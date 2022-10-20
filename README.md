@@ -1,18 +1,17 @@
-# [ROI System](https://roi.femglobalb.com.br/storage/settings/CWQbOUW16TTy0ofdE16bKRqHEOi9SwwuWPdkDPWu.png/)
+# Panel Laravel
 
-A finalidade deste projeto é fazer uma integração entre as plataformas do google ad manager e facebook ads, a fim de gerar relatórios de ROI, usando os valores gastos em anúncio no facebook e retornos no google ad manager, tornando assim a fácil a visualização de roi, sem a necessidade de gastar horas organizando e craiando planilhas para ver esse dados.
+Projeto para servir como base para projetos laravel, economizando tempo ao criar telas de login, registro de usuário, permissões...
 
 ## 🚀 Começando
-Antes de começar certifique de ter o PHP com versão 8 ou superior, Redis coma versão 7.0 ou mais.
+Antes de começar certifique de ter o PHP com versão 8 ou superior.
 
 ## 📋 Pré-requisitos
 - PHP Versão 8 ou mais
-- Redis versão 7.0 ou mais
 
 ## 🔧 Instalação
  - Primeiro passo é baixar o projeto fazendo dawnload do arquivo zip, ou usando o comando abaixo:
  ```
-   git clone https://github.com/rafaeldevfem/roi-system.git
+   git clone https://github.com/rafaeldevcode/panel-laravel.git
  ```
 
  - Depois do projeo ter sido clonado naveque até o diretório criado e instale as dependências:
@@ -30,12 +29,12 @@ Antes de começar certifique de ter o PHP com versão 8 ou superior, Redis coma 
 - Rodar as migrations:
    - Comando seeder: Este comando irá gerar as migrations com dados pré definidos.
     ```
-      php artisan migrete --seed
+      php artisan migrate --seed
     ```
 
    - Comando normal: Este comando irá apenas gerar as migrations sem  enhum dado.
     ```
-      php artisan migrete
+      php artisan migrate
     ```
 
  - Rodar aplicação usando servidor interno do php:
@@ -43,34 +42,25 @@ Antes de começar certifique de ter o PHP com versão 8 ou superior, Redis coma 
    php artisan serve
  ```
 
-- Rodar Redis (Certifique de ter o mesmo instalado em sua máquina)
- ```
-   redis-server
- ```
-
-- Rodar Horizon responssável por gerenciar as filas de processos (Necessário iniciar primeiramente o Redis)
- ```
-   php artisan horizon
- ```
-
-- Caso quira rodar o schedules para o ambiente de desenvolvimento
- ```
-   php artisan schedule:work
- ```
-
 - OBSS: Usando o camando seeder, irá gerar um usuário inicial
    - User: admin@admin.com
    - Pass: admin1234
+
+- OBSS BOOTSTRAP: É possivel alterar a cor principal do site e outras variaveis do bootstrap neste arquivo [aqui](), depois de feita as alterações rode o comando:
+    ```
+      npm run mix
+    ```
+
+Para observar essar alterações em tempo real rode:
+    ```
+      npm run watch
+    ``` 
  
 ## 🖇 Dependências
-- bensampo/laravel-enum       => 6.0 ou mais
-- facebook/php-business-sdk   => 14.0 ou mais
-- googleads/googleads-php-lib => 57.0 ou mais
 - guzzlehttp/guzzle           => 7.2 ou mais
 - laravel/framework           => 9.19 ou mais
 - laravel/horizon             => 5.10 ou mais
 - laravel/sanctum             => 3.0 ou mais
-- laravel/socialite           => 5.5 ou mais
 - laravel/tinker              => 2.7 ou mais
 - tinymce/tinymce             => 6.1 ou mais
 
@@ -116,7 +106,7 @@ Depois de feito deploy da aplicação:
     - [Github Privado](https://github.com/rafaeldevfem) 
 
 ## 📄 Licença
-Este projeto está sob a licença (MIT) - veja o arquivo [LICENSE.md](https://github.com/rafaeldevfem/roi-system/blob/main/LICENCE.md) para detalhes.
+Este projeto está sob a licença (MIT) - veja o arquivo [LICENSE.md](https://github.com/rafaeldevcode/panel-laravel/blob/main/LICENCE.md) para detalhes.
 
 ## 🎁 Expressões de gratidão
 * Conte a outras pessoas sobre este projeto 📢
@@ -125,17 +115,11 @@ Este projeto está sob a licença (MIT) - veja o arquivo [LICENSE.md](https://gi
 ## 🔗 Links úteis
 - [Documentação PHP](https://www.php.net/docs.php)
 - [Laravel](https://laravel.com/docs)
-- [Laravel Horizon](https://laravel.com/docs/9.x/horizon)
-- [Laravel Supervisor](https://laravel.com/docs/9.x/horizon#supervisors)
 - [Bootstrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
 - [Jquery](https://api.jquery.com/)
 - [SASS](https://sass-lang.com/documentation/)
 - [TineMce](https://www.tiny.cloud/docs/tinymce/6/)
 - [Webpack](https://webpack.js.org/concepts/)
-- [Laravel Enum](https://github.com/BenSampo/laravel-enum)
-- [Laravel Socialite](https://laravel.com/docs/9.x/socialite)
-- [Facebook SDK](https://developers.facebook.com/docs/)
-- [Google SDK](https://developers.google.com/ad-manager/api/start)
 
 ---
 ⌨️ com ❤️ por [Rafael Vieira](https://github.com/rafaeldevcode) 😊
