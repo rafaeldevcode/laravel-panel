@@ -1,0 +1,15 @@
+{
+    "/libs/tinymce/skins/content/default/content.css": "/libs/tinymce/skins/content/default/content.css",
+    "/libs/tinymce/skins/ui/oxide/content.min.css": "/libs/tinymce/skins/ui/oxide/content.min.css",
+    "/libs/tinymce/skins/ui/oxide/skin.min.css": "/libs/tinymce/skins/ui/oxide/skin.min.css",
+    "/libs/bootstrap/bootstrap-icons.css": "/libs/bootstrap/bootstrap-icons.css",
+    "/assets/css/globals.css": "/assets/css/globals.css",
+    "/assets/css/style.css": "/assets/css/style.css",
+    "/libs/jquery/jquery.js": "/libs/jquery/jquery.js",
+    "/libs/bootstrap/bootstrap.js": "/libs/bootstrap/bootstrap.js",
+    "/libs/bootstrap/bootstrap.bundle.js.map": "/libs/bootstrap/bootstrap.bundle.js.map",
+    "/libs/tinymce/tinymce.js": "/libs/tinymce/tinymce.js",
+    "/libs/tinymce/themes/silver/theme.js": "/libs/tinymce/themes/silver/theme.js",
+    "/libs/tinymce/models/dom/model.js": "/libs/tinymce/models/dom/model.js",
+    "/libs/tinymce/icons/default/icons.js": "/libs/tinymce/icons/default/icons.js"
+}

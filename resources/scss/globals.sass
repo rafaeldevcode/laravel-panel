@@ -1,0 +1,478 @@
+@import ./_variables
+@import ./_mixins
+
+*
+    margin: 0
+    padding: 0
+    list-style: none
+    text-decoration: none
+    font-size: 16px
+    box-sizing: border-box
+
+::-webkit-scrollbar
+    width: 8px
+    height: 5px
+
+::-webkit-scrollbar-track
+    background: $cm-light
+
+::-webkit-scrollbar-thumb
+    background: $color-main
+    border-radius: 10px
+
+input[type=number]::-webkit-inner-spin-button
+    -webkit-appearance: none
+
+input[type=number]
+   -moz-appearance: textfield
+   appearance: textfield
+
+.cm-list-number
+    li
+        list-style: decimal
+
+.cm-list
+    li
+        list-style: circle
+
+// Dashboard
+.card-dashboard
+    width: 220px
+    transition: all .4s
+
+    &:hover
+        background: $cm-light !important
+        color: $color-main !important
+
+.card-roi
+    cursor: pointer
+    width: 250px
+    transition: all .4s
+
+    &:hover
+        background: $cm-light !important
+        color: $cm-secondary !important
+
+// Notification flutuante
+.notification
+    max-width: 600px
+    height: 600px
+    transform: translateY(600px)
+    z-index: 100
+
+    &::before
+        content: ''
+        position: absolute
+        width: 100%
+        height: 100%
+        top: 0
+        left: 0
+        background-image: url('/assets/images/notifications.svg')
+        background-size: cover
+        background-position: center
+        background-repeat: no-repeat
+        opacity: .7
+
+    &-btn
+        width: 45px
+        height: 45px
+        top: -55px
+        cursor: pointer
+
+    &-count
+        width: 23px
+        height: 23px
+        border-radius: 50%
+        font-size: .9rem
+
+    &-contents
+        max-height: 580px
+        overflow-y: scroll
+
+        &-box
+            cursor: pointer
+            max-height: 450px
+            overflow-y: scroll
+
+article[data-content="false"]
+    display: none
+
+article[data-content="true"]
+    display: block
+
+.bubbleNotification
+    font-size: .6rem !important
+
+// Animação para abertura da notificações
+div[data-notification="true"]
+    animation: .8s showNotifications ease-out forwards
+
+div[data-notification="false"]
+    animation: .8s hiddeNotifications ease-out forwards
+
+// Painel de login
+.image-bg-login
+    min-width: 100%
+    min-height: 100%
+    background-position: center
+    background-repeat: no-repeat
+    background-size: cover
+
+    &::before
+        content: ''
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background: #00000059
+
+label
+    transition: all .4s
+
+.validit-custom
+    &:focus
+        box-shadow: none
+
+        & ~ label
+            @include inputsValid
+
+    &:valid ~ label
+        @include inputsValid
+
+    &:disabled ~ label
+        @include inputsValid
+
+span[data-valid="false"]
+    color: $cm-danger
+    animation: showError .4s linear forwards
+    z-index: 1
+
+span[data-valid="true"]
+    color: $cm-success
+    animation: showSuccess .4s linear forwards
+    z-index: 1
+
+.input-transform-translate
+    transform: translate(-30px, -30px)
+
+.no-transform-translate
+    transform: translate(0px, 0px) !important
+
+.validit
+    font-size: .8rem
+    z-index: -1
+
+    i
+        font-size: .8rem
+
+.btn-show-pass:focus
+    box-shadow: none
+
+// Animação da mensagem ao validar usuário e senha
+div[data-message="true"]
+    animation: 1s showMessage ease-out
+    z-index: 100
+
+div[data-message="false"]
+    animation: 1s hiddeMessage ease-out forwards
+
+// Header
+.header
+    min-height: 50px
+
+    div
+        height: 45px
+
+.logo-header
+    height: 40px
+
+// Sidebar
+.profile
+    min-height: 50px
+
+    &-dropdawn
+        z-index: 1
+
+        &-btn:focus
+            box-shadow: none
+
+.user
+    width: 45px
+    height: 45px
+
+    img
+        border-radius: 50%
+
+// Menu sandwiche
+.menu
+    &_label
+        cursor: pointer
+        height: 18px
+        width: 25px
+        color: transparent
+
+        span
+            height: 3px
+            width: 100%
+            transition: 0.25s ease-in-out
+
+            &:nth-child(1)
+                top: 0px
+                width: 50%
+
+            &:nth-child(2)
+                top: 8px
+                width: 75%
+
+            &:nth-child(3)
+                top: 16px
+                width: 100%
+
+    &_input
+        &:checked + label span:nth-child(1)
+            transform: rotate(-25deg)
+            width: 60%
+            top: 5px
+
+        &:checked + label span:nth-child(2)
+            width: 100%
+
+        &:checked + label span:nth-child(3)
+            transform: rotate(25deg)
+            width: 60%
+            top: 11px
+
+// Menu sidebar
+.sidebar
+    min-height: 100vh
+
+.sidebar[data-expanded='desactive']
+    animation: toRecalldAside .4s .2s ease-in-out forwards
+
+.sidebar[data-expanded='active']
+    animation: expandedAside .4s ease-in-out forwards
+
+.hiddeItem
+    opacity: 0
+
+.dNone
+    display: none
+
+.iconManu
+    width: 100%
+
+.item-nav-sidbar
+    transition: all .4s
+
+    &:hover
+        background: $color-main
+
+    div
+        a
+            padding: .5rem
+
+.item-nav-sidbar-logout
+    transition: all .4s
+
+    &:hover
+        background: $cm-danger
+
+    div
+        form
+            padding: .5rem
+
+            button
+                border: none
+                background: transparent
+
+[data-item-menu="active"]
+    background: $color-main
+
+div[data-item-active='false']
+    animation: hiddeItem .2s linear forwards
+
+div[data-item-active='true']
+    display: block
+    animation: showItem .2s .4s linear forwards
+
+// Profile
+.profile-bg
+    background-repeat: no-repeat
+    background-position: center top
+    background-size: cover
+    width: 100%
+    height: 300px
+
+.profile-user
+    width: 100px
+    height: 100px
+    margin-top: -50px
+
+    &-btn
+        border: none
+        border-radius: 50%
+        opacity: 0
+        transition: all .4s
+
+        &:hover
+            opacity: 1
+
+    img
+        border-radius: 50%
+
+// Modal de imagens do perfil
+.label-image-profile
+    cursor: pointer
+    width: 80px
+    height: 80px
+
+input[name="avatar"]
+    &:checked ~ label
+        border: 1px solid $color-main
+        box-shadow: 0px 0px 10px $color-main
+
+input[type="checkbox"]
+    cursor: pointer
+
+// Estilo para os inputs images
+.section-input
+    width: 100%
+    max-width: 300px
+
+    &-label
+        cursor: pointer
+
+    &-span
+        margin-top: -28px
+
+    &-image
+        max-width: 100%
+
+// Formulário de pesquisa customizada dos relatórios
+.focus-shadown-none
+    &:focus
+        box-shadow: none
+
+[data-report="single"]
+    display: none !important
+
+[data-report="more"]
+    display: inline !important
+
+// Server error and not found pages custom
+.custom-401
+    @include pagesCustom('/assets/images/not_found.svg')
+
+    &-mirror
+        @include pageCustomMirror($cm-danger)
+
+.custom-403
+    @include pagesCustom('/assets/images/not_found.svg')
+
+    &-mirror
+        @include pageCustomMirror($cm-danger)
+
+.custom-404
+    @include pagesCustom('/assets/images/not_found.svg')
+
+    &-mirror
+        @include pageCustomMirror($cm-danger)
+
+.custom-419
+    @include pagesCustom('/assets/images/not_found.svg')
+
+    &-mirror
+        @include pageCustomMirror($cm-danger)
+
+.custom-429
+    @include pagesCustom('/assets/images/not_found.svg')
+
+    &-mirror
+        @include pageCustomMirror($cm-danger)
+
+.custom-500
+    @include pagesCustom('/assets/images/server_error.svg')
+
+    &-mirror
+        @include pageCustomMirror($cm-warning)
+
+.custom-503
+    @include pagesCustom('/assets/images/not_found.svg')
+
+    &-mirror
+        @include pageCustomMirror($cm-danger)
+
+.custom-maintenance
+    @include pagesCustom('/assets/images/maintenance.svg')
+
+    &-mirror
+        @include pageCustomMirror($color-main)
+
+.custom-construction
+    @include pagesCustom('/assets/images/construction.svg')
+
+    &-mirror
+        @include pageCustomMirror($color-main)
+
+// Limitar a quantidade de caracteres em determinadas colunas
+.limit-caracter
+    display: block
+    white-space: nowrap
+    width: 220px
+    overflow-x: scroll
+
+// Estilizações customizadas
+.input-custom
+    border-radius: 3px
+    cursor: pointer
+
+    &:focus
+        outline: none
+        box-shadow: none
+
+.results-found
+    span
+        cursor: pointer
+        transition: all .4s
+
+        &:hover
+            background: $cm-secondary
+            color: $cm-light !important
+
+.remove-campaign
+    font-size: .9rem
+    cursor: pointer
+
+// Definir scroll para a tabelas
+.custom-table
+    display: block
+    max-width: 1300px
+    overflow-x: scroll
+
+    th
+        font-size: .85rem
+
+    td
+        font-size: .85rem
+
+[data-url-status="inactive"]
+    display: none
+
+[data-url-status="active"]
+    display: block
+
+// Página de logs
+.link-log
+    transition: all .4s
+
+    &:hover
+        color: $color-main !important
+
+.block-log
+    max-width: 1300px
+    max-height: 700px
+    overflow: auto
+
+@import  ./_mediaQueries
+@import ./_keyFrames

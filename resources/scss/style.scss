@@ -1,0 +1,54 @@
+// Variaveis originais do bootstrap
+$primary: #0D6EFD;
+$secondary: #6C757D;
+$success: #198754;
+$info: #0DCAF0;
+$warning: #FFC107;
+$danger: #DC3545;
+$light: #F8F9FA;
+$dark: #212529;
+
+// Tamanho do border radius
+$border-radius: .2rem;
+
+// Tema com cores originais do bootstrap
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+);
+
+// Variaveis customizadas
+$color-main: #3695FF;
+$cm-primary: #0062FF;
+$cm-secondary: #6C757D;
+$cm-success: #008000;
+$cm-info: #00D5FF;
+$cm-warning: #FFFF00;
+$cm-danger: #FF0000;
+$cm-light: #FFFFFF;
+$cm-dark: #000000;
+$cm-grey: #F4F4F4;
+
+// Tema com cores pesonalizadas
+$custom-colors: (
+  "color-main":    $color-main,
+  "cm-primary":  $cm-primary,
+  "cm-secondary":  $cm-secondary,
+  "cm-success":    $cm-success,
+  "cm-info":       $cm-info,
+  "cm-warning":    $cm-warning,
+  "cm-danger":     $cm-danger,
+  "cm-light":      $cm-light,
+  "cm-dark":       $cm-dark,
+  "cm-grey":       $cm-grey
+);
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import  "~bootstrap/scss/bootstrap"

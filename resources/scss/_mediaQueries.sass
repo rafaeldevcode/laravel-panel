@@ -1,0 +1,71 @@
+@media only screen and ( max-width: 992px )
+    .section-image-login
+        display: none
+
+@media only screen and ( max-width: 750px )
+    .sidebar[data-expanded='desactive']
+        animation: none
+
+    .sidebar[data-expanded='active']
+        animation: none
+
+    .sidebar[data-expanded='mobile-active']
+        animation: expandedAsideMobile .4s ease-out forwards
+
+    .sidebar[data-expanded='mobile-desactive']
+        animation: toRecalldAsideMobile .4s ease-out
+
+    .sidebar
+        position: fixed
+        top: 0
+        left: 0
+        z-index: 99999
+        transform: translateX(-200px)
+
+    .divClosed
+        position: fixed
+        width: 100%
+        height: 100%
+        background: rgba(0, 0, 0, .8)
+        top: 0
+        right: 0
+        z-index: 1
+        opacity: 0
+
+    div[data-divbtn-closed='active']
+        animation: showItem .4s .2s linear forwards
+
+    div[data-divbtn-closed='desactive']
+        animation: hiddeItem .2s linear
+
+    .menuMobileOppen
+        position: fixed
+        top: 0
+        left: 0
+        z-index: 99999
+        transform: translateX(170px)
+        margin-top: 20px
+        animation: hiddeItem .2s linear
+
+    .hiddeItem
+        opacity: 1
+
+    .dNone
+        display: block
+
+    .iconManu
+        width: auto
+
+    div[data-item-active='false']
+        animation: none
+
+
+@media only screen and ( max-width: 605px )
+    .card-dashboard
+        width: 100%
+
+@media only screen and ( max-width: 420px )
+    .breadcrumps-overflow
+        max-width: 320px
+        overflow-x: auto
+        margin-bottom: .8rem

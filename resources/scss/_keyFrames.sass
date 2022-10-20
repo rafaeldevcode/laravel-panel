@@ -1,0 +1,96 @@
+@import ./_mixins
+    
+@keyframes showError
+    @include error
+    
+@keyframes showSuccess
+    @include error
+    
+@keyframes showMessage
+    0%
+        transform: translateX(230px)
+        opacity: 0
+
+    20%
+        transform: translateX(0)
+        opacity: 1
+
+    40%
+        transform: translateX(-80px)
+        opacity: 1
+
+    100%
+        opacity: 1
+        transform: translateX(0)
+    
+@keyframes hiddeMessage
+    0%
+        transform: translateX(0)
+        opacity: 1
+
+    20%
+        transform: translateX(-80px)
+        opacity: 1
+
+    40%
+        transform: translateX(0)
+        opacity: 1
+
+    100%
+        transform: translateX(230px)
+        opacity: 0
+        
+@keyframes expandedAside
+    0%
+        width: 66px
+    
+    100%
+        width: 230px
+
+@keyframes toRecalldAside
+    0%
+        width: 230px
+    
+    100%
+        width: 66px
+        
+
+@keyframes showItem
+    0%
+        opacity: 0
+    100%
+        opacity: 1
+
+@keyframes hiddeItem
+    0%
+        opacity: 1
+    100%
+        opacity: 0
+
+@keyframes showNotifications
+    0%
+        transform: translateY(600px)
+
+    100%
+        transform: translateY(0)
+
+@keyframes hiddeNotifications
+    0%
+        transform: translateY(0)
+
+    100%
+        transform: translateY(600px)
+
+@keyframes expandedAsideMobile
+    0%
+        transform: translateX(-200px)
+    
+    100%
+        transform: translateX(0)
+
+@keyframes toRecalldAsideMobile
+    0%
+        transform: translateX(0)
+    
+    100%
+        transform: translateX(-200px)
