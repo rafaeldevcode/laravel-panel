@@ -50,6 +50,10 @@
             </div>
         </div>
 
+        <div class='col-12 col-md-6'>
+            <x-input-checkbox-switch name="user_status" label='Status do usuário (Ativo | Inativo)' :dchecked='$user_status' />
+        </div>
+
         <div class='row d-flex justify-content-end'>
             <div class='col-12 col-md-3'>
                 <x-input-button type='submit' title='Salvar usuário' value='Salvar usuário' style='cm-primary' />

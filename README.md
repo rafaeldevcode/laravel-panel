@@ -60,6 +60,7 @@ Para observar essar alterações em tempo real rode:
     ``` 
  
 ## 🖇 Dependências
+- bensampo/laravel-enum       => 6.0 ou mais
 - guzzlehttp/guzzle           => 7.2 ou mais
 - laravel/framework           => 9.19 ou mais
 - laravel/horizon             => 5.10 ou mais
@@ -118,6 +119,7 @@ Este projeto está sob a licença (MIT) - veja o arquivo [LICENSE.md](https://gi
 ## 🔗 Links úteis
 - [Documentação PHP](https://www.php.net/docs.php)
 - [Laravel](https://laravel.com/docs)
+- [Laravel Enum](https://github.com/BenSampo/laravel-enum)
 - [Bootstrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
 - [Jquery](https://api.jquery.com/)
 - [SASS](https://sass-lang.com/documentation/)

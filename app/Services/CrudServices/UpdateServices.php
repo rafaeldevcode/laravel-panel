@@ -136,6 +136,7 @@ class UpdateServices extends BaseCrud
             $user->birth_date         = $request->birth_date;
             $user->initials_campaign  = $request->initials_campaign;
             $user->permission_id      = $request->permission;
+            $user->user_status        = $request->user_status;
 
             $request->user_type          !== 'default' && $user->user_type = $request->user_type;
             !is_null($request->password) && $user->password = Hash::make($request->password);

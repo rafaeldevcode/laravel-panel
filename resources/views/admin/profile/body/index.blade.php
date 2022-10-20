@@ -20,6 +20,10 @@
 
         <div class='position-absolute top-0 start-0 m-3 text-color-main fw-bold display-4'>
             {{ $user->name }}
+            <span class='text-cm-{{ $status[0] }}'>
+                <i class='bi bi-circle-fill'></i>
+                {{ $status[1] }}
+            </span>
         </div>
     </div>
 

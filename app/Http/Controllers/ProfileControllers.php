@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserStatus;
 use App\Models\Permissions;
 use App\Services\CrudServices\UpdateServices;
 use Illuminate\Http\Request;
@@ -27,12 +28,14 @@ class ProfileControllers extends Controller
         $type = $request->session()->get('type');
         $user = Auth::user();
         $user_permission = Permissions::find($user->permission_id)->name;
+        $status = [UserStatus::getColor($user->user_status), UserStatus::getMessage($user->user_status)];
 
         return view('admin/profile/index', compact(
             'user',
             'message',
             'type',
-            'user_permission'
+            'user_permission',
+            'status'
         ));
     }
 
