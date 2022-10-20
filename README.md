@@ -46,10 +46,13 @@ Antes de começar certifique de ter o PHP com versão 8 ou superior.
    - User: admin@admin.com
    - Pass: admin1234
 
-- OBSS BOOTSTRAP: É possivel alterar a cor principal do site e outras variaveis do bootstrap neste arquivo [aqui](), depois de feita as alterações rode o comando:
-    ```
-      npm run mix
-    ```
+- OBSS BOOTSTRAP: É possivel alterar a cor principal do site e outras variaveis do bootstrap nestes dois arquivos:
+    - [style.scaa](https://github.com/rafaeldevcode/panel-laravel/blob/main/resources/scss/style.scss)
+    - [_variables.sass](https://github.com/rafaeldevcode/panel-laravel/blob/main/resources/scss/_variables.sass)
+    Depois de feita as alterações rode o comando:
+        ```
+        npm run mix
+        ```
 
 Para observar essar alterações em tempo real rode:
     ```
