@@ -28,7 +28,7 @@ class MenusControllers extends Controller
 
         $message = $request->session()->get('message');
         $type = $request->session()->get('type');
-        $menus = Menus::all();
+        $menus = Menus::paginate(10);
 
         $options = [
             'search' => true,

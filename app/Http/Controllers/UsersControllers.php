@@ -29,7 +29,7 @@ class UsersControllers extends Controller
 
         $message = $request->session()->get('message');
         $type = $request->session()->get('type');
-        $users = User::all();
+        $users = User::paginate(10);
 
         $options = [
             'search' => true,

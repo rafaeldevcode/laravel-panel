@@ -45,6 +45,11 @@
         </table>
     </section>
 
-    <x-table-footer />
+    <x-pagination
+        :next='$permissions->nextPageUrl()'
+        :previous='$permissions->previousPageUrl()'
+        :current='$permissions->currentPage()'
+        :totalpages='$permissions->lastPage()'
+    />
     <x-modal-delete />
 </section>

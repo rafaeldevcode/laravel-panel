@@ -31,7 +31,7 @@ class NotificationsControllers extends Controller
 
         $message = $request->session()->get('message');
         $type = $request->session()->get('type');
-        $notifications = Notifications::all();
+        $notifications = Notifications::paginate(10);
 
         $options = [
             'search' => true,

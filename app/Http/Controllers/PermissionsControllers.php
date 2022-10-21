@@ -29,7 +29,7 @@ class PermissionsControllers extends Controller
 
         $message = $request->session()->get('message');
         $type = $request->session()->get('type');
-        $permissions = Permissions::all();
+        $permissions = Permissions::paginate(10);
 
         $options = [
             'search' => true,

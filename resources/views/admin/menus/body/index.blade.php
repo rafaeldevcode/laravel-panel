@@ -51,6 +51,11 @@
         </table>
     </section>
 
-    <x-table-footer />
+    <x-pagination
+        :next='$menus->nextPageUrl()'
+        :previous='$menus->previousPageUrl()'
+        :current='$menus->currentPage()'
+        :totalpages='$menus->lastPage()'
+    />
     <x-modal-delete />
 </section>

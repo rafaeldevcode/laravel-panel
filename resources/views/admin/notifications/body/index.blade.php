@@ -48,6 +48,11 @@
         </table>
     </section>
 
-    <x-table-footer />
+    <x-pagination
+        :next='$notifications->nextPageUrl()'
+        :previous='$notifications->previousPageUrl()'
+        :current='$notifications->currentPage()'
+        :totalpages='$notifications->lastPage()'
+    />
     <x-modal-delete />
 </section>
