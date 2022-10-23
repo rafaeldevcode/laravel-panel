@@ -31,11 +31,8 @@
     </article>
 
     <div class='mt-4 d-flex justify-content-end'>
-        <form action='/admin/logs/clear' method='POST'>
-            @csrf
-            <input type='hidden' name='file' value='{{ $log_query }}'>
-
-            <input type='submit' class='btn btn-cm-danger text-cm-light' value='Limpar arquivo' />
-        </form>
+        <button type='button' class='btn btn-cm-danger text-cm-light' title='Limpar arquivo de logs' data-bs-toggle='modal' data-bs-target='#modalClearLogs'>
+            Limpar arquivo
+        </button>
     </div>
 </section>

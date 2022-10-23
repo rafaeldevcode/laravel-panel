@@ -28,4 +28,5 @@
     </section>
 
     <x-footer />
+    @include('admin/logs/partials/modal-clear-logs')
 @endsection

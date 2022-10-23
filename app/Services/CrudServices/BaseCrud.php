@@ -93,35 +93,6 @@ class BaseCrud
     }
 
     /**
-     * @param string $prefix
-     * @return void
-     */
-    public function createPermissionForAdmin(string $prefix): void
-    {
-        $permission_admin = DB::table('permissions')
-            ->where('eng_name', 'admin')
-            ->get()[0];
-
-            $old_permission = json_decode($permission_admin->permissions, true);
-
-            $new_permissions = [
-                "read_{$prefix}"   => 'on',
-                "create_{$prefix}" => 'on',
-                "update_{$prefix}" => 'on',
-                "delete_{$prefix}" => 'on'
-            ];
-
-            $permissions = array_merge($old_permission, $new_permissions);
-            $permissions = json_encode($permissions);
-
-            DB::beginTransaction();
-                Permissions::find($permission_admin->id)->update([
-                    'permissions' => $permissions
-                ]);
-            DB::commit();
-    }
-
-    /**
      * @param array permissions
      * @param ?string $extra_permissions
      * @return array

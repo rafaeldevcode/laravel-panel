@@ -2,6 +2,7 @@
 
 namespace App\Services\CrudServices;
 
+use App\Events\CreatePermissionForAdmin;
 use App\Events\NotificationUser;
 use App\Models\Menus;
 use App\Models\Notifications;
@@ -54,7 +55,7 @@ class CreateServices extends BaseCrud
             ]);
 
             // Adicionar permições para admin
-            $this->createPermissionForAdmin($prefix);
+            CreatePermissionForAdmin::dispatch($prefix);
         DB::commit();
 
         SessionMessage::create($request, 'Item adicionado ao menu com sucesso!', 'cm-success');

@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\CreatePermissionForAdmin;
 use App\Events\NotificationUser;
+use App\Listeners\CreatePermission;
 use App\Listeners\CreateUser;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         NotificationUser::class => [
             CreateUser::class
+        ],
+        CreatePermissionForAdmin::class => [
+            CreatePermission::class
         ]
     ];
 
