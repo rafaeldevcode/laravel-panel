@@ -96,6 +96,35 @@ Depois de feito deploy da aplicação:
 - Acessar o servidor via ssh e instalar as dependências
 - E adicionar um arquivo .env com as váriaveis necessárias
 
+## 📦 Modo de manutanção
+    - para ativar o modo de manutenção da aplicação acesse o terminal e digite:
+    ```
+        php artisan down --redirect=maintenance --render=maintenance/index --secret="1630542a-246b-4b66-afa1-dd72a4c43515" 
+    ```
+
+    - Para remover o modo de manutanção:
+    ```
+        php artisan up
+    ```
+
+    - OBSS: 
+        - Para ignorar esse modo, pode acessar a sua url usando o secret passado no comando anterior:
+            https://meusite.com/1630542a-246b-4b66-afa1-dd72a4c43515
+
+## 📦 Modo de construção
+    - para ativar o modo de construção da aplicação acesse o terminal e digite:
+    ```
+        php artisan down --redirect=construction --render=construction/index --secret="1630542a-246b-4b66-afa1-dd72a4c43515" 
+    ```
+
+    - Para remover o modo de construção:
+    ```
+        php artisan up
+    ```
+
+    - OBSS: 
+        - Para ignorar esse modo, pode acessar a sua url usando o secret passado no comando anterior:
+            https://meusite.com/1630542a-246b-4b66-afa1-dd72a4c43515
 
 ## 🛠️ Construído com
 * [HTML](https://html.com/) - Linguagem de marcação
