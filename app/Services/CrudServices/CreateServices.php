@@ -155,7 +155,7 @@ class CreateServices extends BaseCrud
 
             foreach($users as $user):
                 $user->notifications()->attach($notification->id);
-                $user->notifications()->update(['notification_status' => $request->notification_status]);
+                NotificationsUser::where('notifications_id', $notification->id)->where('user_id', $user->id)->update(['notification_status' => 'on']);
             endforeach;
         DB::commit();
         SessionMessage::create($request, 'Notificação adicionada com sucesso!', 'cm-success');
