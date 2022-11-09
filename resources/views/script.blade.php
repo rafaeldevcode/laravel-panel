@@ -613,8 +613,39 @@
             }else{
                 const textarea = permissios.find('textarea');
                     permissios.attr('hidden', true);
-                    textarea.val('');
             }
         });
+    }
+
+    // Marcar permissões extras como 'on' ou 'off'
+    function alterStatusPermissions(){
+        const extraPermissions = document.querySelectorAll('input[data-permission]');
+
+        extraPermissions.forEach((extra) => {
+            $(extra).click((event) => {
+                const key = $(event.target).attr('name');
+                const value = event.target.checked == true ? 'on' : 'off';
+
+                alter(key, value);
+            });
+        });
+
+        function alter(key, value){
+            const extraPermissions = [];
+            const textArea = $('#extra_permissions');
+            const textAreaArray = textArea.val().split(',');
+
+            textAreaArray.forEach((item) => {
+                const itemArray = item.split('=');
+
+                if(key == itemArray[0]){
+                    extraPermissions.push(`${key}=${value}`);
+                }else{
+                    extraPermissions.push(`${itemArray[0]}=${itemArray[1]}`);
+                }
+            });
+
+            textArea.val(extraPermissions.join(','));
+        }
     }
 </script>

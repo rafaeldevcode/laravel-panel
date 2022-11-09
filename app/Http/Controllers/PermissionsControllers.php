@@ -122,6 +122,7 @@ class PermissionsControllers extends Controller
 
         $permissions = Permissions::find($ID);
         $permissions_in_array = json_decode($permissions->permissions, true);
+        $permissions_edit = $this->getPermisionsEdit($permissions->extra_permissions);
         $menus = Menus::all();
         $method = 'edit';
 
@@ -129,7 +130,8 @@ class PermissionsControllers extends Controller
             'permissions',
             'menus',
             'permissions_in_array',
-            'method'
+            'method',
+            'permissions_edit'
         ));
     }
 
@@ -146,5 +148,25 @@ class PermissionsControllers extends Controller
         $update->updatePermissions($request, $ID);
 
         return redirect('/admin/permissions');
+    }
+
+    /**
+     * @param string $extra_permissions
+     * @return string|null
+     */
+    private function getPermisionsEdit(string|null $extra_permissions): string
+    {
+        if($extra_permissions):
+            $permissions = [];
+            $permissions_edit = json_decode($extra_permissions, true);
+
+            foreach($permissions_edit as $indice => $permission):
+                array_push($permissions, "{$indice}={$permission}");
+            endforeach;
+
+            return implode(',', $permissions);
+        else:
+            return '';
+        endif;
     }
 }

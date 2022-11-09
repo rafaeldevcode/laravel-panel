@@ -43,7 +43,11 @@
                 </h2>
 
                 @foreach (json_decode($permissions->extra_permissions, true) as $indice => $permissions)
-                    <x-input-checkbox-switch :name='$indice' :label='$indice' />
+                    @php
+                        $checked = $permissions == 'on' ? 'on' : 'off';
+                    @endphp
+
+                    <x-input-checkbox-switch :name='$indice' :label='$indice' :dchecked='$checked' data-permission='extra' />
                 @endforeach
             </div>
         @endisset
@@ -52,7 +56,7 @@
             <button type='button' title='Adicionar permissões extras' class='border-0 bg-transparent text-color-main'>Adiconar permissoes extras</button>
 
             <div hidden>
-                <x-text-area name='extra_permissions' icon='bi bi-file-earmark-plus-fill' label='Permissões extra' />
+                <x-text-area name='extra_permissions' icon='bi bi-file-earmark-plus-fill' label='Permissões extra' :value='$permissions_edit' />
             </div>
         </div>
 

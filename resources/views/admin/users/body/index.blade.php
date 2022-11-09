@@ -9,6 +9,7 @@
                     <th class='col'>Thumb</th>
                     <th class='col'>Nome</th>
                     <th class='col' data-row='email'>Email</th>
+                    <th class='col'>Status</th>
                     <th class='col'>Ações</th>
                 </tr>
             </thead>
@@ -31,6 +32,9 @@
                         </th>
                         <td>{{ $user->name }}</td>
                         <td data-col='email'>{{ $user->email }}</td>
+                        <td>
+                            <span class="badge bg-cm-{{ App\Enums\UserStatus::getColor($user->user_status) }}">{{ App\Enums\UserStatus::getMessage($user->user_status) }}</span>
+                        </td>
                         <td>
                             <a href='/admin/users/edit/{{ $user->id }}' title='Editar usuário {{ $user->name }}' class='btn btn-sm btn-cm-primary text-cm-light fw-bold m-1'>
                                 <i class='bi bi-pencil-square'></i>

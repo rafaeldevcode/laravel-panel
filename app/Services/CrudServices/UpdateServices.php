@@ -2,6 +2,7 @@
 
 namespace App\Services\CrudServices;
 
+use App\Events\CreateExtraPermissionForAdmin;
 use App\Models\Menus;
 use App\Models\Permissions;
 use App\Models\Settings;
@@ -100,7 +101,7 @@ class UpdateServices extends BaseCrud
     public function updatePermissions(Request $request, int $ID)
     {
         $permissions = $request->except(['_token', 'name', 'extra_permissions']);
-        $permissions = $this->getPermissionsInJson($permissions, $request->extra_permissions);
+        $permissions = $this->getPermissionsInJson($permissions, $request->extra_permissions, $ID);
 
         DB::beginTransaction();
             $permission = Permissions::find($ID);
@@ -110,6 +111,7 @@ class UpdateServices extends BaseCrud
             !is_null($permissions['extra_permissions']) && $permission->extra_permissions = $permissions['extra_permissions'];
             $permission->save();
 
+            CreateExtraPermissionForAdmin::dispatch($permissions['extra_permissions']);
         DB::commit();
 
         SessionMessage::create($request, 'Permissões atualizadas com sucesso!', 'cm-success');

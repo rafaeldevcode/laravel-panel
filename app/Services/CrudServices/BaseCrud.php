@@ -40,67 +40,15 @@ class BaseCrud
     }
 
     /**
-     * Verificar formatos dos arquivos de configurações e autenticação do google
-     *
-     * @param Request $request
-     * @return bool
-     */
-    public function verifyFormatArchives(Request $request): bool
-    {
-        $is_valid = true;
-
-        $file_access_token_json_extension =$request->access_token_json->extension();
-        $file_adsapi_ini_extension = $request->adsapi_ini->extension();
-
-        if($file_access_token_json_extension !== 'json'):
-            SessionMessage::create($request, 'Formato de arquivo inválido, aceito somente .json', 'cm-danger');
-
-            $is_valid = false;
-        elseif($file_adsapi_ini_extension !== 'txt'):
-            SessionMessage::create($request, 'Formato de arquivo inválido, aceito somente .ini', 'cm-danger');
-            $is_valid = false;
-        endif;
-
-        return $is_valid;
-    }
-
-    /**
-     * @param string $name
-     * @param string $access_token_json
-     * @param string $adsapi_ini
-     * @return array
-     */
-    public function createFilesSettings(string $name, string $access_token_json, string $adsapi_ini): array
-    {
-        $storage_path = storage_path();
-        $name = str_replace(' ', '-', $name);
-        $name = strtolower($name);
-        $date = Carbon::now()->format('Y-m-d_H-i-s');
-        $path_file_ini = "accounts-settings/adsapi_{$name}-{$date}.ini";
-        $path_file_json = "accounts-settings/adsapi_{$name}-{$date}.json";
-
-        $adsapi_ini = str_replace('path_file_json_not_edit_this_line', "{$storage_path}/app/public/{$path_file_json}", $adsapi_ini);
-        $adsapi_ini = str_replace('path_file_log_soap_not_edit_this_line', "{$storage_path}/logs/soap.log", $adsapi_ini);
-        $adsapi_ini = str_replace('path_file_log_downloader_not_edit_this_line', "{$storage_path}/logs/downloader.log", $adsapi_ini);
-
-        Storage::disk('public')->put($path_file_ini, $adsapi_ini);
-        Storage::disk('public')->put($path_file_json, $access_token_json);
-
-        return [
-            'path_file_json' => $path_file_json,
-            'path_file_ini'  => $path_file_ini
-        ];
-    }
-
-    /**
      * @param array permissions
      * @param ?string $extra_permissions
+     * @param int|null $ID
      * @return array
      */
-    protected function getPermissionsInJson(array $permissions, ?string $extra_permissions): array
+    protected function getPermissionsInJson(array $permissions, ?string $extra_permissions, int|null $ID = null): array
     {
         $extra_permissions_array = [];
-        $extra_permissions_json = [];
+        $extra_permissions_json = !is_null($ID) ? json_decode(Permissions::find($ID)->get()[0]->extra_permissions, true) : [];
 
         // Formatar as permissões extras
         if(!is_null($extra_permissions)):

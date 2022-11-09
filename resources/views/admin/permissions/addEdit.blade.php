@@ -36,5 +36,6 @@
     <script type="text/javascript">
         getFields();
         addExtraPermissions();
+        alterStatusPermissions();
     </script>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Services\CrudServices;
 
+use App\Events\CreateExtraPermissionForAdmin;
 use App\Events\CreatePermissionForAdmin;
 use App\Events\NotificationUser;
 use App\Models\Menus;
@@ -101,7 +102,7 @@ class CreateServices extends BaseCrud
                 ], $remember);
             endif;
 
-            NotificationUser::dispatch($user);
+            NotificationUser::dispatch($user->id);
         DB::commit();
 
         if($auth):
@@ -138,6 +139,8 @@ class CreateServices extends BaseCrud
                     'extra_permissions' => $permissions['extra_permissions'],
                     'eng_name'          => $eng_name
                 ]);
+
+                CreateExtraPermissionForAdmin::dispatch($permissions['extra_permissions']);
             DB::commit();
 
         SessionMessage::create($request, 'Permissão adicionada com sucesso!', 'cm-success');
