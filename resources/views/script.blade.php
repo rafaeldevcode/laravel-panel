@@ -648,4 +648,24 @@
             textArea.val(extraPermissions.join(','));
         }
     }
+
+    // Alterar a inserção de item ao menu de menu principal para submenu
+    function addSubmenu(){
+        $('#is_submenu').click(() => {
+            const submenus = document.querySelectorAll('[data-submenu]');
+
+            submenus.forEach((sub) => {
+                const status = $(sub).attr('data-submenu');
+                    if(status == 'true'){
+                        $(sub).attr('data-submenu', false);
+                        $(sub).find('input').attr('required', true);
+                        $('#submenu').attr('required', true);
+                    }else{
+                        $(sub).attr('data-submenu', true);
+                        $(sub).find('input').attr('required', false);
+                        $('#submenu').attr('required', false);
+                    }
+            });
+        });
+    }
 </script>

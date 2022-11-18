@@ -35,5 +35,6 @@
 @section('scripts')
     <script type="text/javascript">
         getFields();
+        addSubmenu();
     </script>
 @endsection

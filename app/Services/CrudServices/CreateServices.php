@@ -24,6 +24,16 @@ class CreateServices extends BaseCrud
      */
     public function createItemMneu(Request $request)
     {
+        if(isset($request->is_submenu) && $request->is_submenu == 'on'){
+            $slug = "/admin{$this->normalizeSlug($request->slug)}";
+            $menu = Menus::find($request->submenu);
+            $submenus = $this->getSubmenus($menu->submenus, [$slug => $request->name]);
+
+            $menu->update(['submenus' => $submenus]);
+
+            return SessionMessage::create($request, 'Submenu adicionado com sucesso!', 'cm-success');
+        }
+
         $slug = "/admin{$this->normalizeSlug($request->slug)}";
         $prefix = $this->normalizeName(explode('/', $request->slug)[1]);
 

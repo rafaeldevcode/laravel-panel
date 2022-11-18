@@ -297,9 +297,14 @@ div[data-message=false] {
 
 .item-nav-sidbar {
   transition: all 0.4s;
+  cursor: pointer;
 }
 .item-nav-sidbar:hover {
   background: #3695FF;
+}
+.item-nav-sidbar:hover .submenu {
+  display: block;
+  opacity: 1;
 }
 .item-nav-sidbar div a {
   padding: 0.5rem;
@@ -332,6 +337,30 @@ div[data-item-active=true] {
   display: block;
   -webkit-animation: showItem 0.2s 0.4s linear forwards;
           animation: showItem 0.2s 0.4s linear forwards;
+}
+
+.submenu {
+  width: 130px;
+  transform: translateX(100%);
+  z-index: 100;
+  display: none;
+  opacity: 0;
+  transition: all 0.4s;
+}
+.submenu_li a {
+  padding: 0.4rem;
+  transition: all 0.4s;
+}
+.submenu_li a:hover {
+  background: #3695FF;
+}
+
+[data-submenu=true] {
+  display: none;
+}
+
+[data-submenu=false] {
+  display: block;
 }
 
 .profile-bg {

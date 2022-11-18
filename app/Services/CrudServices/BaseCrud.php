@@ -74,4 +74,21 @@ class BaseCrud
             'extra_permissions' => $extra_permissions_json,
         ];
     }
+
+    /**
+     * @param null|string $submenus
+     * @param array $new_submenu
+     * @return string
+     */
+    protected function getSubmenus(null|string $submenus, array $new_submenu): string
+    {
+        if(is_null($submenus)):
+            $submenus = $new_submenu;
+        else:
+            $submenus = json_decode($submenus, true);
+            $submenus = $submenus + $new_submenu;
+        endif;
+
+        return json_encode($submenus);
+    }
 }

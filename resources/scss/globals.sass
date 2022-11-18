@@ -264,9 +264,14 @@ div[data-message="false"]
 
 .item-nav-sidbar
     transition: all .4s
+    cursor: pointer
 
     &:hover
         background: $color-main
+
+        .submenu
+            display: block
+            opacity: 1
 
     div
         a
@@ -295,6 +300,28 @@ div[data-item-active='false']
 div[data-item-active='true']
     display: block
     animation: showItem .2s .4s linear forwards
+
+.submenu
+    width: 130px
+    transform: translateX(100%)
+    z-index: 100
+    display: none
+    opacity: 0
+    transition: all .4s
+
+    &_li
+        a
+            padding: .4rem
+            transition: all .4s
+
+            &:hover
+                background: $color-main
+
+[data-submenu="true"]
+    display: none
+
+[data-submenu="false"]
+    display: block
 
 // Profile
 .profile-bg

@@ -7,7 +7,7 @@
                 @can('read', $menu->prefix)
                     <li class='d-flex flex-row align-items-center rounded item-nav-sidbar' data-item-menu='{{ $uri == $menu->prefix ? 'active' : 'inactive' }}'>
                         <div class='nav-icon text-color-main text-center w-100'>
-                            <a href='{{ $menu->slug }}' title={{ $menu->name }} class='text-decoration-none d-block fw-bold text-cm-light'>
+                            <a @if(!isset($menu->submenus)) href='{{ $menu->slug }}' @endif title={{ $menu->name }} class='text-decoration-none d-block fw-bold text-cm-light'>
                                 <div class='d-flex align-items-center w-100'>
                                     <i class='{{ $menu->icon }} fs-5 iconManu'></i>
                                     <div class='ms-2 hiddeItem dNone' data-item-active='false'>
@@ -16,6 +16,18 @@
                                 </div>
                             </a>
                         </div>
+
+                        @if ($menu->submenus)
+                            <ul class="m-0 p-1 position-absolute bottom-0 end-0 submenu bg-cm-secondary rounded">
+                                @foreach (json_decode($menu->submenus, true) as $indice => $value)
+                                    <li class="submenu_li rounded">
+                                        <a class="text-cm-light fw-bold text-decoration-none d-block rounded" href="{{ $indice }}" title="{{ $value }}">
+                                            {{ $value }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
                     </li>
                 @endcan
             @endforeach

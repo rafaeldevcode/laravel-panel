@@ -6,7 +6,7 @@
                 <x-input-text name='name' label='Nome do item do menu' icon='bi bi-menu-button-wide-fill' required />
             </div>
 
-            <div class='col-12 col-md-6'>
+            <div class='col-12 col-md-6' data-submenu="false">
                 <x-input-text name='icon' label='Ícone' icon='bi bi-emoji-smile' required />
             </div>
 
@@ -14,12 +14,27 @@
                 <x-input-text name='slug' label='Slug (Sem espaçoe e ascentos)' icon='bi bi-link' required />
             </div>
 
-            <div class='col-12 col-md-6'>
+            <div class='col-12 col-md-6' data-submenu="false">
                 <x-input-number name='position' label='Posição' icon='bi bi-123' required />
             </div>
 
-            <div class='col-12 col-md-6'>
-                <x-input-checkbox-switch name="view_dashboard" label='Exibir na dashboard' />
+            <div class='col-12 col-md-6' data-submenu="true">
+                <div class='d-flex flex-column position-relative my-4'>
+                    <i class='bi bi-file-earmark-lock-fill position-absolute m-2'></i>
+                    <select class='form-select ps-4 focus-shadown-none' name='submenu' id='submenu'>
+                        <option>Selecione o menu principal</option>
+
+                        @foreach ($menus as $menu)
+                            <option value='{{ $menu->id }}'>{{ $menu->name }}</option>
+                        @endforeach
+                    </select>
+                    <label class='position-absolute ms-4 my-2 px-2 input-transform-translate' for='submenu'>Selecione o menu principal</label>
+                    <span class='position-absolute end-0 bottom-0 validit'></span>
+                </div>
+            </div>
+
+            <div class='col-12'>
+                <x-input-checkbox-switch name="is_submenu" label='Esté um submneu?' />
             </div>
         </div>
 
