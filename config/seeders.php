@@ -4,7 +4,7 @@ return [
     'user' => [
         'name'        => 'Admin',
         'email'       => 'admin@admin.com',
-        'password'    => 'admin1234',
+        'password'    => '!R443303e',
         'user_status' => 'on'
     ],
     'menus' => [
@@ -13,7 +13,6 @@ return [
             'icon'           => 'bi bi-speedometer',
             'slug'           => '/admin/dashboard',
             'position'       => 1,
-            'view_dashboard' => NULL,
             'prefix'         => 'dashboard'
         ],
         2 => [
@@ -21,7 +20,6 @@ return [
             'icon'           => 'bi bi-menu-button-wide-fill',
             'slug'           => '/admin/menus',
             'position'       => 4,
-            'view_dashboard' => 'on',
             'prefix'         => 'menus'
         ],
         3 => [
@@ -29,7 +27,6 @@ return [
             'icon'           => 'bi bi-file-earmark-lock-fill',
             'slug'           => '/admin/permissions',
             'position'       => 3,
-            'view_dashboard' => 'on',
             'prefix'         => 'permissions'
         ],
         4 => [
@@ -37,7 +34,6 @@ return [
             'icon'           => 'bi bi-people-fill',
             'slug'           => '/admin/users',
             'position'       => 2,
-            'view_dashboard' => 'on',
             'prefix'         => 'users'
         ],
         5 => [
@@ -45,7 +41,6 @@ return [
             'icon'           => 'bi bi-bell-fill',
             'slug'           => '/admin/notifications',
             'position'       => 5,
-            'view_dashboard' => 'on',
             'prefix'         => 'notifications'
         ],
         6 => [
@@ -53,7 +48,6 @@ return [
             'icon'           => 'bi bi-gear-fill',
             'slug'           => '/admin/settings/edit',
             'position'       => 6,
-            'view_dashboard' => NULL,
             'prefix'         => 'settings'
         ],
         7 => [
@@ -61,7 +55,6 @@ return [
             'icon'           => 'bi bi-card-text',
             'slug'           => '/admin/logs',
             'position'       => 7,
-            'view_dashboard' => NULL,
             'prefix'         => 'logs'
         ]
     ],

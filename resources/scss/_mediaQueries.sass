@@ -3,6 +3,21 @@
         display: none
 
 @media only screen and ( max-width: 750px )
+    .menu_input
+        &:checked + label span:nth-child(1)
+            transform: rotate(-45deg)
+            width: 100%
+            top: 11px
+
+        &:checked + label span:nth-child(2)
+            width: 0%
+            opacity: 0
+
+        &:checked + label span:nth-child(3)
+            transform: rotate(45deg)
+            width: 100%
+            top: 11px
+
     .sidebar[data-expanded='desactive']
         animation: none
 
@@ -41,10 +56,9 @@
     .menuMobileOppen
         position: fixed
         top: 0
-        left: 0
+        right: 0
         z-index: 99999
-        transform: translateX(170px)
-        margin-top: 20px
+        margin: 15px
         animation: hiddeItem .2s linear
 
     .hiddeItem

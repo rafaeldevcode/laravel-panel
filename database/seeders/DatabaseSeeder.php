@@ -8,9 +8,7 @@ use App\Models\Menus;
 use App\Models\Permissions;
 use App\Models\Settings;
 use App\Models\User;
-use App\Services\Crypt;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -33,7 +31,6 @@ class DatabaseSeeder extends Seeder
                     'icon'           => $menu['icon'],
                     'slug'           => $menu['slug'],
                     'position'       => $menu['position'],
-                    'view_dashboard' => $menu['view_dashboard'],
                     'prefix'         => $menu['prefix']
                 ]);
 

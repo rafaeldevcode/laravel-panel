@@ -733,6 +733,20 @@ input[type=checkbox] {
   }
 }
 @media only screen and (max-width: 750px) {
+  .menu_input:checked + label span:nth-child(1) {
+    transform: rotate(-45deg);
+    width: 100%;
+    top: 11px;
+  }
+  .menu_input:checked + label span:nth-child(2) {
+    width: 0%;
+    opacity: 0;
+  }
+  .menu_input:checked + label span:nth-child(3) {
+    transform: rotate(45deg);
+    width: 100%;
+    top: 11px;
+  }
   .sidebar[data-expanded=desactive] {
     -webkit-animation: none;
             animation: none;
@@ -777,10 +791,9 @@ input[type=checkbox] {
   .menuMobileOppen {
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0;
     z-index: 99999;
-    transform: translateX(170px);
-    margin-top: 20px;
+    margin: 15px;
     -webkit-animation: hiddeItem 0.2s linear;
             animation: hiddeItem 0.2s linear;
   }
@@ -1020,7 +1033,7 @@ input[type=checkbox] {
 }
 @-webkit-keyframes expandedAsideMobile {
   0% {
-    transform: translateX(-200px);
+    transform: translateX(-100%);
   }
   100% {
     transform: translateX(0);
@@ -1028,7 +1041,7 @@ input[type=checkbox] {
 }
 @keyframes expandedAsideMobile {
   0% {
-    transform: translateX(-200px);
+    transform: translateX(-100%);
   }
   100% {
     transform: translateX(0);
@@ -1039,7 +1052,7 @@ input[type=checkbox] {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-200px);
+    transform: translateX(-100%);
   }
 }
 @keyframes toRecalldAsideMobile {
@@ -1047,6 +1060,6 @@ input[type=checkbox] {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-200px);
+    transform: translateX(-100%);
   }
 }

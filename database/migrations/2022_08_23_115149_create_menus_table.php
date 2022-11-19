@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('position');
             $table->integer('belongs_to')->nullable();
             $table->longText('submenus')->nullable();
-            $table->string('view_dashboard')->nullable();
             $table->string('prefix');
         });
     }

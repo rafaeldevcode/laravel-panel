@@ -1,11 +1,11 @@
 @import ./_mixins
-    
+
 @keyframes showError
     @include error
-    
+
 @keyframes showSuccess
     @include error
-    
+
 @keyframes showMessage
     0%
         transform: translateX(230px)
@@ -22,7 +22,7 @@
     100%
         opacity: 1
         transform: translateX(0)
-    
+
 @keyframes hiddeMessage
     0%
         transform: translateX(0)
@@ -39,21 +39,21 @@
     100%
         transform: translateX(230px)
         opacity: 0
-        
+
 @keyframes expandedAside
     0%
         width: 66px
-    
+
     100%
         width: 230px
 
 @keyframes toRecalldAside
     0%
         width: 230px
-    
+
     100%
         width: 66px
-        
+
 
 @keyframes showItem
     0%
@@ -83,14 +83,14 @@
 
 @keyframes expandedAsideMobile
     0%
-        transform: translateX(-200px)
-    
+        transform: translateX(-100%)
+
     100%
         transform: translateX(0)
 
 @keyframes toRecalldAsideMobile
     0%
         transform: translateX(0)
-    
+
     100%
-        transform: translateX(-200px)
+        transform: translateX(-100%)

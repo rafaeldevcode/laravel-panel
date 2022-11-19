@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\View\Components\BgLogin;
 use App\View\Components\BgProfile;
 use App\View\Components\Breadcrumps;
-use App\View\Components\CardDashboard;
 use App\View\Components\Favicon;
 use App\View\Components\Footer;
 use App\View\Components\Form\InputButton;
@@ -81,7 +80,6 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('text-area', TextArea::class);
         Blade::component('input-file-image', InputFileImage::class);
         Blade::component('message', Message::class);
-        Blade::component('card-dashboard', CardDashboard::class);
         Blade::component('bg-profile', BgProfile::class);
         Blade::component('logo', Logo::class);
         Blade::component('logo-header', LogoHeader::class);
