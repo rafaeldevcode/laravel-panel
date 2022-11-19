@@ -67,7 +67,6 @@ class UpdateServices extends BaseCrud
             !is_null($request->phone)             && $profile->phone = $request->phone;
             !is_null($request->birth_date)        && $profile->birth_date = $request->birth_date;
             !is_null($request->permission)        && $profile->permission = $request->permission;
-            !is_null($request->initials_campaign) && $profile->campaign = $request->initials_campaign;
             !is_null($request->user_type)         && $profile->user_type = $request->user_type;
 
             $updatePass == true && $profile->password = Hash::make($request->password);
@@ -136,11 +135,9 @@ class UpdateServices extends BaseCrud
             $user->name               = $request->name;
             $user->phone              = $request->phone;
             $user->birth_date         = $request->birth_date;
-            $user->initials_campaign  = $request->initials_campaign;
             $user->permission_id      = $request->permission;
             $user->user_status        = $request->user_status;
 
-            $request->user_type          !== 'default' && $user->user_type = $request->user_type;
             !is_null($request->password) && $user->password = Hash::make($request->password);
 
             $user->save();
@@ -163,7 +160,7 @@ class UpdateServices extends BaseCrud
                     'slug'           => $request->slug,
                     'icon'           => $request->icon,
                     'position'       => $request->position,
-                    'view_dashboard' => $request->name,
+                    'submenus'       => $request->submenus
                 ]);
         DB::commit();
 

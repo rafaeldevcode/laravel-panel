@@ -5,7 +5,7 @@
         <ul class='m-0 p-2'>
             @foreach ($menus as $menu)
                 @can('read', $menu->prefix)
-                    <li class='d-flex flex-row align-items-center rounded item-nav-sidbar' data-item-menu='{{ $uri == $menu->prefix ? 'active' : 'inactive' }}'>
+                    <li class='d-flex flex-row align-items-center rounded item-nav-sidbar position-relative' data-item-menu='{{ $uri == $menu->prefix ? 'active' : 'inactive' }}'>
                         <div class='nav-icon text-color-main text-center w-100'>
                             <a @if(!isset($menu->submenus)) href='{{ $menu->slug }}' @endif title={{ $menu->name }} class='text-decoration-none d-block fw-bold text-cm-light'>
                                 <div class='d-flex align-items-center w-100'>

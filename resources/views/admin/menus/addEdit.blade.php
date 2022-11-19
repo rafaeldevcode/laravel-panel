@@ -36,5 +36,6 @@
     <script type="text/javascript">
         getFields();
         addSubmenu();
+        removeSubmenus();
     </script>
 @endsection

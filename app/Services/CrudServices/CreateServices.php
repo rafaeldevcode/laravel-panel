@@ -61,7 +61,6 @@ class CreateServices extends BaseCrud
                 'icon'           => $request->icon,
                 'slug'           => $slug,
                 'position'       => $request->position,
-                'view_dashboard' => $request->view_dashboard,
                 'prefix'         => $prefix
             ]);
 
@@ -100,9 +99,7 @@ class CreateServices extends BaseCrud
                 'permission_id'      => $request->permission,
                 'phone'              => $phone,
                 'birth_date'         => $birth_date,
-                'user_type'          => $request->user_type,
-                'user_status'        => $request->user_status,
-                'initials_campaign'  => $request->initials_campaign
+                'user_status'        => $request->user_status
             ]);
 
             if($auth):

@@ -668,4 +668,35 @@
             });
         });
     }
+
+    // Remover submenus
+    function removeSubmenus(){
+        const btnSubmenus = document.querySelectorAll('[data-submenu="delete"]');
+
+        btnSubmenus.forEach((sub) => {
+            $(sub).click((event) => {
+                let submenus = JSON.parse($('#submenus').val());
+                let btnSubmenu;
+
+                if($(event.target).attr('data-submenu')){
+                    btnSubmenu = event.target;
+                }else{
+                    btnSubmenu = event.target.parentNode;
+                }
+
+                Object.keys(submenus).forEach((key) => {
+                    if($(btnSubmenu).attr('data-key') === key){
+                        delete submenus[key];
+                    }
+                });
+
+                $('#submenus').val(JSON.stringify(submenus));
+                $(btnSubmenu).parent().remove();
+
+                if($('#submenus').val() == '{}'){
+                    $('#list-submenus').remove();
+                }
+            });
+        });
+    }
 </script>
