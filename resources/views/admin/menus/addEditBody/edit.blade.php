@@ -1,9 +1,6 @@
 <section class='p-2 p-md-2 bg-cm-grey m-3 rounded shadow'>
     <form method="POST" action="/admin/menus/edit/{{ $menu->id }}">
         @csrf
-        @php
-            $read_dashboard = $menu->view_dashboard === 'on' ? 'on' : 'off';
-        @endphp
 
         <div class='row d-flex justify-content-between'>
             <div class='col-12 col-md-6'>

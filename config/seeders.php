@@ -52,7 +52,7 @@ return [
         ],
         7 => [
             'name'           => 'Logs',
-            'icon'           => 'bi bi-card-text',
+            'icon'           => 'bi bi-file-binary-fill',
             'slug'           => '/admin/logs',
             'position'       => 7,
             'prefix'         => 'logs'

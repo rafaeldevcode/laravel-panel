@@ -18,7 +18,7 @@
             <section class='p-3'>
                 <x-breadcrumps
                     color='cm-secondary'
-                    icon='bi bi-card-text'
+                    icon='bi bi-file-binary-fill'
                     title='Logs do sistema'
                     type='Visualizar'
                 />
