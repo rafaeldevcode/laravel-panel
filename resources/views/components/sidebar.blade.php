@@ -34,7 +34,7 @@
 
             <li class='d-flex flex-row align-items-center rounded item-nav-sidbar-logout' data-item-menu='inactive'>
                 <div class='nav-icon text-color-main text-center w-100'>
-                    <form action="/logout" title={{ $menu->name }} class='d-block fw-bold' method="POST">
+                    <form action="/logout" class='d-block fw-bold' method="POST">
                         @csrf
                         <button type="submit" title="Fazer logout" class='d-flex align-items-center w-100 text-cm-light'>
                             <i class='bi bi-box-arrow-right fs-5 iconManu'></i>

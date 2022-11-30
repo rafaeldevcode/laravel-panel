@@ -18,9 +18,12 @@
             </button>
         </div>
 
-        <div class='position-absolute top-0 start-0 m-3 text-color-main fw-bold display-4'>
-            {{ $user->name }}
-            <span class='text-cm-{{ $status[0] }}'>
+        <div class='position-absolute top-0 start-0 m-3 text-color-main'>
+            <p class='p-0 m-0 display-4 fw-bold'>{{ $user->name }}</p>
+        </div>
+
+        <div class='position-absolute top-0 end-0 m-3'>
+            <span class='text-cm-light bg-cm-{{ $status[0] }} badge badge-sm fw-bold'>
                 <i class='bi bi-circle-fill'></i>
                 {{ $status[1] }}
             </span>

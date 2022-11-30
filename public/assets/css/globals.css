@@ -135,7 +135,7 @@ div[data-notification=false] {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3490196078);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2959558824) 50%, rgb(0, 0, 0) 100%);
 }
 
 label {
@@ -369,6 +369,15 @@ div[data-item-active=true] {
   background-size: cover;
   width: 100%;
   height: 300px;
+}
+.profile-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2352941176) 50%, rgb(0, 0, 0) 100%);
 }
 
 .profile-user {
