@@ -39,6 +39,15 @@ input[type=number] {
   list-style: circle;
 }
 
+.pointer {
+  cursor: pointer !important;
+}
+
+.zindex-100 {
+  position: relative;
+  z-index: 100;
+}
+
 .card-dashboard {
   width: 220px;
   transition: all 0.4s;

@@ -70,6 +70,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/delete/several/notifications', [NotificationsControllers::class, 'deleteSeveral']);
     Route::get('/notifications/edit/{ID}', [NotificationsControllers::class, 'update']);
     Route::post('/notifications/{ID}/view', [NotificationsControllers::class, 'view']);
+    Route::post('/notifications/view', [NotificationsControllers::class, 'viewSeveral']);
 
     // Grupo de rotas para as configurações da página
     Route::get('/settings/edit', [SettingsControllers::class, 'create']);

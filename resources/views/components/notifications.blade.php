@@ -10,13 +10,19 @@
     </button>
 
     <div class='notification-contents'>
+        <div class="py-2 text-end col-12" {{ count($notifications) > 0 ? '' : 'hidden' }}>
+            <button class="border-0 bg-transparent text-cm-primary pointer zindex-100" type="button" title="Marcar todas as norificaçãoe como vistas" id="nark-all-view">
+                Marcar todas como vista
+            </button>
+        </div>
+
         <div class='alert alert-cm-info' data-notification-count {{ count($notifications) > 0 ? 'hidden' : '' }}>
             <p class='text-center fw-bold text-color-main m-0'>Sem notificações por aqui!</p>
         </div>
 
         @foreach ($notifications as $notification)
             <div class='border border-color-main rounded w-100 p-2 position-relative mb-2 bg-cm-light'>
-                <div class='notification-contents-box' id='box-notifications'>
+                <div class='notification-contents-box'>
                     <p class='fw-bold text-color-main'>{{ $notification->name }}</p>
 
                     <article data-content="false" id='{{ $notification->id }}'>
@@ -44,4 +50,5 @@
 
     oppenOrClosedNotification();
     markNotificationSeen();
+    markAllNotificationWith()
 </script>

@@ -493,7 +493,7 @@
 
     // Abrir ou fechar a notificação clicada
     function oppenOrClosedNotification(){
-        const notifications = document.querySelectorAll('#box-notifications');
+        const notifications = document.querySelectorAll('.notification-contents-box');
 
         notifications.forEach((notification) => {
             $(notification).click(()=>{
@@ -545,6 +545,39 @@
                 }).fail((error) => {
                     console.log(error)
                 });
+            });
+        });
+    }
+
+    // Marcar todas as notificações como vistas
+    function markAllNotificationWith(){
+        $('#nark-all-view').click(() => {
+            const ids = [];
+            const inputsIds = document.querySelectorAll('#notifications input[name="ID"]');
+            const token = document.querySelector('input[name="_token"]').value;
+
+            inputsIds.forEach((input) => {
+                ids.push($(input).val());
+            });
+
+            const data = {
+                _token: token,
+                ids: ids
+            }
+
+            $.post('/admin/notifications/view', data, (response) => {
+                if(response.status == 'success'){
+                    inputsIds.forEach((input) => {
+                        $(input).parent().parent().parent().parent().remove();
+
+                        $('#notification-count').text('0');
+                        $('[data-notification-count]').removeAttr('hidden');
+                        $('#nark-all-view').parent().attr('hidden', true);
+                    });
+                }
+
+            }).fail((error) => {
+                console.log(error)
             });
         });
     }

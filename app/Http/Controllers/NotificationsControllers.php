@@ -142,4 +142,25 @@ class NotificationsControllers extends Controller
             'message' => 'Notificação marcada como vista!'
         ], 201);
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function viewSeveral(Request $request)
+    {
+        DB::beginTransaction();
+            foreach($request->ids as $ID):
+                NotificationsUser::where('user_id', Auth::user()
+                    ->id)->where('notifications_id', $ID)
+                    ->get()[0]
+                    ->update(['notification_status' => 'off']);
+            endforeach;
+        DB::commit();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'Notificações marcadas como vista!'
+        ], 201);
+    }
 }
