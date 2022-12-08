@@ -732,4 +732,29 @@
             });
         });
     }
+
+    // Abrir diretório
+    function openFolder(){
+        const folders = document.querySelectorAll('[data-gallery]');
+
+        folders.forEach((folder) => {
+            let openFolder = $(folder).attr('data-gallery').replace('public/gallery/', '');
+
+            $(folder).dblclick(() => {
+                window.location.href = `/admin/gallery?folder=${openFolder}`;
+            });
+        });
+    }
+
+    // Voltar um diretório da galeria
+    function backFolder(){
+        $('[data-folder="back"]').click(() => {
+            let folder = new URLSearchParams(window.location.search).get('folder')
+                folder = folder.split('/');
+                folder.pop();
+                folder = folder.join('/');
+
+                window.location.href = `/admin/gallery?folder=${folder}`;
+        });
+    }
 </script>

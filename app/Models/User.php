@@ -22,7 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'permission_id',
-        'user_status'
+        'user_status',
+        'folders'
     ];
 
     /**
@@ -66,5 +67,13 @@ class User extends Authenticatable
     public function campaigns()
     {
         return $this->hasMany(Campaign::class);
+    }
+
+    /**
+     * @return Image
+     */
+    public function images()
+    {
+        return $this->hasMany(Image::class);
     }
 }

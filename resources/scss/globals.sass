@@ -112,10 +112,10 @@ article[data-content="true"]
 
 // Animação para abertura da notificações
 div[data-notification="true"]
-    animation: .8s showNotifications ease-out forwards
+    animation: .5s showNotifications ease-out forwards
 
 div[data-notification="false"]
-    animation: .8s hiddeNotifications ease-out forwards
+    animation: .5s hiddeNotifications ease-out forwards
 
 // Painel de login
 .image-bg-login
@@ -516,6 +516,48 @@ input[type="checkbox"]
     max-width: 1300px
     max-height: 700px
     overflow: auto
+
+// Gallery
+.folder-folder
+    #options-folder
+        opacity: 0
+        display: none
+        transition: opacity .4s
+
+    &:hover #options-folder
+        opacity: 1
+        display: block
+
+.card-folder-image
+    width: 100px
+    height: 100px
+
+    img
+        width: 100px
+        height: 100px
+        object-fit: cover
+        object-position: center
+
+.folder-image
+    #options-image
+        opacity: 0
+        display: none
+        transition: opacity .4s
+        background: #00000070
+
+    &:hover #options-image
+        opacity: 1
+        display: block
+
+.folder-image-name
+    max-width: 100px
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+    margin-top: .8rem
+
+.fs-icon-image
+    font-size: .7rem
 
 @import  ./_mediaQueries
 @import ./_keyFrames

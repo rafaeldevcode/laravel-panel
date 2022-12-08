@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('birth_date')->nullable();
             $table->string('avatar')->default('default.png');
             $table->string('user_status')->nullable();
+            $table->text('folders')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

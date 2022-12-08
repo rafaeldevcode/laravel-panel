@@ -84,6 +84,14 @@ Route::group(['prefix' => 'admin'], function(){
     // Grupo de rotas exibir arquivos de logs
     Route::get('/logs', [LogsControllers::class, 'index']);
     Route::post('/logs/clear', [LogsControllers::class, 'clear']);
+
+    // Gupo de rotas para galeria
+    Route::get('/gallery', [ImagesControllers::class, 'index']);
+    Route::post('/gallery/upload', [ImagesControllers::class, 'upload']);
+    Route::post('/gallery/create/folder', [ImagesControllers::class, 'storeFolder']);
+    Route::post('/gallery/image/dowload', [ImagesControllers::class, 'imageDowload']);
+    Route::post('/gallery/image/remove', [ImagesControllers::class, 'imageRemove']);
+    Route::post('/gallery/folder/remove', [ImagesControllers::class, 'folderRemove']);
 });
 
 // Grupo de rotas para políticas e termos

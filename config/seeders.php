@@ -37,24 +37,32 @@ return [
             'prefix'         => 'users'
         ],
         5 => [
+            'name'           => 'Galeria',
+            'icon'           => 'bi bi-images',
+            'slug'           => '/admin/gallery',
+            'position'       => 5,
+            'view_dashboard' => 'on',
+            'prefix'         => 'gallery'
+        ],
+        6 => [
             'name'           => 'Notificações',
             'icon'           => 'bi bi-bell-fill',
             'slug'           => '/admin/notifications',
-            'position'       => 5,
+            'position'       => 6,
             'prefix'         => 'notifications'
         ],
-        6 => [
+        7 => [
             'name'           => 'Configurações',
             'icon'           => 'bi bi-gear-fill',
             'slug'           => '/admin/settings/edit',
-            'position'       => 6,
+            'position'       => 7,
             'prefix'         => 'settings'
         ],
-        7 => [
+        8 => [
             'name'           => 'Logs',
             'icon'           => 'bi bi-file-binary-fill',
             'slug'           => '/admin/logs',
-            'position'       => 7,
+            'position'       => 8,
             'prefix'         => 'logs'
         ]
     ],
