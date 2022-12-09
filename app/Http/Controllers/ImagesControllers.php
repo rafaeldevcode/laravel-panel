@@ -97,7 +97,7 @@ class ImagesControllers extends Controller
             User::find($user->id)->update([
                 'folders' => json_encode($folders)
             ]);
-            Storage::makeDirectory("public/gallery/{$folder}{$request->name}");
+            Storage::disk('public')->makeDirectory("gallery/{$folder}{$request->name}");
         DB::commit();
 
         return redirect()->back();
@@ -111,6 +111,8 @@ class ImagesControllers extends Controller
      */
     public function imageDowload(Request $request)
     {
+        $this->authorize('read', 'gallery');
+
         return Storage::download("public/{$request->image}");
     }
 
@@ -122,6 +124,8 @@ class ImagesControllers extends Controller
      */
     public function imageRemove(Request $request)
     {
+        $this->authorize('delete', 'gallery');
+
         /**
          * @var User $user
          */
@@ -143,6 +147,8 @@ class ImagesControllers extends Controller
      */
     public function folderRemove(Request $request)
     {
+        $this->authorize('delete', 'gallery');
+
         /**
          * @var User $user
          */
