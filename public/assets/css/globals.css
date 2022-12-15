@@ -121,13 +121,13 @@ article[data-content=true] {
 }
 
 div[data-notification=true] {
-  -webkit-animation: 0.8s showNotifications ease-out forwards;
-          animation: 0.8s showNotifications ease-out forwards;
+  -webkit-animation: 0.5s showNotifications ease-out forwards;
+          animation: 0.5s showNotifications ease-out forwards;
 }
 
 div[data-notification=false] {
-  -webkit-animation: 0.8s hiddeNotifications ease-out forwards;
-          animation: 0.8s hiddeNotifications ease-out forwards;
+  -webkit-animation: 0.5s hiddeNotifications ease-out forwards;
+          animation: 0.5s hiddeNotifications ease-out forwards;
 }
 
 .image-bg-login {
@@ -745,6 +745,52 @@ input[type=checkbox] {
   overflow: auto;
 }
 
+.folder-folder #options-folder {
+  opacity: 0;
+  display: none;
+  transition: opacity 0.4s;
+}
+.folder-folder:hover #options-folder {
+  opacity: 1;
+  display: block;
+}
+
+.card-folder-image {
+  width: 100px;
+  height: 100px;
+}
+.card-folder-image img {
+  width: 100px;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.folder-image #options-image {
+  opacity: 0;
+  display: none;
+  transition: opacity 0.4s;
+  background: rgba(0, 0, 0, 0.4392156863);
+}
+.folder-image:hover #options-image {
+  opacity: 1;
+  display: block;
+}
+
+.folder-image-name {
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 0.8rem;
+}
+
+.fs-icon-image {
+  font-size: 0.7rem;
+}
+
 @media only screen and (max-width: 992px) {
   .section-image-login {
     display: none;
@@ -1019,23 +1065,31 @@ input[type=checkbox] {
 }
 @-webkit-keyframes showNotifications {
   0% {
+    opacity: 0;
     transform: translateY(600px);
   }
   100% {
+    opacity: 1;
     transform: translateY(0);
   }
 }
 @keyframes showNotifications {
   0% {
+    opacity: 0;
     transform: translateY(600px);
   }
   100% {
+    opacity: 1;
     transform: translateY(0);
   }
 }
 @-webkit-keyframes hiddeNotifications {
   0% {
+    opacity: 1;
     transform: translateY(0);
+  }
+  99% {
+    opacity: 0;
   }
   100% {
     transform: translateY(600px);
@@ -1043,7 +1097,11 @@ input[type=checkbox] {
 }
 @keyframes hiddeNotifications {
   0% {
+    opacity: 1;
     transform: translateY(0);
+  }
+  99% {
+    opacity: 0;
   }
   100% {
     transform: translateY(600px);
