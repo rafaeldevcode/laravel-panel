@@ -70,10 +70,10 @@ class User extends Authenticatable
     }
 
     /**
-     * @return Image
+     * @return Gallery
      */
-    public function images()
+    public function gallery()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(Gallery::class);
     }
 }

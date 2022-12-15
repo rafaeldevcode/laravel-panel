@@ -1,9 +1,18 @@
 <?php
 
-use App\Http\Controllers\{UsersControllers, DashboardControllers, AuthControllers, CampaignsController, LogsControllers, MenusControllers, NotificationsControllers, PermissionsControllers, PoliciesCotrollers, ProfileControllers, QuotesControllers, SettingsControllers, SocialiteControllers};
+use App\Http\Controllers\{
+    UsersControllers,
+    DashboardControllers,
+    AuthControllers,
+    GalleryControllers,
+    LogsControllers,
+    MenusControllers,
+    NotificationsControllers,
+    PermissionsControllers,
+    PoliciesCotrollers,
+    ProfileControllers,
+    SettingsControllers};
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Accounts\GoogleController;
-use App\Http\Controllers\Reports\ReportsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,12 +95,12 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/logs/clear', [LogsControllers::class, 'clear']);
 
     // Gupo de rotas para galeria
-    Route::get('/gallery', [ImagesControllers::class, 'index']);
-    Route::post('/gallery/upload', [ImagesControllers::class, 'upload']);
-    Route::post('/gallery/create/folder', [ImagesControllers::class, 'storeFolder']);
-    Route::post('/gallery/image/dowload', [ImagesControllers::class, 'imageDowload']);
-    Route::post('/gallery/image/remove', [ImagesControllers::class, 'imageRemove']);
-    Route::post('/gallery/folder/remove', [ImagesControllers::class, 'folderRemove']);
+    Route::get('/gallery', [GalleryControllers::class, 'index']);
+    Route::post('/gallery/upload', [GalleryControllers::class, 'upload']);
+    Route::post('/gallery/create/folder', [GalleryControllers::class, 'storeFolder']);
+    Route::post('/gallery/image/dowload', [GalleryControllers::class, 'fileDowload']);
+    Route::post('/gallery/image/remove', [GalleryControllers::class, 'fileRemove']);
+    Route::post('/gallery/folder/remove', [GalleryControllers::class, 'folderRemove']);
 });
 
 // Grupo de rotas para políticas e termos

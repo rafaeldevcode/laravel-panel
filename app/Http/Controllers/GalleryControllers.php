@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class ImagesControllers extends Controller
+class GalleryControllers extends Controller
 {
     /**
      * @return mixed
@@ -30,11 +31,10 @@ class ImagesControllers extends Controller
          */
         $user = Auth::user();
 
-        $folder = isset($request->query()['folder']) ? $request->query()['folder'] : '';
+        $folder = isset($request->query()['folder']) ? "{$request->query()['folder']}" : '';
         $folder_name = (isset($request->query()['folder']) && !empty($request->query()['folder'])) ? "{$request->query()['folder']}" : null;
-        $folders = isset($user->folders) ? json_decode($user->folders, true) : [];
-        $folders = empty($folder) ? $folders : $folders[$folder];
-        $files = $user->images()->where('folder_name', $folder_name)->get();
+        $folders = Storage::directories("public/gallery/{$folder}");
+        $files = $user->gallery()->where('folder_name', $folder_name)->get();
 
         $message = $request->session()->get('message');
         $type = $request->session()->get('type');
@@ -55,15 +55,24 @@ class ImagesControllers extends Controller
     public function upload(Request $request)
     {
         $this->authorize('create', 'gallery');
-        $folder = isset($request->folder) ? "/{$request->folder}" : '';
 
-        DB::beginTransaction();
-            User::find(Auth::user()->id)->images()->create([
-                'name'        => $request->name,
-                'folder_name' => $request->folder,
-                'image'       => $request->file('image')->store("gallery{$folder}", 'public')
-            ]);
-        DB::commit();
+        $folder = isset($request->folder) ? "{$request->folder}/" : '';
+        $mime_type = $request->path->getMimeType();
+        $file_name = Carbon::now()->format('Y-m-d_His').str_replace(' ', '', $request->path->getClientOriginalName());
+        $path = "gallery/{$folder}{$file_name}";
+        $type = strpos($mime_type, 'image') === false ? 'video' : 'image';
+        $is_uploaded = Storage::disk('public')->put($path, file_get_contents($request->path));
+
+        if($is_uploaded):
+            DB::beginTransaction();
+                User::find(Auth::user()->id)->gallery()->create([
+                    'title'       => $request->title,
+                    'folder_name' => $request->folder,
+                    'path'        => $path,
+                    'type'        => $type
+                ]);
+            DB::commit();
+        endif;
 
         return redirect()->back();
     }
@@ -77,28 +86,10 @@ class ImagesControllers extends Controller
     public function storeFolder(Request $request)
     {
         $this->authorize('create', 'gallery');
-        /**
-         * @var User $user
-         */
-        $user = Auth::user();
-        $folders = isset($user->folders) ? json_decode($user->folders, true) : [];
 
         $folder = isset($request->folder) ? "{$request->folder}/" : '';
-        if(isset($request->folder)):
 
-            $folders[$request->folder]+=["{$folder}{$request->name}" => []];
-            unset($folders["{$folder}{$request->name}"]);
-        else:
-
-            $folders = $folders+["{$folder}{$request->name}" => []];
-        endif;
-
-        DB::beginTransaction();
-            User::find($user->id)->update([
-                'folders' => json_encode($folders)
-            ]);
-            Storage::disk('public')->makeDirectory("gallery/{$folder}{$request->name}");
-        DB::commit();
+        Storage::disk('public')->makeDirectory("gallery/{$folder}{$request->name}");
 
         return redirect()->back();
     }
@@ -109,11 +100,11 @@ class ImagesControllers extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function imageDowload(Request $request)
+    public function fileDowload(Request $request)
     {
         $this->authorize('read', 'gallery');
 
-        return Storage::download("public/{$request->image}");
+        return Storage::download("public/{$request->path}");
     }
 
     /**
@@ -122,7 +113,7 @@ class ImagesControllers extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function imageRemove(Request $request)
+    public function fileRemove(Request $request)
     {
         $this->authorize('delete', 'gallery');
 
@@ -132,8 +123,9 @@ class ImagesControllers extends Controller
         $user = Auth::user();
 
         DB::beginTransaction();
-            $user->images()->where('image', $request->image)->delete();
-            Storage::delete("public/{$request->image}");
+            $user->gallery()->where('path', $request->path)->delete();
+
+            Storage::delete("public/{$request->path}");
         DB::commit();
 
         return redirect()->back();
@@ -153,19 +145,16 @@ class ImagesControllers extends Controller
          * @var User $user
          */
         $user = Auth::user();
+        $folder_name = str_replace('public/gallery/', '', $request->folder_name);
 
         DB::beginTransaction();
-            $images = $user->images()->where('folder_name', $request->folder_name)->get();
+            $files = $user->gallery()->where('folder_name', $folder_name)->get();
 
-            foreach($images as $image):
-                $user->images()->where('image', $image->image)->delete();
+            foreach($files as $file):
+                $user->gallery()->where('path', $file->path)->delete();
             endforeach;
 
-            Storage::deleteDirectory("public/gallery/{$request->folder_name}");
-
-            $folders = json_decode($user->folders, true);
-            unset($folders[$request->folder_name]);
-            User::find($user->id)->update(['folders' => json_encode($folders)]);
+            Storage::deleteDirectory($request->folder_name);
         DB::commit();
 
         return redirect()->back();
