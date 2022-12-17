@@ -44,14 +44,10 @@
             <div class='col-12 col-md-6'>
                 <x-input-text name='initials_campaign' label='Iniciais do campaign' icon='bi bi-globe2' :value='$user->initials_campaign' />
             </div>
-
-            <div class='col-12 col-md-6'>
-                <x-input-select name='user_type' :value='$user_type' icon='bi bi-person-lines-fill' label='Selecione o tipo de usuário' :array='$all_user_typers' required />
-            </div>
         </div>
 
         <div class='col-12 col-md-6'>
-            <x-input-checkbox-switch name="user_status" label='Status do usuário (Ativo | Inativo)' :dchecked='$user_status' />
+            <x-input-checkbox-switch name="user_status" label='Status do usuário (Ativo | Inativo)' :dchecked='$user->user_status' />
         </div>
 
         <div class='row d-flex justify-content-end'>

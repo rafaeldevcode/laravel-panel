@@ -4,6 +4,7 @@ namespace App\Services\CrudServices;
 
 use App\Events\CreateExtraPermissionForAdmin;
 use App\Models\Menus;
+use App\Models\Notifications;
 use App\Models\Permissions;
 use App\Models\Settings;
 use App\Models\User;
@@ -165,5 +166,23 @@ class UpdateServices extends BaseCrud
         DB::commit();
 
         SessionMessage::create($request, 'Item do menu atualizado com sucesso!', 'cm-success');
+    }
+
+    /**
+     * @param Request $request
+     * @param int $ID
+     * @return mixed
+     */
+    public function updateNotification(Request $request, int $ID)
+    {
+        DB::beginTransaction();
+            Notifications::find($ID)->update([
+                'name'                => $request->name,
+                'notification'        => $request->notification,
+                'notification_status' => $request->notification_status
+            ]);
+        DB::commit();
+
+        SessionMessage::create($request, 'Notificação atualizada com sucesso!', 'cm-success');
     }
 }

@@ -1,8 +1,4 @@
 <section class='p-2 p-md-5 bg-cm-grey m-3 rounded shadow'>
-    @php
-        $user_status = isset($user->user_status) && $user->user_status === 'on' ? 'on' : 'off';
-    @endphp
-
     <form method="POST" action="/admin/users/add">
         @csrf
         <div class='row d-flex justify-content-between'>

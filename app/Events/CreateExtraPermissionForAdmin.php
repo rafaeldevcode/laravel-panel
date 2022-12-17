@@ -22,10 +22,10 @@ class CreateExtraPermissionForAdmin
     /**
      * Create a new event instance.
      *
-     * @param string $extra_permissions
+     * @param string|null $extra_permissions
      * @return void
      */
-    public function __construct(string $extra_permissions)
+    public function __construct(string|null $extra_permissions)
     {
         $this->extra_permissions = $extra_permissions;
     }

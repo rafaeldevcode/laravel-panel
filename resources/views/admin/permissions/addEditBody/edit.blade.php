@@ -10,10 +10,10 @@
         <div class='d-flex flex-wrap justify-content-evenly'>
             @foreach ($menus as $menu)
                 @php
-                    $create_checked = isset($permissions_in_array["create_{$menu->prefix}"]) && $permissions_in_array["create_{$menu->prefix}"] === 'on' ? 'on' : 'off';
-                    $delete_checked = isset($permissions_in_array["delete_{$menu->prefix}"]) && $permissions_in_array["delete_{$menu->prefix}"] === 'on' ? 'on' : 'off';
-                    $update_checked = isset($permissions_in_array["update_{$menu->prefix}"]) && $permissions_in_array["update_{$menu->prefix}"] === 'on' ? 'on' : 'off';
-                    $read_checked   = isset($permissions_in_array["read_{$menu->prefix}"])   && $permissions_in_array["read_{$menu->prefix}"] === 'on' ? 'on' : 'off';
+                    $create_checked = isset($permissions_in_array["create_{$menu->prefix}"]) && $permissions_in_array["create_{$menu->prefix}"] === 'on' ? 'on' : null;
+                    $delete_checked = isset($permissions_in_array["delete_{$menu->prefix}"]) && $permissions_in_array["delete_{$menu->prefix}"] === 'on' ? 'on' : null;
+                    $update_checked = isset($permissions_in_array["update_{$menu->prefix}"]) && $permissions_in_array["update_{$menu->prefix}"] === 'on' ? 'on' : null;
+                    $read_checked   = isset($permissions_in_array["read_{$menu->prefix}"])   && $permissions_in_array["read_{$menu->prefix}"] === 'on' ? 'on' : null;
                 @endphp
 
                 <div class='card p-3 col-md-4 col-12 col-lg-3 m-2 position-relative'>

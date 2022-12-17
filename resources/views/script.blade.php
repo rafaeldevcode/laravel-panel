@@ -757,4 +757,132 @@
                 window.location.href = `/admin/gallery?folder=${folder}`;
         });
     }
+
+    // Abrir e fechar a galeria de imagens
+    function openGallery(){
+        const buttons = document.querySelectorAll('[data-gallery="open"]');
+        const gallery = $('[data-gallery="content"]');
+        buttons.forEach((button) => {
+            $(button).click((event) => {
+                const type = $(button).attr('data-gallery-type');
+                const src = $(button).attr('data-gallery-src');
+                const title = $(button).attr('data-gallery-title');
+                const current = $(button).attr('data-gallery-current');
+                const size = $(button).attr('data-gallery-size');
+                const count = $(button).attr('data-gallery-count');
+                    switch (type) {
+                        case 'image':
+                            insertImage(src, title);
+                            break;
+                        case 'video':
+                            insertVideo(src);
+                            break;
+                        default:
+                            break;
+                    }
+                    $('body').addClass('body-overflow-hidden');
+                    $('[data-gallery-options="title"]').text(title);
+                    $('[data-gallery-options="size"]').text(`${size} Bts`);
+                    gallery.attr('hidden', false);
+                    gallery.addClass('d-flex');
+                    habilitOptions(src);
+                    closeGallery(gallery);
+                    next(current, count);
+                    prev(current, count);
+            });
+        });
+        function next(current, count){
+            $('[data-gallery="next"]').click((event) => {
+                current = parseInt(current)+1 == count ? 0 : parseInt(current)+1;
+                const nextItem = $(`[data-gallery-current="${current}"]`);
+                const type = nextItem.attr('data-gallery-type');
+                const src = nextItem.attr('data-gallery-src');
+                const title = nextItem.attr('data-gallery-title');
+                const size = nextItem.attr('data-gallery-size');
+                switch (type) {
+                    case 'image':
+                        insertImage(src, title);
+                        break;
+                    case 'video':
+                        insertVideo(src);
+                        break;
+                    default:
+                        break;
+                }
+                $('[data-gallery-options="title"]').text(title);
+                $('[data-gallery-options="size"]').text(`${size} Bts`);
+                habilitOptions(src);
+                next(current, count);
+                prev(current, next);
+            });
+        }
+        function prev(current, count)
+        {
+            $('[data-gallery="prev"]').click((event) => {
+                current = current == 0 ? parseInt(count)-1 : parseInt(current)-1;
+                const nextItem = $(`[data-gallery-current="${current}"]`);
+                const type = nextItem.attr('data-gallery-type');
+                const src = nextItem.attr('data-gallery-src');
+                const title = nextItem.attr('data-gallery-title');
+                const size = nextItem.attr('data-gallery-size');
+                switch (type) {
+                    case 'image':
+                        insertImage(src, title);
+                        break;
+                    case 'video':
+                        insertVideo(src);
+                        break;
+                    default:
+                        break;
+                }
+                $('[data-gallery-options="title"]').text(title);
+                $('[data-gallery-options="size"]').text(`${size} Bts`);
+                habilitOptions(src);
+                next(current, count);
+                prev(current, count);
+            });
+        }
+        function closeGallery(gallery){
+            $('[data-gallery="close"]').click(() => {
+                $('body').removeClass('body-overflow-hidden');
+                gallery.attr('hidden', true);
+                gallery.removeClass('d-flex');
+            });
+        }
+        function insertVideo(src){
+            const image = $('#img');
+            const video = $('#video');
+            const currentUrl = getCurrentUrl();
+            const url = `${currentUrl}/storage/${src}`
+                image.parent().attr('hidden', true);
+                image.parent().removeClass('d-flex');
+                video.parent().attr('hidden', false);
+                video.parent().addClass('d-flex');
+                video.attr('src', url);
+        }
+        function insertImage(src, title){
+            const image = $('#img');
+            const video = $('#video');
+            const currentUrl = getCurrentUrl();
+            const url = `${currentUrl}/storage/${src}`
+                video.parent().attr('hidden', true);
+                video.parent().removeClass('d-flex');
+                image.parent().attr('hidden', false);
+                image.parent().addClass('d-flex');
+                image.attr('src', url);
+                image.attr('alt', title);
+        }
+        function getCurrentUrl(){
+            const host = window.location.host
+            const protocol = window.location.protocol
+            const currentUrl = `${protocol}//${host}`;
+            return currentUrl;
+        }
+        function habilitOptions(src){
+            const inputs = document.querySelectorAll('[data-gallery="input"]');
+            inputs.forEach((input) => {
+                $(input).attr('value', src);
+            });
+        }
+    }
 </script>

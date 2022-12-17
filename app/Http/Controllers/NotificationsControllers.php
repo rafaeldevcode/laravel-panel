@@ -6,6 +6,7 @@ use App\Models\Notifications;
 use App\Models\NotificationsUser;
 use App\Services\CrudServices\CreateServices;
 use App\Services\CrudServices\DeleteServices;
+use App\Services\CrudServices\UpdateServices;
 use Illuminate\Http\Request;
 use App\Services\SessionMessage\SessionMessage;
 use Illuminate\Support\Facades\Auth;
@@ -119,9 +120,29 @@ class NotificationsControllers extends Controller
     {
         $this->authorize('update', 'notifications');
 
-        SessionMessage::create(request(), 'Método indisponível!', 'cm-danger');
+        $notification = Notifications::find($ID);
+        $method = 'edit';
 
-        return redirect()->back();
+        return view('admin/notifications/addEdit', compact(
+            'notification',
+            'method'
+        ));
+    }
+
+
+    /**
+     * @param Request $request
+     * @param int $ID
+     * @param UpdateServices $update
+     * @return mixed
+    */
+    public function updateStore(Request $request, int $ID, UpdateServices $update)
+    {
+        $this->authorize('update', 'notifications');
+
+        $update->updateNotification($request, $ID);
+
+        return redirect('/admin/notifications');
     }
 
     /**

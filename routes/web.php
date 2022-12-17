@@ -78,6 +78,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/notifications/delete/{ID}', [NotificationsControllers::class, 'delete']);
     Route::post('/delete/several/notifications', [NotificationsControllers::class, 'deleteSeveral']);
     Route::get('/notifications/edit/{ID}', [NotificationsControllers::class, 'update']);
+    Route::post('/notifications/edit/{ID}', [NotificationsControllers::class, 'updateStore']);
     Route::post('/notifications/{ID}/view', [NotificationsControllers::class, 'view']);
     Route::post('/notifications/view', [NotificationsControllers::class, 'viewSeveral']);
 

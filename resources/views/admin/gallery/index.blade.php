@@ -40,5 +40,6 @@
         getFields();
         backFolder();
         openFolder();
+        openGallery();
     </script>
 @endsection

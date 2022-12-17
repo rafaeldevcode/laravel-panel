@@ -1,5 +1,5 @@
 <section class='p-3 p-sm-5 bg-cm-grey m-3 rounded shadow'>
-    <section class='custom-table m-auto'>
+    <section class='custom-table m-auto cm-browser-height'>
         <table class='table table-hover mb-0'>
             <thead>
                 <tr>
@@ -43,6 +43,11 @@
                 @endforeach
             </tbody>
         </table>
+        @if(count($permissions) == 0)
+            <div class="p-2 empty-collections d-flex justify-content-center align-items-center">
+                <img class="h-100" src="{{ asset('assets/images/empty.svg') }}" alt="Teste">
+            </div>
+        @endif
     </section>
 
     <x-pagination
