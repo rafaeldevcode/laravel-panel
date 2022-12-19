@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\CrudServices\UpdateServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 
 class SettingsControllers extends Controller
 {
@@ -17,32 +18,31 @@ class SettingsControllers extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return mixed
+     * Show the form for editing the specified resource.
+     *
+     * @return Response
      */
-    public function create(Request $request)
+    public function edit()
     {
         $this->authorize('update', 'settings');
 
-        $message = $request->session()->get('message');
-        $type = $request->session()->get('type');
         $settings = DB::table('settings')->first();
         $images = $this->returnPathsImagesOfSettings($settings);
 
         return view('admin/settings/index', compact(
             'settings',
-            'message',
-            'type',
             'images'
         ));
     }
 
     /**
+     * Update the specified resource in storage.
+     *
      * @param Request $request
      * @param UpdateServices $update
-     * @return mixed
+     * @return Response
      */
-    public function store(Request $request, UpdateServices $update)
+    public function update(Request $request, UpdateServices $update)
     {
         $this->authorize('read', 'settings');
 
@@ -77,7 +77,6 @@ class SettingsControllers extends Controller
         if($settings->site_bg_login !== 'login_bg.png'):
             $site_bg_login = "/storage/{$settings->site_bg_login}";
         endif;
-
 
         return [
             'site_logo'        => $site_logo,

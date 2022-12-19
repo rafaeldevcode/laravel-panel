@@ -40,7 +40,7 @@ class InputCheckboxSwitch extends Component
      * @param string $dchecked
      * @return void
      */
-    public function __construct(string $name, ?string $value = null, string $label, string|null $dchecked)
+    public function __construct(string $name, ?string $value = null, string $label, string|null $dchecked = null)
     {
         $this->name     = $name;
         $this->value    = $value;

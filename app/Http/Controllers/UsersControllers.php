@@ -8,6 +8,7 @@ use App\Services\CrudServices\CreateServices;
 use App\Services\CrudServices\DeleteServices;
 use App\Services\CrudServices\UpdateServices;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class UsersControllers extends Controller
 {
@@ -20,15 +21,14 @@ class UsersControllers extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return mixed
+     * Display a listing of the resource.
+     *
+     * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $this->authorize('read', 'users');
 
-        $message = $request->session()->get('message');
-        $type = $request->session()->get('type');
         $users = User::paginate(10);
 
         $options = [
@@ -41,17 +41,16 @@ class UsersControllers extends Controller
 
         return view('admin/users/index', compact(
             'options',
-            'users',
-            'message',
-            'type'
+            'users'
         ));
     }
 
     /**
-     * @param Request $request
-     * @return mixed
+     * Show the form for creating a new resource.
+     *
+     * @return Response
      */
-    public function create(Request $request)
+    public function create()
     {
         $this->authorize('create', 'users');
 
@@ -67,9 +66,11 @@ class UsersControllers extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
      * @param Request $request
      * @param CreateServices $create
-     * @return mixed
+     * @return Response
      */
     public function store(Request $request, CreateServices $create)
     {
@@ -81,43 +82,22 @@ class UsersControllers extends Controller
     }
 
     /**
-     * Method for delete item menu
+     * Display the specified resource.
      *
-     * @param Request $request
-     * @param int $ID
-     * @param DeleteServices $delete
-     * @return mixed
+     * @return Response
      */
-    public function delete(Request $request, int $ID, DeleteServices $delete)
+    public function show()
     {
-        $this->authorize('delete', 'users');
-
-        $delete->deleteUser($request, $ID);
-
-        return redirect()->back();
+        //
     }
 
     /**
-     * Method for delete several item menu
+     * Show the form for editing the specified resource.
      *
-     * @param Request $request
-     * @param DeleteServices $delete
-     * @return mixed
-     */
-    public function deleteSeveral(Request $request, DeleteServices $delete)
-    {
-        $this->authorize('delete', 'users');
-
-        $delete->deleteSeveralUsers($request);
-
-        return redirect()->back();
-    }
-
-    /**
      * @param int $ID
-     * @return mixed
+     * @return Response
      */
-    public function update(int $ID)
+    public function edit(int $ID)
     {
         $this->authorize('update', 'users');
 
@@ -134,17 +114,52 @@ class UsersControllers extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
      * @param Request $request
      * @param int $ID
      * @param UpdateServices $update
-     * @return mixed
-    */
-    public function updateStore(Request $request, int $ID, UpdateServices $update)
+     * @return Response
+     */
+    public function update(Request $request, int $ID, UpdateServices $update)
     {
         $this->authorize('update', 'users');
 
         $update->updateUser($request, $ID);
 
         return redirect('/admin/users');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Request $request
+     * @param int $ID
+     * @param DeleteServices $delete
+     * @return Response
+     */
+    public function destroy(Request $request, int $ID, DeleteServices $delete)
+    {
+        $this->authorize('delete', 'users');
+
+        $delete->deleteUser($request, $ID);
+
+        return redirect()->back();
+    }
+
+    /**
+     * Remove the several resource from storage.
+     *
+     * @param Request $request
+     * @param DeleteServices $delete
+     * @return mixed
+     */
+    public function destroySeveral(Request $request, DeleteServices $delete)
+    {
+        $this->authorize('delete', 'users');
+
+        $delete->deleteSeveralUsers($request);
+
+        return redirect()->back();
     }
 }

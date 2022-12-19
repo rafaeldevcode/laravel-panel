@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Response;
 
 class GalleryControllers extends Controller
 {
@@ -20,8 +21,10 @@ class GalleryControllers extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
      * @param Request $request
-     * @return mixed
+     * @return Response
      */
     public function index(Request $request)
     {
@@ -36,12 +39,7 @@ class GalleryControllers extends Controller
         $folders = Storage::directories("public/gallery/{$folder}");
         $files = $user->gallery()->where('folder_name', $folder_name)->get();
 
-        $message = $request->session()->get('message');
-        $type = $request->session()->get('type');
-
         return view('admin/gallery/index', compact(
-            'message',
-            'type',
             'folders',
             'files',
             'folder'
@@ -49,8 +47,10 @@ class GalleryControllers extends Controller
     }
 
     /**
+     * Upload a file
+     *
      * @param Request $request
-     * @return mixed
+     * @return Response
      */
     public function upload(Request $request)
     {
@@ -78,10 +78,10 @@ class GalleryControllers extends Controller
     }
 
     /**
-     * Adicionar um novo diretório
+     * Add a new directory
      *
      * @param Request $request
-     * @return mixed
+     * @return Response
      */
     public function storeFolder(Request $request)
     {
@@ -95,12 +95,12 @@ class GalleryControllers extends Controller
     }
 
     /**
-     * Realizar dowload da imagem
+     * Download a specific file
      *
      * @param Request $request
-     * @return mixed
+     * @return Response
      */
-    public function fileDowload(Request $request)
+    public function dowloadFile(Request $request)
     {
         $this->authorize('read', 'gallery');
 
@@ -108,12 +108,12 @@ class GalleryControllers extends Controller
     }
 
     /**
-     * Remover imagem
+     * Remove a specific image
      *
      * @param Request $request
-     * @return mixed
+     * @return Response
      */
-    public function fileRemove(Request $request)
+    public function destroyFile(Request $request)
     {
         $this->authorize('delete', 'gallery');
 
@@ -132,12 +132,12 @@ class GalleryControllers extends Controller
     }
 
     /**
-     * Remover diretório e todas as suas imagens
+     * Destroy the directory with all the images
      *
      * @param Request $request
-     * @return mixed
+     * @return Response
      */
-    public function folderRemove(Request $request)
+    public function destroyFolder(Request $request)
     {
         $this->authorize('delete', 'gallery');
 

@@ -7,6 +7,7 @@ use App\Models\Permissions;
 use App\Services\CrudServices\UpdateServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 
 class ProfileControllers extends Controller
 {
@@ -19,32 +20,32 @@ class ProfileControllers extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return mixed
+     * Show the form for editing the specified resource.
+     *
+    * Request $request
+     * @return Response
      */
-    public function index(Request $request)
+    public function edit(Request $request)
     {
-        $message = $request->session()->get('message');
-        $type = $request->session()->get('type');
         $user = Auth::user();
         $user_permission = Permissions::find($user->permission_id)->name;
         $status = [UserStatus::getColor($user->user_status), UserStatus::getMessage($user->user_status)];
 
         return view('admin/profile/index', compact(
             'user',
-            'message',
-            'type',
             'user_permission',
             'status'
         ));
     }
 
     /**
+     * Update the specified resource in storage.
+     *
      * @param Request $request
      * @param UpdateServices $update
-     * @return mixed
+     * @return Response
      */
-    public function store(Request $request, UpdateServices $update)
+    public function update(Request $request, UpdateServices $update)
     {
         $update->updateProfile($request);
 
@@ -52,9 +53,11 @@ class ProfileControllers extends Controller
     }
 
     /**
+     *  Update avatar of the specified user in storage.
+     *
      * @param Request $request
      * @param UpdateServices $update
-     * @return mixed
+     * @return Response
      */
     public function updateAvatar(Request $request, UpdateServices $update)
     {

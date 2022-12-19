@@ -8,6 +8,7 @@ use App\Services\CrudServices\CreateServices;
 use App\Services\CrudServices\DeleteServices;
 use App\Services\CrudServices\UpdateServices;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PermissionsControllers extends Controller
 {
@@ -20,15 +21,14 @@ class PermissionsControllers extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return mixed
+     * Display a listing of the resource.
+     *
+     * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $this->authorize('read', 'permissions');
 
-        $message = $request->session()->get('message');
-        $type = $request->session()->get('type');
         $permissions = Permissions::paginate(10);
 
         $options = [
@@ -41,14 +41,14 @@ class PermissionsControllers extends Controller
 
         return view('admin/permissions/index', compact(
             'options',
-            'permissions',
-            'message',
-            'type'
+            'permissions'
         ));
     }
 
     /**
-     * @return mixed
+     * Show the form for creating a new resource.
+     *
+     * @return Response
      */
     public function create()
     {
@@ -66,9 +66,11 @@ class PermissionsControllers extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
      * @param Request $request
      * @param CreateServices $create
-     * @return mixed
+     * @return Response
      */
     public function store(Request $request, CreateServices $create)
     {
@@ -80,43 +82,22 @@ class PermissionsControllers extends Controller
     }
 
     /**
-     * Method for delete item menu
+     * Display the specified resource.
      *
-     * @param Request $request
-     * @param int $ID
-     * @param DeleteServices $delete
-     * @return mixed
+     * @return Response
      */
-    public function delete(Request $request, int $ID, DeleteServices $delete)
+    public function show()
     {
-        $this->authorize('delete', 'permissions');
-
-        $delete->deletePermission($request, $ID);
-
-        return redirect()->back();
+        //
     }
 
     /**
-     * Method for delete several item menu
+     * Show the form for editing the specified resource.
      *
-     * @param Request $request
-     * @param DeleteServices $delete
-     * @return mixed
-     */
-    public function deleteSeveral(Request $request, DeleteServices $delete)
-    {
-        $this->authorize('delete', 'permissions');
-
-        $delete->deleteSeveralPermission($request);
-
-        return redirect()->back();
-    }
-
-    /**
      * @param int $ID
-     * @return mixed
+     * @return Response
      */
-    public function update(int $ID)
+    public function edit(int $ID)
     {
         $this->authorize('update', 'permissions');
 
@@ -136,18 +117,53 @@ class PermissionsControllers extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
      * @param Request $request
      * @param int $ID
      * @param UpdateServices $update
-     * @return mixed
-    */
-    public function updateStore(Request $request, int $ID, UpdateServices $update)
+     * @return Response
+     */
+    public function update(Request $request, int $ID, UpdateServices $update)
     {
         $this->authorize('update', 'permissions');
 
         $update->updatePermissions($request, $ID);
 
         return redirect('/admin/permissions');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Request $request
+     * @param int $ID
+     * @param DeleteServices $delete
+     * @return Response
+     */
+    public function destroy(Request $request, int $ID, DeleteServices $delete)
+    {
+        $this->authorize('delete', 'permissions');
+
+        $delete->deletePermission($request, $ID);
+
+        return redirect()->back();
+    }
+
+    /**
+     * Remove the several resource from storage.
+     *
+     * @param Request $request
+     * @param DeleteServices $delete
+     * @return mixed
+     */
+    public function destroySeveral(Request $request, DeleteServices $delete)
+    {
+        $this->authorize('delete', 'permissions');
+
+        $delete->deleteSeveralPermission($request);
+
+        return redirect()->back();
     }
 
     /**

@@ -6,12 +6,15 @@ use App\Services\CrudServices\CreateServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\SessionMessage\SessionMessage;
+use Illuminate\Http\Response;
 
 class AuthControllers extends Controller
 {
     /**
+     * Display a listing of the resource.
+     *
      * @param Request $request
-     * @return mixed
+     * @return Response
      */
     public function index(Request $request)
     {
@@ -20,18 +23,14 @@ class AuthControllers extends Controller
             return redirect('/admin/dashboard');
         endif;
 
-        $message = $request->session()->get('message');
-        $type = $request->session()->get('type');
-
-        return view('auth/login', compact(
-            'message',
-            'type'
-        ));
+        return view('auth/login');
     }
 
     /**
+     * Perform user login
+     *
      * @param Request $request
-     * @return mixed
+     * @return Response
      */
     public function login(Request $request)
     {
@@ -52,26 +51,24 @@ class AuthControllers extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
      * @param Request $request
-     * @return mixed
+     * @return Response
      */
-    public function create(Request $request)
+    public function create()
     {
         $this->authorize('create', 'users');
 
-        $message = $request->session()->get('message');
-        $type = $request->session()->get('type');
-
-        return view('auth/create', compact(
-            'message',
-            'type'
-        ));
+        return view('auth/create');
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
      * @param Request $request
      * @param CreateServices $create
-     * @return mixed
+     * @return Response
      */
     public function store(Request $request, CreateServices $create)
     {
@@ -94,8 +91,10 @@ class AuthControllers extends Controller
     }
 
     /**
+     * Update user password
+     *
      * @param Request $request
-     * @return mixed
+     * @return Response
      */
     public function resetPassword(Request $request)
     {
@@ -104,20 +103,23 @@ class AuthControllers extends Controller
         return view('auth/reset-password', compact('insert'));
     }
 
+    /**
+     * Check user email
+     *
+     * @return Response
+     */
     public function verifyEmail()
     {
-        $metas_config = [
-            'title'       => 'Verificar meu email',
-            'description' => ''
-        ];
 
-        return view('auth/verify-email', compact('metas_config'));
+        return view('auth/verify-email');
 
     }
 
     /**
+     * Log out user
+     *
      * @param Request $request
-     * @return mixed
+     * @return Response
      */
     public function logout(Request $request)
     {

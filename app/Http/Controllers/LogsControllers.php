@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\SessionMessage\SessionMessage;
+use Illuminate\Http\Response;
 
 class LogsControllers extends Controller
 {
@@ -16,14 +17,14 @@ class LogsControllers extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
      * @param Request $resquest
-     * @return mixed
+     * @return Response
      */
     public function index(Request $request)
     {
         $this->authorize('read', 'logs');
-        $message = $request->session()->get('message');
-        $type = $request->session()->get('type');
 
         $log_query = isset($request->query()['log']) ? $request->query()['log'] : 'laravel';
 
@@ -33,8 +34,6 @@ class LogsControllers extends Controller
         $logs = file(storage_path('logs')."/{$log_query}.log");
 
         return view('admin/logs/index', compact(
-            'message',
-            'type',
             'logs_files',
             'logs',
             'log_query'
@@ -43,7 +42,7 @@ class LogsControllers extends Controller
 
     /**
      * @param Request $resquest
-     * @return mixed
+     * @return Response
      */
     public function clear(Request $request)
     {

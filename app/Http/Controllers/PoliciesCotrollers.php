@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Settings;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 
 class PoliciesCotrollers extends Controller
 {
     /**
-     * @return mixed
+     * Display a listing of the resource.
+     *
+     * @return Response
      */
-    public function privacy()
+    public function indexPrivacy()
     {
-        $settings = DB::table('settings')->first();
+        $settings = Settings::first();
 
         return view('policies/privacy/index', compact(
             'settings'
@@ -20,11 +23,13 @@ class PoliciesCotrollers extends Controller
     }
 
     /**
-     * @return mixed
+     * Display a listing of the resource.
+     *
+     * @return Response
      */
-    public function terms()
+    public function indexTerms()
     {
-        $settings = DB::table('settings')->first();
+        $settings = Settings::first();
 
         return view('policies/terms/index', compact(
             'settings'
