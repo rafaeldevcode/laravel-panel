@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
 
-class SettingsControllers extends Controller
+class SettingsController extends Controller
 {
     /**
      * @return mixed

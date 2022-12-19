@@ -6,7 +6,7 @@ use App\Models\Settings;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
 
-class PoliciesCotrollers extends Controller
+class PoliciesCotroller extends Controller
 {
     /**
      * Display a listing of the resource.

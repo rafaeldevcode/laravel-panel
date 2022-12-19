@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Response;
 
-class GalleryControllers extends Controller
+class GalleryController extends Controller
 {
     /**
      * @return mixed

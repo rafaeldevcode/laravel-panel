@@ -10,7 +10,7 @@ use App\Services\CrudServices\UpdateServices;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class UsersControllers extends Controller
+class UsersController extends Controller
 {
     /**
      * @return mixed

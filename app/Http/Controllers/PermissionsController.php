@@ -10,7 +10,7 @@ use App\Services\CrudServices\UpdateServices;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class PermissionsControllers extends Controller
+class PermissionsController extends Controller
 {
     /**
      * @return mixed

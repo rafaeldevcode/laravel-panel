@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Services\SessionMessage\SessionMessage;
 use Illuminate\Http\Response;
 
-class AuthControllers extends Controller
+class AuthController extends Controller
 {
     /**
      * Display a listing of the resource.

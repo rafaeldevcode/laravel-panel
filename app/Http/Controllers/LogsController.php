@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\SessionMessage\SessionMessage;
 use Illuminate\Http\Response;
 
-class LogsControllers extends Controller
+class LogsController extends Controller
 {
     /**
      * @return mixed

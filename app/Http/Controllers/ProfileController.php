@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
 
-class ProfileControllers extends Controller
+class ProfileController extends Controller
 {
     /**
      * @return mixed
