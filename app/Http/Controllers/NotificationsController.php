@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Notifications;
-use App\Models\NotificationsUser;
+use App\Models\Notification;
+use App\Models\NotificationUser;
 use App\Services\CrudServices\CreateServices;
 use App\Services\CrudServices\DeleteServices;
 use App\Services\CrudServices\UpdateServices;
@@ -31,7 +31,7 @@ class NotificationsController extends Controller
     {
         $this->authorize('read', 'notifications');
 
-        $notifications = Notifications::paginate(10);
+        $notifications = Notification::paginate(10);
 
         $options = [
             'search' => true,
@@ -56,7 +56,7 @@ class NotificationsController extends Controller
     {
         $this->authorize('create', 'notifications');
 
-        $notifications = Notifications::all();
+        $notifications = Notification::all();
         $method = 'add';
 
         return view('admin/notifications/addEdit', compact(
@@ -101,7 +101,7 @@ class NotificationsController extends Controller
     {
         $this->authorize('update', 'notifications');
 
-        $notification = Notifications::find($ID);
+        $notification = Notification::find($ID);
         $method = 'edit';
 
         return view('admin/notifications/addEdit', compact(
@@ -167,7 +167,7 @@ class NotificationsController extends Controller
     public function view(int $ID)
     {
         DB::beginTransaction();
-            NotificationsUser::where('user_id', Auth::user()
+            NotificationUser::where('user_id', Auth::user()
                 ->id)->where('notifications_id', $ID)
                 ->get()[0]
                 ->update(['notification_status' => 'off']);
@@ -187,7 +187,7 @@ class NotificationsController extends Controller
     {
         DB::beginTransaction();
             foreach($request->ids as $ID):
-                NotificationsUser::where('user_id', Auth::user()
+                NotificationUser::where('user_id', Auth::user()
                     ->id)->where('notifications_id', $ID)
                     ->get()[0]
                     ->update(['notification_status' => 'off']);

@@ -2,10 +2,10 @@
 
 namespace App\Services\CrudServices;
 
-use App\Models\Menus;
-use App\Models\Notifications;
-use App\Models\NotificationsUser;
-use App\Models\Permissions;
+use App\Models\Menu;
+use App\Models\Notification;
+use App\Models\NotificationUser;
+use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Services\SessionMessage\SessionMessage;
@@ -21,7 +21,7 @@ class DeleteServices extends BaseCrud
     public function deleteMenuItem(Request $request, int $ID): void
     {
         DB::beginTransaction();
-            Menus::find($ID)->delete();
+            Menu::find($ID)->delete();
         DB::commit();
 
         SessionMessage::create($request, 'Item removido com sucesso!', 'cm-success');
@@ -35,7 +35,7 @@ class DeleteServices extends BaseCrud
     {
         DB::beginTransaction();
             foreach($request->ids as $ID):
-                Menus::find($ID)->delete();
+                Menu::find($ID)->delete();
             endforeach;
         DB::commit();
 
@@ -59,8 +59,8 @@ class DeleteServices extends BaseCrud
             $user = User::find($ID);
 
             // Remover o relacionamento do usuário com as notificações
-            $user->notifications->each(function(Notifications $notification) use($user){
-                $notifications_user = NotificationsUser::where('user_id', $user->id)->where('notifications_id', $notification->id)->get();
+            $user->notifications->each(function(Notification $notification) use($user){
+                $notifications_user = NotificationUser::where('user_id', $user->id)->where('notifications_id', $notification->id)->get();
 
                 if(isset($notifications_user[0])):
                     $notifications_user[0]->delete();
@@ -91,8 +91,8 @@ class DeleteServices extends BaseCrud
                 $user = User::find($ID);
 
                 // Remover o relacionamento do usuário com as notificações
-                $user->notifications->each(function(Notifications $notification) use($user){
-                    $notifications_user = NotificationsUser::where('user_id', $user->id)->where('notifications_id', $notification->id)->get();
+                $user->notifications->each(function(Notification $notification) use($user){
+                    $notifications_user = NotificationUser::where('user_id', $user->id)->where('notifications_id', $notification->id)->get();
 
                     if(isset($notifications_user[0])):
                         $notifications_user[0]->delete();
@@ -120,7 +120,7 @@ class DeleteServices extends BaseCrud
         endif;
 
         DB::beginTransaction();
-            Permissions::find($ID)->delete();
+            Permission::find($ID)->delete();
         DB::commit();
 
         SessionMessage::create($request, 'Permição removida com sucesso!', 'cm-success');
@@ -141,7 +141,7 @@ class DeleteServices extends BaseCrud
 
         DB::beginTransaction();
             foreach($request->ids as $ID):
-                Permissions::find($ID)->delete();
+                Permission::find($ID)->delete();
             endforeach;
         DB::commit();
 
@@ -156,11 +156,11 @@ class DeleteServices extends BaseCrud
     public function deleteNotification(Request $request, int $ID): void
     {
         DB::beginTransaction();
-            $notification = Notifications::find($ID);
+            $notification = Notification::find($ID);
 
             // Remover o relacionamento da notificação com os usuários
             $notification->users->each(function(User $user) use($notification){
-                $notifications_user = NotificationsUser::where('user_id', $user->id)->where('notifications_id', $notification->id)->get();
+                $notifications_user = NotificationUser::where('user_id', $user->id)->where('notifications_id', $notification->id)->get();
 
                 if(isset($notifications_user[0])):
                     $notifications_user[0]->delete();
@@ -181,11 +181,11 @@ class DeleteServices extends BaseCrud
     {
         DB::beginTransaction();
             foreach($request->ids as $ID):
-                $notification = Notifications::find($ID);
+                $notification = Notification::find($ID);
 
                 // Remover o relacionamento da notificação com os usuários
                 $notification->users->each(function(User $user) use($notification){
-                    $notifications_user = NotificationsUser::where('user_id', $user->id)->where('notifications_id', $notification->id)->get();
+                    $notifications_user = NotificationUser::where('user_id', $user->id)->where('notifications_id', $notification->id)->get();
 
                     if(isset($notifications_user[0])):
                         $notifications_user[0]->delete();

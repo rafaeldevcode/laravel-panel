@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\CreatePermissionForAdmin;
-use App\Models\Permissions;
+use App\Models\Permission;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\DB;
@@ -45,7 +45,7 @@ class CreatePermission
             $permissions = json_encode($permissions);
 
             DB::beginTransaction();
-                Permissions::find($permission_admin->id)->update([
+                Permission::find($permission_admin->id)->update([
                     'permissions' => $permissions
                 ]);
             DB::commit();

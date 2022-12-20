@@ -3,10 +3,10 @@
 namespace App\Services\CrudServices;
 
 use App\Events\CreateExtraPermissionForAdmin;
-use App\Models\Menus;
-use App\Models\Notifications;
-use App\Models\Permissions;
-use App\Models\Settings;
+use App\Models\Menu;
+use App\Models\Notification;
+use App\Models\Permission;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +22,7 @@ class UpdateServices extends BaseCrud
      */
     public function updateSettings(Request $request): void
     {
-        $settings = Settings::find(1);
+        $settings = Setting::find(1);
 
         DB::beginTransaction();
             $site_logo        = isset($request->site_logo) ? $request->file('site_logo')->store('settings', 'public') : '';
@@ -104,7 +104,7 @@ class UpdateServices extends BaseCrud
         $permissions = $this->getPermissionsInJson($permissions, $request->extra_permissions, $ID);
 
         DB::beginTransaction();
-            $permission = Permissions::find($ID);
+            $permission = Permission::find($ID);
 
             $permission->name        = $request->name;
             $permission->permissions = $permissions['permissions'];
@@ -155,7 +155,7 @@ class UpdateServices extends BaseCrud
     public function updateMenus(Request $request, int $ID)
     {
         DB::beginTransaction();
-            Menus::find($ID)
+            Menu::find($ID)
                 ->update([
                     'name'           => $request->name,
                     'slug'           => $request->slug,
@@ -176,7 +176,7 @@ class UpdateServices extends BaseCrud
     public function updateNotification(Request $request, int $ID)
     {
         DB::beginTransaction();
-            Notifications::find($ID)->update([
+            Notification::find($ID)->update([
                 'name'                => $request->name,
                 'notification'        => $request->notification,
                 'notification_status' => $request->notification_status

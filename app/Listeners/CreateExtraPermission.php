@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\CreateExtraPermissionForAdmin;
-use App\Models\Permissions;
+use App\Models\Permission;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\DB;
@@ -49,7 +49,7 @@ class CreateExtraPermission
                 $permissions = json_encode($new_permissions);
 
                 DB::beginTransaction();
-                    Permissions::find($permission_admin->id)->update([
+                    Permission::find($permission_admin->id)->update([
                         'permissions'       => $permissions,
                         'extra_permissions' => $extra_permissions
                     ]);

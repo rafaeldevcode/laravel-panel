@@ -2,13 +2,7 @@
 
 namespace App\Services\CrudServices;
 
-use App\Models\Permissions;
-use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
-use App\Services\SessionMessage\SessionMessage;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Permission;
 
 class BaseCrud
 {
@@ -48,7 +42,7 @@ class BaseCrud
     protected function getPermissionsInJson(array $permissions, ?string $extra_permissions, int|null $ID = null): array
     {
         $extra_permissions_array = [];
-        $extra_permissions_json = !is_null($ID) ? json_decode(Permissions::find($ID)->get()[0]->extra_permissions, true) : [];
+        $extra_permissions_json = !is_null($ID) ? json_decode(Permission::find($ID)->get()[0]->extra_permissions, true) : [];
 
         // Formatar as permissões extras
         if(!is_null($extra_permissions)):

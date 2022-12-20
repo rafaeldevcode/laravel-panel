@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Menus;
+use App\Models\Menu;
 use App\Services\CrudServices\CreateServices;
 use App\Services\CrudServices\DeleteServices;
 use App\Services\CrudServices\UpdateServices;
@@ -28,7 +28,7 @@ class MenusController extends Controller
     {
         $this->authorize('read', 'menus');
 
-        $menus = Menus::paginate(10);
+        $menus = Menu::paginate(10);
 
         $options = [
             'search' => true,
@@ -53,7 +53,7 @@ class MenusController extends Controller
     {
         $this->authorize('create', 'menus');
 
-        $menus = Menus::all();
+        $menus = Menu::all();
         $method = 'add';
 
         return view('admin/menus/addEdit', compact(
@@ -98,7 +98,7 @@ class MenusController extends Controller
     {
         $this->authorize('update', 'menus');
 
-        $menu = Menus::find($ID);
+        $menu = Menu::find($ID);
         $method = 'edit';
 
         return view('admin/menus/addEdit', compact(

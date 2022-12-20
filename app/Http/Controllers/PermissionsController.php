@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Menus;
-use App\Models\Permissions;
+use App\Models\Menu;
+use App\Models\Permission;
 use App\Services\CrudServices\CreateServices;
 use App\Services\CrudServices\DeleteServices;
 use App\Services\CrudServices\UpdateServices;
@@ -29,7 +29,7 @@ class PermissionsController extends Controller
     {
         $this->authorize('read', 'permissions');
 
-        $permissions = Permissions::paginate(10);
+        $permissions = Permission::paginate(10);
 
         $options = [
             'search' => true,
@@ -54,8 +54,8 @@ class PermissionsController extends Controller
     {
         $this->authorize('create', 'permissions');
 
-        $permissions = Permissions::all();
-        $menus = Menus::all();
+        $permissions = Permission::all();
+        $menus = Menu::all();
         $method = 'add';
 
         return view('admin/permissions/addEdit', compact(
@@ -101,10 +101,10 @@ class PermissionsController extends Controller
     {
         $this->authorize('update', 'permissions');
 
-        $permissions = Permissions::find($ID);
+        $permissions = Permission::find($ID);
         $permissions_in_array = json_decode($permissions->permissions, true);
         $permissions_edit = $this->getPermisionsEdit($permissions->extra_permissions);
-        $menus = Menus::all();
+        $menus = Menu::all();
         $method = 'edit';
 
         return view('admin/permissions/addEdit', compact(

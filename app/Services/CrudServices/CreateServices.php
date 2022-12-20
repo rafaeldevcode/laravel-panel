@@ -4,11 +4,11 @@ namespace App\Services\CrudServices;
 
 use App\Events\CreateExtraPermissionForAdmin;
 use App\Events\CreatePermissionForAdmin;
-use App\Events\NotificationUser;
-use App\Models\Menus;
-use App\Models\Notifications;
-use App\Models\NotificationsUser;
-use App\Models\Permissions;
+use App\Events\NotificationUser as EventsNotificationUser;
+use App\Models\Menu;
+use App\Models\Notification;
+use App\Models\NotificationUser;
+use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +26,7 @@ class CreateServices extends BaseCrud
     {
         if(isset($request->is_submenu) && $request->is_submenu == 'on'){
             $slug = "/admin{$this->normalizeSlug($request->slug)}";
-            $menu = Menus::find($request->submenu);
+            $menu = Menu::find($request->submenu);
             $submenus = $this->getSubmenus($menu->submenus, [$slug => $request->name]);
 
             $menu->update(['submenus' => $submenus]);
@@ -56,7 +56,7 @@ class CreateServices extends BaseCrud
             endif;
 
         DB::beginTransaction();
-            Menus::create([
+            Menu::create([
                 'name'           => $request->name,
                 'icon'           => $request->icon,
                 'slug'           => $slug,
@@ -109,7 +109,7 @@ class CreateServices extends BaseCrud
                 ], $remember);
             endif;
 
-            NotificationUser::dispatch($user->id);
+            EventsNotificationUser::dispatch($user->id);
         DB::commit();
 
         if($auth):
@@ -140,7 +140,7 @@ class CreateServices extends BaseCrud
             endif;
 
             DB::beginTransaction();
-                Permissions::create([
+                Permission::create([
                     'name'              => $request->name,
                     'permissions'       => $permissions['permissions'],
                     'extra_permissions' => $permissions['extra_permissions'],
@@ -161,11 +161,11 @@ class CreateServices extends BaseCrud
     {
         DB::beginTransaction();
             $users = User::all();
-            $notification = Notifications::create($request->all());
+            $notification = Notification::create($request->all());
 
             foreach($users as $user):
                 $user->notifications()->attach($notification->id);
-                NotificationsUser::where('notifications_id', $notification->id)->where('user_id', $user->id)->update(['notification_status' => 'on']);
+                NotificationUser::where('notifications_id', $notification->id)->where('user_id', $user->id)->update(['notification_status' => 'on']);
             endforeach;
         DB::commit();
         SessionMessage::create($request, 'Notificação adicionada com sucesso!', 'cm-success');

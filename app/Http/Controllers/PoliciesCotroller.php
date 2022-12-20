@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Settings;
+use App\Models\Setting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
 
@@ -15,7 +15,7 @@ class PoliciesCotroller extends Controller
      */
     public function indexPrivacy()
     {
-        $settings = Settings::first();
+        $settings = Setting::first();
 
         return view('policies/privacy/index', compact(
             'settings'
@@ -29,7 +29,7 @@ class PoliciesCotroller extends Controller
      */
     public function indexTerms()
     {
-        $settings = Settings::first();
+        $settings = Setting::first();
 
         return view('policies/terms/index', compact(
             'settings'

@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Menus;
-use App\Models\Permissions;
-use App\Models\Settings;
+use App\Models\Menu;
+use App\Models\Permission;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             $permissionsID = [];
 
             foreach(config('seeders.menus') as $menu):
-                $itemMenu = Menus::create([
+                $itemMenu = Menu::create([
                     'name'           => $menu['name'],
                     'icon'           => $menu['icon'],
                     'slug'           => $menu['slug'],
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             endforeach;
 
             foreach(config('seeders.permissions') as $permissions):
-                $permission = Permissions::create([
+                $permission = Permission::create([
                     'name'        => $permissions['name'],
                     'eng_name'    => $permissions['eng_name'],
                     'permissions' => $this->generatePermissions($menus, $permissions['permission'])
@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
                 'permission_id'    => $permissionsID[0]
             ]);
 
-            Settings::create([
+            Setting::create([
                 'site_name'        => config('seeders.settings.site_name'),
                 'site_description' => config('seeders.settings.site_description'),
                 'site_logo'        => config('seeders.settings.site_logo'),

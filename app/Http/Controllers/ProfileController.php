@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserStatus;
-use App\Models\Permissions;
+use App\Models\Permission;
 use App\Services\CrudServices\UpdateServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +28,7 @@ class ProfileController extends Controller
     public function edit(Request $request)
     {
         $user = Auth::user();
-        $user_permission = Permissions::find($user->permission_id)->name;
+        $user_permission = Permission::find($user->permission_id)->name;
         $status = [UserStatus::getColor($user->user_status), UserStatus::getMessage($user->user_status)];
 
         return view('admin/profile/index', compact(

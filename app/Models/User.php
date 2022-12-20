@@ -46,27 +46,19 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return Permissions
+     * @return Permission
      */
     public function permission()
     {
-        return $this->belongsTo(Permissions::class);
+        return $this->belongsTo(Permission::class);
     }
 
     /**
-     * @return Notifications
+     * @return Notification
      */
     public function notifications()
     {
-        return $this->belongsToMany(Notifications::class);
-    }
-
-    /**
-     * @return Campaign
-     */
-    public function campaigns()
-    {
-        return $this->hasMany(Campaign::class);
+        return $this->belongsToMany(Notification::class);
     }
 
     /**

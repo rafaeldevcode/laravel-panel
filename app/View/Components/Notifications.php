@@ -2,8 +2,8 @@
 
 namespace App\View\Components;
 
-use App\Models\Notifications as ModelsNotifications;
-use App\Models\NotificationsUser;
+use App\Models\Notification as ModelsNotifications;
+use App\Models\NotificationUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
@@ -23,7 +23,7 @@ class Notifications extends Component
     public function __construct()
     {
         $ids = [];
-        $notifications_user = NotificationsUser::where('notification_status', 'on')->where('user_id', Auth::user()->id)->get('notifications_id');
+        $notifications_user = NotificationUser::where('notification_status', 'on')->where('user_id', Auth::user()->id)->get('notifications_id');
 
         foreach($notifications_user as $id):
             array_push($ids, $id->notifications_id);
@@ -48,7 +48,7 @@ class Notifications extends Component
     private function getNotifications(): mixed
     {
         $ids = [];
-        $notifications_user = NotificationsUser::where('notification_status', 'on')->where('user_id', Auth::user()->id)->get('notifications_id');
+        $notifications_user = NotificationUser::where('notification_status', 'on')->where('user_id', Auth::user()->id)->get('notifications_id');
 
         foreach($notifications_user as $id):
             array_push($ids, $id->notifications_id);
