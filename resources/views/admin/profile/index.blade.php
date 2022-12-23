@@ -5,10 +5,6 @@
 @endsection
 
 @section('content')
-    @isset($message)
-        <x-message :type='$type' :text='$message' />
-    @endisset
-
     <section class='d-flex flex-nowrap justify-content-between w-100'>
         <x-sidebar />
 

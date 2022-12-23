@@ -7,26 +7,24 @@ use Illuminate\View\Component;
 class Message extends Component
 {
     /**
-     * @var string $type
+     * @var string|null $type
      */
     public $type;
 
     /**
-     * @var string $text
+     * @var string|null $text
      */
     public $text;
 
     /**
      * Create a new component instance.
      *
-     * @param string $type
-     * @param string $text
      * @return void
      */
-    public function __construct(string $type, string $text)
+    public function __construct()
     {
-        $this->type = $type;
-        $this->text = $text;
+        $this->type = request()->session()->get('type');
+        $this->text = request()->session()->get('message');
     }
 
     /**

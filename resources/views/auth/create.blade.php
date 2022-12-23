@@ -5,10 +5,6 @@
 @endsection
 
 @section('content')
-    @isset($message)
-        <x-message :type='$type' :text='$message' />
-    @endisset
-
     <section class="vh-100 vw-100 d-flex flex-nowrap">
         <x-bg-login src='/assets/images/login_bg_3.png' />
 

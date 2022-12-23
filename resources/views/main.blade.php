@@ -15,6 +15,8 @@
 </head>
 <body>
 
+    <x-message />
+
     @yield('content')
 
     @auth
