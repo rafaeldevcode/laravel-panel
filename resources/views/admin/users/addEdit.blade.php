@@ -25,7 +25,7 @@
                 />
             </section>
 
-            @include("admin/users/addEditBody/{$method}")
+            @include("admin/users/body/{$method}")
         </section>
     </section>
 

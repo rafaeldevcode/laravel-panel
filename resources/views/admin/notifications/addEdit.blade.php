@@ -26,7 +26,7 @@
                 />
             </section>
 
-            @include("admin/notifications/addEditBody/{$method}")
+            @include("admin/notifications/body/{$method}")
         </section>
     </section>
 
