@@ -11,14 +11,8 @@
         <section class='w-100'>
             <x-header />
 
-            <section class='p-3'>
-                <x-breadcrumps
-                    color='cm-secondary'
-                    icon='bi bi-speedometer'
-                    title='Dashboard'
-                    type='Visualizar'
-                />
-            </section>
+            {{ App\Actions\DashboardActions::handle() }}
+
             @include('admin/dashboard/body/index')
         </section>
     </section>
