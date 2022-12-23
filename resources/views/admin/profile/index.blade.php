@@ -11,14 +11,8 @@
         <section class='w-100'>
             <x-header />
 
-            <section class='p-3'>
-                <x-breadcrumps
-                    color='cm-primary'
-                    icon='bi bi-person-bounding-box'
-                    title='Perfil'
-                    type='Editar'
-                />
-            </section>
+            {{ App\Actions\ProfileActions::handle() }}
+
             @include('admin/profile/body/index', $user)
         </section>
     </section>

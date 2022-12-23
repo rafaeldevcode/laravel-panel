@@ -17,8 +17,11 @@ class PoliciesCotroller extends Controller
     {
         $settings = Setting::first();
 
+        $method = 'read';
+
         return view('policies/privacy/index', compact(
-            'settings'
+            'settings',
+            'method'
         ));
     }
 
@@ -31,8 +34,11 @@ class PoliciesCotroller extends Controller
     {
         $settings = Setting::first();
 
+        $method = 'read';
+
         return view('policies/terms/index', compact(
-            'settings'
+            'settings',
+            'method'
         ));
     }
 }

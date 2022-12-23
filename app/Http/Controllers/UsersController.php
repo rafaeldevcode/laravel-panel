@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Permissions;
+use App\Models\Permission;
 use App\Models\User;
 use App\Services\CrudServices\CreateServices;
 use App\Services\CrudServices\DeleteServices;
@@ -31,16 +31,10 @@ class UsersController extends Controller
 
         $users = User::paginate(10);
 
-        $options = [
-            'search' => true,
-            'delete' => true,
-            'add'    => [
-                'href' => '/admin/users/add'
-            ]
-            ];
+        $method = 'read';
 
         return view('admin/users/index', compact(
-            'options',
+            'method',
             'users'
         ));
     }
@@ -55,10 +49,10 @@ class UsersController extends Controller
         $this->authorize('create', 'users');
 
         $users = User::all();
-        $permissions = Permissions::all();
-        $method = 'add';
+        $permissions = Permission::all();
+        $method = 'create';
 
-        return view('admin/users/addEdit', compact(
+        return view('admin/users/index', compact(
             'users',
             'permissions',
             'method'
@@ -102,11 +96,11 @@ class UsersController extends Controller
         $this->authorize('update', 'users');
 
         $user = User::find($ID);
-        $permissions = Permissions::all();
+        $permissions = Permission::all();
 
         $method = 'edit';
 
-        return view('admin/users/addEdit', compact(
+        return view('admin/users/index', compact(
             'user',
             'method',
             'permissions'

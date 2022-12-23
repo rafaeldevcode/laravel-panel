@@ -11,18 +11,9 @@
         <section class='w-100'>
             <x-header />
 
-            <section class='p-3'>
-                <x-breadcrumps
-                    color='cm-secondary'
-                    icon='bi bi-file-earmark-lock-fill'
-                    title='Permissões'
-                    type='Visualizar'
-                    :options='$options'
-                    route='/admin/delete/several/permissions'
-                />
-            </section>
+            {{ App\Actions\PermissionsActions::handle() }}
 
-            @include('admin/permissions/body/index', $permissions)
+            @include("admin/permissions/body/{$method}")
         </section>
     </section>
 
@@ -32,24 +23,9 @@
 
 @section('scripts')
     <script type="text/javascript">
-        const buttons = document.querySelectorAll('[data-button="delete"]');
-
-            buttons.forEach((button) => {
-                $(button).click((event) => {
-                    deleteItem(event);
-                });
-            });
-
-            $('[data-button="select-several"]').click((event) => {
-                selectSeveral(event);
-            });
-
-            $('[data-button="delete-several"]').click((event) => {
-                deleteAllItems(event);
-            });
-
-            $('[data-button="delete-enable"').click(() => {
-                disableEnableBtn();
-            });
+        getFields();
+        addExtraPermissions();
+        alterStatusPermissions();
+        optionsDelete();
     </script>
 @endsection

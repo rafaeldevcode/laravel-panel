@@ -30,16 +30,10 @@ class MenusController extends Controller
 
         $menus = Menu::paginate(10);
 
-        $options = [
-            'search' => true,
-            'delete' => true,
-            'add'    => [
-                'href' => '/admin/menus/add'
-            ]
-        ];
+        $method = 'read';
 
         return view('admin/menus/index', compact(
-            'options',
+            'method',
             'menus'
         ));
     }
@@ -54,9 +48,9 @@ class MenusController extends Controller
         $this->authorize('create', 'menus');
 
         $menus = Menu::all();
-        $method = 'add';
+        $method = 'create';
 
-        return view('admin/menus/addEdit', compact(
+        return view('admin/menus/index', compact(
             'menus',
             'method'
         ));
@@ -101,7 +95,7 @@ class MenusController extends Controller
         $menu = Menu::find($ID);
         $method = 'edit';
 
-        return view('admin/menus/addEdit', compact(
+        return view('admin/menus/index', compact(
             'menu',
             'method'
         ));

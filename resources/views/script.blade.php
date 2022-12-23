@@ -18,12 +18,6 @@
             });
         }
     }
-
-    // Chamar submita para alterar a conta do google
-    function alterAccount(){
-        $('#alter-account').submit();
-    }
-
     // Função respossável por abrir e fechar o menu lateral
     function oppenClosedMenu(event){
         const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
@@ -318,177 +312,27 @@
             });
     }
 
-    // Alterar atributos do formulário de pesquisa customizada dos relatórios
-    function selectDays(event){
-        const dataReports = document.querySelectorAll('[data-report]');
-        const value = event.target.value;
+    // Options de delete aitems
+    function optionsDelete(){
+        const buttons = document.querySelectorAll('[data-button="delete"]');
 
-        switch (value) {
-            case 'single_day':
-                alterAttr('single');
-                $('#end_date').attr('required');
-                $('#start_date').attr('type', 'date');
-                break;
-
-            case 'more_days':
-                alterAttr('more');
-                $('#end_date').attr('required');
-                $('#start_date').attr('type', 'datetime-local');
-                break;
-
-            default:
-                break;
-        }
-
-        function alterAttr(attrValue){
-            dataReports.forEach((item) => {
-                $(item).attr('data-report', attrValue);
-            });
-        }
-    }
-
-    // Atualizar o id de usuário para buscar as utms no banco
-    function updateIdUser(){
-        setingsFilterReport();
-    }
-
-    // Manipular configurações no popup de filtrar os relatórios
-    function setingsFilterReport(){
-        getFields();
-
-        const search_campaign = $('#search_campaign');
-        const token = $('input[name="_token"]').val();
-        const resultsFound = $('#results-found');
-        const campaignsSelected = $('#campaigns-selected');
-        let mediaBuyer = $('#media_buyer').val();
-            mediaBuyer = mediaBuyer ? mediaBuyer : null
-
-        search_campaign.blur(() => {
-            setTimeout(() => {
-                resultsFound.html('');
-                resultsFound.attr('hidden', true);
-            }, 200);
-        });
-
-        search_campaign.keyup((event) => {
-            const value = search_campaign.val();
-            const campaigns = getCampaigns();
-
-            const data = {
-                _token: token,
-                search: value,
-                media_buyer: mediaBuyer,
-                no_search: campaigns
-            }
-
-            $.post('/admin/campaigns/search', data, (response) => {
-                resultsFound.html('');
-
-                for(let i = 0; i <= 4; i++){
-                    if(response[0][i]){
-                        const span = $('<span />');
-                            span.attr('class', 'text-cm-secondary py-1 px-2 border-bottom d-block');
-                            span.text(response[0][i]['name']);
-
-                            resultsFound.append(span);
-                            resultsFound.css('transform', `translateY(${i*44}px)`);
-                    }
-                }
-
-                resultsFound.removeAttr('hidden');
-                selectCampaing();
-            }).fail((error) => {
-                console.log(error)
-            });
-
-            function getCampaigns(){
-                const campaigns = [];
-                const dateCampaigns = document.querySelectorAll('[data-campaign]');
-
-                dateCampaigns.forEach((campaign) => {
-                    campaigns.push($(campaign).attr('data-campaign'));
-                });
-
-                return campaigns;
-            }
-        });
-
-        // Adicionar as campanhas que serão usadas para fazero o filtro
-        function selectCampaing(){
-            const campaigns = resultsFound.find('span');
-
-            campaigns.each((key) => {
-                $(campaigns[key]).click(() => {
-                    const campaign = campaigns[key].innerHTML;
-
-                    if(!verifyExistsCampaign(campaign)){
-                        const div = $('<div />');
-                            div.attr('data-campaign', campaign);
-
-                        const icon = $('<i />');
-                            icon.attr('class', 'ms-1 bi bi-x-circle-fill remove-campaign');
-                            icon.attr('data-remove', 'campaign')
-
-                        const span = $('<span />');
-                            span.attr('class', 'badge bg-cm-secondary m-1');
-                            span.text(campaign);
-                            span.append(icon);
-
-                        const input = $('<input />');
-                            input.attr('type', 'hidden');
-                            input.attr('name', 'campaigns[]');
-                            input.attr('value', campaign);
-
-                        div.append(span);
-                        div.append(input);
-                        campaignsSelected.append(div);
-
-                        search_campaign.val('');
-                        campaignsSelected.parent().removeAttr('hidden');
-                        removeCamapign();
-                    }
+            buttons.forEach((button) => {
+                $(button).click((event) => {
+                    deleteItem(event);
                 });
             });
 
-            // Remover campanhas a dicionadas
-            function removeCamapign(){
-                const camapignsRemove = document.querySelectorAll('[data-remove="campaign"]');
+            $('[data-button="select-several"]').click((event) => {
+                selectSeveral(event);
+            });
 
-                camapignsRemove.forEach((campaign) => {
-                    $(campaign).click(() => {
-                        $(campaign).parent().parent().remove();
-                        verifyEmptyCampaigns();
-                    });
-                });
+            $('[data-button="delete-several"]').click((event) => {
+                deleteAllItems(event);
+            });
 
-                // Verificar se não existe nenhuma campanha caso FALSE esconder a div
-                function verifyEmptyCampaigns(){
-                    const campaigns = document.querySelectorAll('div[data-campaign]');
-
-                    if(campaigns.length == 0){
-                        campaignsSelected.parent().attr('hidden', true);
-                    }
-                }
-            }
-
-            // Verificar se a campanha já existe no filtro caso TRUE não adicionar
-            function verifyExistsCampaign(campaign){
-                const campaigns = document.querySelectorAll('div[data-campaign]');
-                var exists = false;
-
-                if(campaigns.length !== 0){
-                    campaigns.forEach((item) => {
-                        const campaignExists = $(item).attr('data-campaign')
-
-                        if(campaignExists == campaign){
-                            exists = true;
-                        }
-                    });
-                }
-
-                return exists;
-            }
-        }
+            $('[data-button="delete-enable"').click(() => {
+                disableEnableBtn();
+            });
     }
 
     // Abrir ou fechar a notificação clicada
@@ -579,58 +423,6 @@
             }).fail((error) => {
                 console.log(error)
             });
-        });
-    }
-
-    // Ocultar ou exibir as urls das campanhas
-    function hiddenShowUrls(){
-        const btnUrls = document.querySelectorAll('[data-url="button"]');
-
-        btnUrls.forEach((btn) => {
-            $(btn).click((event) => {
-                const td = event.target.parentNode.parentNode;
-                const url = $(td).find('[data-url-status]');
-                const icon = event.target;
-
-                if(url.attr('data-url-status') == 'inactive'){
-                    hiddenOthersUrls(url.attr('id'), $(icon).attr('id'));
-
-                    url.attr('data-url-status', 'active');
-                    $(icon).attr('class', 'bi bi-eye-slash-fill');
-                }else{
-                    url.attr('data-url-status', 'inactive');
-                    $(icon).attr('class', 'bi bi-eye-fill');
-                }
-
-                // Ocultar demais urls que estejam sendo exibidas
-                function hiddenOthersUrls(urlId, iconId){
-                    const urls = document.querySelectorAll('[data-url-status]');
-                    const icons = document.querySelectorAll('[data-url="button"] i');
-
-                    urls.forEach((url) => {
-                        if($(url).attr('id') !== urlId){
-                            $(url).attr('data-url-status', 'inactive');
-                        }
-                    });
-
-                    icons.forEach((icon) => {
-                        if($(icon).attr('id') !== iconId){
-                            $(icon).attr('class', 'bi bi-eye-fill');
-                        }
-                    });
-                }
-            });
-        });
-    }
-
-    // Expandir resultados da tabela de roi
-    function hiddenColmns(selectors, hidden){
-        selectors.forEach(selector => {
-            const items = document.querySelectorAll(`[data-col="${selector}"]`);
-
-                items.forEach(item => {
-                    $(item).attr('hidden', hidden);
-                })
         });
     }
 

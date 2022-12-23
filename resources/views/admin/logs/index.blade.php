@@ -11,14 +11,8 @@
         <section class='w-100'>
             <x-header />
 
-            <section class='p-3'>
-                <x-breadcrumps
-                    color='cm-secondary'
-                    icon='bi bi-file-binary-fill'
-                    title='Logs do sistema'
-                    type='Visualizar'
-                />
-            </section>
+            {{ App\Actions\LogsActions::handle() }}
+
             @include('admin/logs/body/index')
         </section>
     </section>

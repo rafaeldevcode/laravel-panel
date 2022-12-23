@@ -13,15 +13,9 @@
         <section class='w-100'>
             <x-header />
 
-            <section class='p-3'>
-                <x-breadcrumps
-                    color='cm-secondary'
-                    icon='bi bi-file-earmark-text-fill'
-                    title='Termos de Uso'
-                    type='Visualizar'
-                />
-            </section>
-            @include('policies/terms/body/index')
+            {{ App\Actions\PrivacyActions::handle() }}
+
+            @include("policies/terms/body/{$method}")
         </section>
     </section>
 

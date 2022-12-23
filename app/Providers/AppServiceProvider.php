@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\View\Components\BgLogin;
 use App\View\Components\BgProfile;
-use App\View\Components\Breadcrumps;
 use App\View\Components\Favicon;
 use App\View\Components\Footer;
 use App\View\Components\Form\InputButton;
@@ -68,7 +67,6 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('header', Header::class);
         Blade::component('menu', Menu::class);
         Blade::component('footer', Footer::class);
-        Blade::component('breadcrumps', Breadcrumps::class);
         Blade::component('notifications', Notifications::class);
         Blade::component('profile', Profile::class);
         Blade::component('pagination', Pagination::class);

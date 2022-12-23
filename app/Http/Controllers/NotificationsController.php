@@ -33,16 +33,10 @@ class NotificationsController extends Controller
 
         $notifications = Notification::paginate(10);
 
-        $options = [
-            'search' => true,
-            'delete' => true,
-            'add'    => [
-                'href' => '/admin/notifications/add'
-            ]
-        ];
+        $method = 'read';
 
         return view('admin/notifications/index', compact(
-            'options',
+            'method',
             'notifications'
         ));
     }
@@ -57,9 +51,9 @@ class NotificationsController extends Controller
         $this->authorize('create', 'notifications');
 
         $notifications = Notification::all();
-        $method = 'add';
+        $method = 'create';
 
-        return view('admin/notifications/addEdit', compact(
+        return view('admin/notifications/index', compact(
             'notifications',
             'method'
         ));
@@ -104,7 +98,7 @@ class NotificationsController extends Controller
         $notification = Notification::find($ID);
         $method = 'edit';
 
-        return view('admin/notifications/addEdit', compact(
+        return view('admin/notifications/index', compact(
             'notification',
             'method'
         ));

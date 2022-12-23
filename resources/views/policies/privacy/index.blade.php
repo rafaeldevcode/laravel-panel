@@ -13,15 +13,9 @@
         <section class='w-100'>
             <x-header />
 
-            <section class='p-3'>
-                <x-breadcrumps
-                    color='cm-secondary'
-                    icon='bi bi-file-earmark-text-fill'
-                    title='Políticas de Privacidade'
-                    type='Visualizar'
-                />
-            </section>
-            @include('policies/privacy/body/index')
+            {{ App\Actions\PrivacyActions::handle() }}
+
+            @include("policies/privacy/body/{$method}")
         </section>
     </section>
 

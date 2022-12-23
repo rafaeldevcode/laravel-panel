@@ -2,13 +2,13 @@
 
 namespace App\Actions;
 
-class DashboardActions extends ActionsBase
+class LogsActions extends ActionsBase
 {
     public static function handle()
     {
         self::$color        = self::getColor();
-        self::$icon         = 'bi bi-speedometer';
-        self::$title        = 'Dashboard';
+        self::$icon         = 'bi bi-file-binary-fill';
+        self::$title        = 'Logs';
         self::$type         = self::getType();
         self::$search       = null;
         self::$delete       = null;

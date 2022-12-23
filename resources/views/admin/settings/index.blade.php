@@ -11,14 +11,8 @@
         <section class='w-100'>
             <x-header />
 
-            <section class='p-3'>
-                <x-breadcrumps
-                    color='cm-primary'
-                    icon='bi bi-gear-fill'
-                    title='Configurações'
-                    type='Editar'
-                />
-            </section>
+            {{ App\Actions\SettingsActions::handle() }}
+
             @include('admin/settings/body/index', ['settings' => $settings])
         </section>
     </section>

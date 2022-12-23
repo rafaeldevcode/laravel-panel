@@ -31,16 +31,10 @@ class PermissionsController extends Controller
 
         $permissions = Permission::paginate(10);
 
-        $options = [
-            'search' => true,
-            'delete' => true,
-            'add'    => [
-                'href' => '/admin/permissions/add'
-            ]
-        ];
+        $method = 'read';
 
         return view('admin/permissions/index', compact(
-            'options',
+            'method',
             'permissions'
         ));
     }
@@ -56,9 +50,9 @@ class PermissionsController extends Controller
 
         $permissions = Permission::all();
         $menus = Menu::all();
-        $method = 'add';
+        $method = 'create';
 
-        return view('admin/permissions/addEdit', compact(
+        return view('admin/permissions/index', compact(
             'permissions',
             'menus',
             'method'
@@ -107,7 +101,7 @@ class PermissionsController extends Controller
         $menus = Menu::all();
         $method = 'edit';
 
-        return view('admin/permissions/addEdit', compact(
+        return view('admin/permissions/index', compact(
             'permissions',
             'menus',
             'permissions_in_array',
