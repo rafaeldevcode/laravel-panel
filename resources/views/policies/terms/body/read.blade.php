@@ -1,4 +1,4 @@
-<article class='p-5 m-3 bg-cm-grey shadow'>
+<article class='p-3 m-3 bg-cm-grey shadow'>
     <div>
         <h4>1. Termos</h4>
 

@@ -1,39 +1,53 @@
-<section class='p-3 p-md-5 bg-cm-grey m-3 rounded shadow'>
-    <div class="d-flex flex-wrap justify-content-evenly cm-browser-height">
-        @foreach($folders as $indice => $folder)
+@php
+    $count = count($files);
+@endphp
+
+<section class='p-3 bg-cm-grey m-3 rounded shadow'>
+    <div class="d-flex flex-wrap">
+        @foreach($folders as $folder)
             <div class="m-2 card-folder-image text-center">
                 <div role="button" tabindex="0" class="position-relative folder-folder">
-                    <div class="position-absolute top-0 end-0" id="options-folder">
-                        <form action="/admin/gallery/folder/remove" method="POST">
-                            @csrf
-                            <input type="hidden" name="folder_name" value="{{ $indice }}">
+                    @can('delete', 'gallery')
+                        <div class="position-absolute top-0 end-0" id="options-folder">
+                            <form action="/admin/gallery/folder/remove" method="POST">
+                                @csrf
+                                <input type="hidden" name="folder_name" value="{{ $folder }}">
 
-                            <button class="btn btn-sm bg-tansparent text-cm-danger border-0" type="submit" title="Remover este diretório">
-                                <i class="bi bi-trash-fill"></i>
-                            </button>
-                        </form>
-                    </div>
+                                <button class="btn btn-sm bg-tansparent text-cm-danger border-0" type="submit" title="Remover este diretório">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            </form>
+                        </div>
+                    @endcan
 
                     <div class="d-flex flex-column">
-                        <i class="bi bi-folder-fill display-2 text-color-main" data-gallery="{{ $indice }}"></i>
-                        <span class="badge bg-color-main folder-image-name">{{ explode('/', $indice)[count(explode('/', $indice))-1] }}</span>
+                        <i class="bi bi-folder-fill display-2 text-color-main" data-gallery-folder="{{ $folder }}"></i>
+                        <span class="badge bg-color-main folder-image-name">{{ explode('/', $folder)[count(explode('/', $folder))-1] }}</span>
                     </div>
                 </div>
             </div>
         @endforeach
 
-        @foreach($files as $file)
-            <div class="position-relative card-folder-image folder-image m-2 text-center" role="button" tabindex="0">
-                <img class="border border-color-main" src='{{ asset("storage/$file->image") }}' alt="{{ $file->name }}">
-                <span class="badge bg-color-main folder-image-name">{{ $file->name }}</span>
+        @foreach($files as $indice => $file)
+            <div class="position-relative card-folder-image folder-image m-2 text-center" role="button" tabindex="0"
+                data-gallery="open"
+                data-gallery-type="{{ $file->type }}"
+                data-gallery-src="{{ $file->path }}"
+                data-gallery-title="{{ $file->title }}"
+                data-gallery-current="{{ $indice }}"
+                data-gallery-count="{{ $count }}"
+                data-gallery-size="undefined">
+
+                @if ($file->type == 'image')
+                    <img class="border border-color-main" src='{{ asset("storage/$file->path") }}' alt="{{ $file->path }}">
+                @else
+                    <div class="gallery-video">
+                        <video class="border border-color-main" src="{{ asset("storage/$file->path") }}"></video>
+                        <i class="bi bi-play-circle-fill fs-2 text-color-main"></i>
+                    </div>
+                @endif
             </div>
         @endforeach
-
-        @if(count($files) == 0 && count($folders) == 0)
-            <div class="p-2 empty-collections d-flex justify-content-center align-items-center">
-                <img class="h-100" src="{{ asset('assets/images/empty.svg') }}" alt="Teste">
-            </div>
-        @endif
     </div>
 
     <section hidden class="gallery-view fixed-top w-100 h-100 justify-content-center align-items-center" data-gallery="content">
@@ -72,25 +86,35 @@
                 </ul>
 
                 <div class="d-flex flex-row">
-                    <form action="/admin/gallery/image/remove" method="POST">
-                        @csrf
-                        <input data-gallery="input" type="hidden" name="path" value="">
+                    @can('delete', 'gallery')
+                        <form action="/admin/gallery/image/remove" method="POST">
+                            @csrf
+                            <input data-gallery="input" type="hidden" name="path" value="">
 
-                        <button class="btn btn-sm btn-cm-danger text-cm-light mx-1" type="submit" title="Remover esta imagem">
-                            <i class="bi bi-trash-fill fs-icon-image"></i>
-                        </button>
-                    </form>
+                            <button class="btn btn-sm btn-cm-danger text-cm-light mx-1" type="submit" title="Remover esta imagem">
+                                <i class="bi bi-trash-fill fs-icon-image"></i>
+                            </button>
+                        </form>
+                    @endcan
 
-                    <form action="/admin/gallery/image/dowload" method="POST">
-                        @csrf
-                        <input data-gallery="input" type="hidden" name="path" value="">
+                    @can('read', 'gallery')
+                        <form action="/admin/gallery/image/dowload" method="POST">
+                            @csrf
+                            <input data-gallery="input" type="hidden" name="path" value="">
 
-                        <button class="btn btn-sm btn-cm-success text-cm-light" type="submit" title="Baixar esta imagem">
-                            <i class="bi bi-arrow-down-square-fill fs-icon-image"></i>
-                        </button>
-                    </form>
+                            <button class="btn btn-sm btn-cm-success text-cm-light" type="submit" title="Baixar esta imagem">
+                                <i class="bi bi-arrow-down-square-fill fs-icon-image"></i>
+                            </button>
+                        </form>
+                    @endcan
                 </div>
             </div>
         </div>
     </section>
+
+    @if(count($files) == 0 && count($folders) == 0)
+        <div class="p-2 empty-collections d-flex justify-content-center align-items-center">
+            <img class="h-100" src="{{ asset('assets/images/empty.svg') }}" alt="Teste">
+        </div>
+    @endif
 </section>

@@ -15,7 +15,7 @@
 
             {{ App\Actions\PrivacyActions::handle() }}
 
-            @include("policies/terms/body/{$method}")
+            @include("policies/terms/body/read")
         </section>
     </section>
 

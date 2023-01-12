@@ -1,4 +1,4 @@
-<article class='p-5 m-3 bg-cm-grey shadow'>
+<article class='p-3 m-3 bg-cm-grey shadow'>
     <div>
         <p>A sua privacidade é importante para nós. É política do <b class='text-color-main'>{{ $settings->site_name }}</b> respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site <b class='text-color-main'>{{ $settings->site_name }}</b>, e outros sites que possuímos e operamos.</p>
 

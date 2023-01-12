@@ -13,7 +13,7 @@
 
             {{ App\Actions\ProfileActions::handle() }}
 
-            @include('admin/profile/body/index', $user)
+            @include("admin/profile/body/read")
         </section>
     </section>
 

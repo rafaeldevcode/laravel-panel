@@ -1,4 +1,4 @@
-<section class='p-2 p-md-5 bg-cm-grey m-3 rounded shadow'>
+<section class='p-3 bg-cm-grey m-3 rounded shadow'>
     <form method="POST" action="/admin/notifications/edit/{{ $notification->id }}">
         @csrf
         <div class='row d-flex justify-content-between'>

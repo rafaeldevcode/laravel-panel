@@ -13,7 +13,7 @@
 
             {{ App\Actions\LogsActions::handle() }}
 
-            @include('admin/logs/body/index')
+            @include("admin/logs/body/read")
         </section>
     </section>
 

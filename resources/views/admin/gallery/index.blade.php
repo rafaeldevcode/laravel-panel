@@ -13,7 +13,7 @@
 
             {{ App\Actions\GalleryActions::handle() }}
 
-            @include('admin/gallery/body/index')
+            @include("admin/gallery/body/read")
         </section>
     </section>
 

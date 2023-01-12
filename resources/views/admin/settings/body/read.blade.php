@@ -1,4 +1,4 @@
-<section class='p-3 p-sm-5 bg-cm-grey m-3 rounded shadow'>
+<section class='p-3 bg-cm-grey m-3 rounded shadow'>
     <form method="POST" accept="/admin/settings/edit" enctype="multipart/form-data">
         <div class='row d-flex justify-content-between'>
             @csrf

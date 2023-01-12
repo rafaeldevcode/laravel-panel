@@ -13,7 +13,7 @@
 
             {{ App\Actions\SettingsActions::handle() }}
 
-            @include('admin/settings/body/index', ['settings' => $settings])
+            @include("admin/settings/body/read")
         </section>
     </section>
 

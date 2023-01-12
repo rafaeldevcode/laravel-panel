@@ -8,7 +8,7 @@ class ProfileActions extends ActionsBase
     {
         self::$color        = self::getColor();
         self::$icon         = 'bi bi-person-bounding-box';
-        self::$title        = 'Logs';
+        self::$title        = 'Perfil';
         self::$type         = self::getType();
         self::$search       = null;
         self::$delete       = null;

@@ -1,5 +1,5 @@
 
-<section class='p-3 p-sm-5 bg-cm-grey m-3 rounded shadow'>
+<section class='p-3 bg-cm-grey m-3 rounded shadow'>
     <section class='custom-table m-auto cm-browser-height'>
         <table class='table table-hover mb-0'>
             <thead>

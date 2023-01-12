@@ -13,7 +13,7 @@
 
             {{ App\Actions\DashboardActions::handle() }}
 
-            @include('admin/dashboard/body/index')
+            @include("admin/dashboard/body/read")
         </section>
     </section>
 

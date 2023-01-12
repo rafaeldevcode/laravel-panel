@@ -1,4 +1,4 @@
-<section class='p-3 p-md-5 bg-cm-grey m-3 rounded shadow'>
+<section class='p-3 bg-cm-grey m-3 rounded shadow'>
     <div class='border-bottom border-cm-secondary d-flex justify-content-center'>
         <ul class='p-0 m-0 d-flex flex-row'>
             @foreach ($logs_files as $file)
@@ -28,6 +28,12 @@
                 </div>
             @endforeach
         </code>
+
+        @if(empty($logs))
+            <div class="p-2 empty-collections d-flex justify-content-center align-items-center">
+                <img class="h-100" src="{{ asset('assets/images/empty.svg') }}" alt="Teste">
+            </div>
+        @endif
     </article>
 
     <div class='mt-4 d-flex justify-content-end'>
