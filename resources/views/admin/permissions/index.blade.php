@@ -11,7 +11,7 @@
         <section class='w-100'>
             <x-header />
 
-            {{ App\Actions\PermissionsActions::handle() }}
+            {{ App\Actions\PermissionsActions::handle($method) }}
 
             @include("admin/permissions/body/{$method}")
         </section>

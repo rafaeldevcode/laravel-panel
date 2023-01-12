@@ -2,14 +2,20 @@
 
 namespace App\Actions;
 
+use Illuminate\Contracts\View\View;
+
 class LogsActions extends ActionsBase
 {
-    public static function handle()
+    /**
+     * @param string|null $method
+     * @return View
+     */
+    public static function handle(string|null $method = null): View
     {
-        self::$color        = self::getColor();
+        self::$color        = self::getColor($method);
         self::$icon         = 'bi bi-file-binary-fill';
         self::$title        = 'Logs';
-        self::$type         = self::getType();
+        self::$type         = self::getType($method);
         self::$search       = null;
         self::$delete       = null;
         self::$route_delete = null;

@@ -2,14 +2,20 @@
 
 namespace App\Actions;
 
+use Illuminate\Contracts\View\View;
+
 class DashboardActions extends ActionsBase
 {
-    public static function handle()
+    /**
+     * @param string|null $method
+     * @return View
+     */
+    public static function handle(string|null $method = null): View
     {
-        self::$color        = self::getColor();
+        self::$color        = self::getColor($method);
         self::$icon         = 'bi bi-speedometer';
         self::$title        = 'Dashboard';
-        self::$type         = self::getType();
+        self::$type         = self::getType($method);
         self::$search       = null;
         self::$delete       = null;
         self::$route_delete = null;

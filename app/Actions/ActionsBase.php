@@ -2,6 +2,8 @@
 
 namespace App\Actions;
 
+use Illuminate\Contracts\View\View;
+
 class ActionsBase
 {
     /**
@@ -50,9 +52,9 @@ class ActionsBase
     public static $sub_options;
 
     /**
-     * Renderizar html
+     * @return View
      */
-    public static function render()
+    public static function render(): View
     {
         $breadcrumps = self::normalizeBreadcrumps();
 
@@ -109,7 +111,7 @@ class ActionsBase
      * @param string|null $method
      * @return string
      */
-    protected static function getType(string|null $method = null): string
+    protected static function getType(string|null $method): string
     {
         $type = '';
 
@@ -138,7 +140,7 @@ class ActionsBase
      * @param string|null $method
      * @return string
      */
-    protected static function getColor(string|null $method = null): string
+    protected static function getColor(string|null $method): string
     {
         $color = '';
 

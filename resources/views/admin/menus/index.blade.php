@@ -11,7 +11,7 @@
         <section class='w-100'>
             <x-header />
 
-            {{ App\Actions\MenuActions::handle() }}
+            {{ App\Actions\MenuActions::handle($method) }}
 
             @include("admin/menus/body/{$method}")
         </section>

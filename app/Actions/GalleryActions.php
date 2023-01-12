@@ -4,12 +4,16 @@ namespace App\Actions;
 
 class GalleryActions extends ActionsBase
 {
-    public static function handle()
+    /**
+     * @param string|null $method
+     * @return void
+     */
+    public static function handle(string|null $method = null)
     {
-        self::$color        = self::getColor();
+        self::$color        = self::getColor($method);
         self::$icon         = 'bi bi-images';
         self::$title        = 'Galeria';
-        self::$type         = self::getType();
+        self::$type         = self::getType($method);
         self::$search       = null;
         self::$delete       = null;
         self::$route_delete = null;

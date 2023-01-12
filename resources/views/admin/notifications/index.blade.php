@@ -11,7 +11,7 @@
         <section class='w-100'>
             <x-header />
 
-            {{ App\Actions\NotificationsActions::handle() }}
+            {{ App\Actions\NotificationsActions::handle($method) }}
 
             @include("admin/notifications/body/{$method}")
         </section>

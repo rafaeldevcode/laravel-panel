@@ -11,7 +11,7 @@
         <section class='w-100'>
             <x-header />
 
-            {{ App\Actions\UsersActions::handle() }}
+            {{ App\Actions\UsersActions::handle($method) }}
 
             @include("admin/users/body/{$method}")
         </section>
