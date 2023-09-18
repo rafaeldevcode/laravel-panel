@@ -1,16 +1,14 @@
-<div class='col-7 position-relative section-image-login'>
-    <div class='position-absolute top-0 start-0 image-bg-login' style="
-        background-image: url('{{ $image }}')
-    "></div>
+<div class='w-7/12 relative section-image-login'>
+    <div class='absolute top-0 left-0 image-bg-login' style="background-image: url('{{ $image }}')"></div>
 
-    <div class='position-absolute bottom-0 start-0 m-2 d-flex flex-nowrap text-cm-dark'>
+    <div class='absolute bottom-0 left-0 m-2 flex flex-nowrap'>
         <div class='me-3'>
-            <i class='bi bi-gear-fill display-3 text-color-main'></i>
+            <i class='bi bi-gear-fill text-7xl text-color-main'></i>
         </div>
 
         <div>
-            <h1 class='m-0 fs-2 text-color-main'>{{ $name }}</h1>
-            <p class='m-0 fs-4 text-color-main'>{{ $description }}</p>
+            <h1 class='m-0 text-4xl text-color-main font-bold'>{{ $name }}</h1>
+            <p class='m-0 text-xl text-color-main font-bold'>{{ $description }}</p>
         </div>
     </div>
 </div>

@@ -1,9 +1,9 @@
-<section class='p-3 bg-cm-grey m-3 rounded shadow'>
+<section class='p-3 bg-light m-0 sm:m-3 rounded shadow-lg'>
     <form method="POST" action="/admin/permissions/add">
         @csrf
         <div class='row d-flex justify-content-between'>
             <div class='col-12 col-md-6'>
-                <x-input-text name='name' label='Nome da permição' icon='bi bi-file-earmark-lock-fill' required />
+                <x-input-default name='name' label='Nome da permição' icon='bi bi-file-earmark-lock-fill' type="text" required />
             </div>
         </div>
 
@@ -32,10 +32,8 @@
             <x-text-area name='extra_permissions' icon='bi bi-file-earmark-plus-fill' label='Permissões extra' />
         </div>
 
-        <div class='row d-flex justify-content-end'>
-            <div class='col-12 col-md-3'>
-                <x-input-button type='submit' title='Salvar permição' value='Salvar permição' style='color-main' />
-            </div>
+        <div class='flex justify-end'>
+            <x-input-button type='submit' title='Salvar permição' value='Salvar permição' style='color-main' />
         </div>
     </form>
 </section>

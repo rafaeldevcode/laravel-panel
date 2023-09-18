@@ -1,12 +1,12 @@
-<div class='d-flex align-items-center'>
+<div class='flex items-center'>
     @auth
         <form id='menu' class='menu'>
-            <input class='d-none menu_input' type='checkbox' id='checkbox-menu'>
+            <input class='hidden menu_input' type='checkbox' id='checkbox-menu'>
 
-            <label class='position-relative d-block ms-2 menu_label' for="checkbox-menu">
-                <span class='position-absolute d-block rounded bg-cm-light'>.</span>
-                <span class='position-absolute d-block rounded bg-cm-light'>.</span>
-                <span class='position-absolute d-block rounded bg-cm-light'>.</span>
+            <label class='relative block ml-2 menu_label' for="checkbox-menu">
+                <span class='absolute block rounded bg-light'>.</span>
+                <span class='absolute block rounded bg-light'>.</span>
+                <span class='absolute block rounded bg-light'>.</span>
             </label>
         </form>
     @endauth

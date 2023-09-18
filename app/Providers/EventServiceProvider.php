@@ -4,9 +4,7 @@ namespace App\Providers;
 
 use App\Events\CreateExtraPermissionForAdmin;
 use App\Events\CreatePermissionForAdmin;
-use App\Events\NotificationUser;
 use App\Listeners\CreatePermission;
-use App\Listeners\CreateUser;
 use App\Listeners\CreateExtraPermission;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -23,9 +21,6 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
-        ],
-        NotificationUser::class => [
-            CreateUser::class
         ],
         CreatePermissionForAdmin::class => [
             CreatePermission::class

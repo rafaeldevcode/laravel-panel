@@ -1,44 +1,43 @@
-@extends('main')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full w-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel='stylesheet' href='{{ asset('/libs/tailwind/style.css') }}' />
+    <link rel='stylesheet' href='{{ asset('/libs/bootstrap-icons/bootstrap-icons.min.css') }}' />
+    <link rel='stylesheet' href='{{ asset('/assets/css/globals.css') }}' />
+    <meta name='author' content='Rafael Vieira | github.com/rafaeldevcode' />
+    <x-favicon />
 
-@section('metasConfig')
-    <x-meta-config title='Realizar login' description='' />
-@endsection
+    @yield('metasConfig')
+    @include('script')
+</head>
+<body class="h-full w-full">
 
-@section('content')
-    <section class="vh-100 vw-100 d-flex flex-nowrap">
+    <x-message />
+
+    <main class="h-full w-full flex flex-nowrap">
         <x-bg-login />
 
-        <div class='d-flex flex-column justify-content-center align-items-center col-12 col-lg-5 p-2'>
+        <div class='flex flex-col justify-center items-center w-full lg:w-5/12 p-2'>
             <x-logo />
 
-            <form class='col-12 col-sm-6' method="POST" action="/login">
+            <form class='w-full sm:w-6/12 md:w-7/12' method="POST" action="/login">
                 @csrf
-                <x-input-email name='email' label='Usuário' icon='bi bi-person-fill' required />
+                <x-input-default name='email' label='Usuário' icon='bi bi-person-fill' type="email" required />
 
-                <x-input-pass name='password' label='Senha' required />
+                <x-input-default name='password' label='Senha' icon="bi bi-envelope-fill" type="password" required />
 
                 <div class='my-4'>
                     <x-input-checkbox-switch name='remember' label='Mantenha-me conectado' />
-
-                    <ul class='d-flex flex-nowrap justify-content-between ps-0'>
-                        {{-- <li>
-                            <a href='/register' class='text-color-main' title="Realizar cadastro">Realizar cadastro</a>
-                        </li> --}}
-                        <li>
-                            <a href='/reset-password?insert=email' class='text-color-main' title="Esqueci minha senha">Esqueci minha senha</a>
-                        </li>
-                    </ul>
                 </div>
 
-                <x-input-button type='submit' title='Fazer login' value='Logar' style='color-main' />
+                <div class="flex justify-end">
+                    <x-input-button type='submit' title='Fazer login' value='Logar' style='color-main' />
+                </div>
             </form>
         </div>
-    </section>
-@endsection
-
-@section('scripts')
-    <script type="text/javascript">
-        getFields();
-        showPass();
-    </script>
-@endsection
+    </main>
+</body>
+</html>

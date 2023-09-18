@@ -15,3 +15,6 @@ yarn-error.log
 /.idea
 /.vscode
 /dump.rdb
+tailwind.config.js
+composer.lock
+package-lock.json

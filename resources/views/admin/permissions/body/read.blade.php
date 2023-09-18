@@ -1,60 +1,84 @@
-<section class='p-3 bg-cm-grey m-3 rounded shadow'>
-    <section class='custom-table m-auto cm-browser-height'>
-        <table class='table table-hover mb-0'>
-            <thead>
-                <tr>
-                    <th class='col'>
-                        <input type='checkbox' data-button="select-several" />
-                    </th>
-                    <th class='col'>Nome</th>
-                    <th class='col'>Ações</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach ($permissions as $permission)
+<section class="p-3 bg-light m-0 sm:m-3 rounded shadow-lg">
+    <section class="custom-table m-auto cm-browser-height">
+        <div class="relative overflow-x-auto rounded border">
+            <table class="w-full text-sm text-left text-gray-500">
+                <thead class="text-xs text-gray-700 uppercase bg-color-main">
                     <tr>
-                        <td class='col'>
-                            <input
-                                data-id='{{ $permission->id }}'
-                                data-message='Esta ação irá remover todas as permições selecionadas!''
-                                type='checkbox'
-                                data-button="delete-enable"
-                            />
-                        </td>
-                        <td class='col'>{{ $permission->name }}</td>
-                        <td>
-                            <a href='/admin/permissions/edit/{{ $permission->id }}' title='Editar permição {{ $permission->name }}' class='btn btn-sm btn-cm-primary text-cm-light fw-bold m-1'>
-                                <i class='bi bi-pencil-square'></i>
-                            </a>
-
-                            <button
-                                data-button="delete"
-                                data-route='/admin/permissions/delete/{{ $permission->id }}'
-                                data-message='Esta ação irá remover a permição "{{ $permission->name }}"!'
-                                type='button'
-                                title='Remover permição {{ $permission->name }}'
-                                class='btn btn-sm btn-cm-danger text-cm-light fw-bold m-1'
-                            >
-                                <i class='bi bi-trash-fill'></i>
-                            </button>
-                        </td>
+                        <th scope="col" class="p-4">
+                            <div class="flex items-center">
+                                <input
+                                    data-button="select-several"
+                                    id="checkbox-all-search"
+                                    type="checkbox"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                >
+                                <label for="checkbox-all-search" class="sr-only">checkbox</label>
+                            </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Nome
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-right">
+                            Ações
+                        </th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+                    @foreach ($permissions as $permission)
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="w-4 p-4">
+                                <div class="flex items-center">
+                                    <input
+                                        value="{{ $permission->id }}"
+                                        data-message-delete="Esta ação irá remover todas as permisões selecionados!"
+                                        type="checkbox"
+                                        data-button="delete-enable"
+                                        id="checkbox-table-search-{{ $permission->id }}"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                    >
+                                    <label for="checkbox-table-search-{{ $permission->id }}" class="sr-only">checkbox</label>
+                                </div>
+                            </td>
+                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                {{ $permission->name }}
+                            </td>
+                            <td class="flex items-center justify-end px-6 py-4 space-x-2 right">
+                                <a href="/admin/permissions/edit/{{ $permission->id }}" title="Editar permisão {{ $permission->name }}" class="text-xs p-2 rounded btn-primary text-light fw-bold">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+
+                                <button
+                                    data-button="delete"
+                                    data-route="/admin/permissions/delete"
+                                    data-delete-id="{{ $permission->id }}"
+                                    data-message-delete="Esta ação irá remover o permisão '{{ $permission->name }}'!"
+                                    type="button"
+                                    title="Remover permisão {{ $permission->name }}"
+                                    class="p-2 text-xs rounded btn-danger text-light fw-bold"
+                                >
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
         @if(count($permissions) == 0)
-            <div class="p-2 empty-collections d-flex justify-content-center align-items-center">
-                <img class="h-100" src="{{ asset('assets/images/empty.svg') }}" alt="Teste">
+            <div class="p-2 empty-collections flex justify-center items-center">
+                <img class="h-full" src="{{ asset('assets/images/empty.svg') }}" alt="Nenhum dado encontrado">
             </div>
         @endif
     </section>
 
     <x-pagination
-        :next='$permissions->nextPageUrl()'
-        :previous='$permissions->previousPageUrl()'
-        :current='$permissions->currentPage()'
-        :totalpages='$permissions->lastPage()'
+        :next="$permissions->nextPageUrl()"
+        :previous="$permissions->previousPageUrl()"
+        :current="$permissions->currentPage()"
+        :totalpages="$permissions->lastPage()"
     />
-    <x-modal-delete />
 </section>
+
+<x-modal-delete />

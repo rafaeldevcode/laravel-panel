@@ -14,7 +14,7 @@
     height: 5px
 
 ::-webkit-scrollbar-track
-    background: $cm-light
+    background: $light
 
 ::-webkit-scrollbar-thumb
     background: $color-main
@@ -27,13 +27,28 @@ input[type=number]
    -moz-appearance: textfield
    appearance: textfield
 
-.cm-list-number
-    li
-        list-style: decimal
+[disabled]
+    opacity: 0.5
+    cursor: not-allowed
 
-.cm-list
-    li
-        list-style: circle
+body
+    margin: 0 !important
+
+// Backgrounds
+.bg-danger
+    background: $danger
+
+.bg-success
+    background: $success
+
+.bg-secondary
+    background: $secondary
+
+.bg-info
+    background: $info
+
+.bg-warning
+    background: $warning
 
 .pointer
     cursor: pointer !important
@@ -42,82 +57,7 @@ input[type=number]
     position: relative
     z-index: 100
 
-// Dashboard
-.card-dashboard
-    width: 220px
-    transition: all .4s
-
-    &:hover
-        background: $cm-light !important
-        color: $color-main !important
-
-.card-roi
-    cursor: pointer
-    width: 250px
-    transition: all .4s
-
-    &:hover
-        background: $cm-light !important
-        color: $cm-secondary !important
-
-// Notification flutuante
-.notification
-    max-width: 600px
-    height: 600px
-    transform: translateY(600px)
-    z-index: 100
-
-    &::before
-        content: ''
-        position: absolute
-        width: 100%
-        height: 100%
-        top: 0
-        left: 0
-        background-image: url('/assets/images/notifications.svg')
-        background-size: cover
-        background-position: center
-        background-repeat: no-repeat
-        opacity: .7
-
-    &-btn
-        width: 45px
-        height: 45px
-        top: -55px
-        cursor: pointer
-
-    &-count
-        width: 23px
-        height: 23px
-        border-radius: 50%
-        font-size: .9rem
-
-    &-contents
-        max-height: 580px
-        overflow-y: scroll
-
-        &-box
-            cursor: pointer
-            max-height: 450px
-            overflow-y: scroll
-
-article[data-content="false"]
-    display: none
-
-article[data-content="true"]
-    display: block
-
-.bubbleNotification
-    font-size: .6rem !important
-
-// Animação para abertura da notificações
-div[data-notification="true"]
-    animation: .5s showNotifications ease-out forwards
-
-div[data-notification="false"]
-    animation: .5s hiddeNotifications ease-out forwards
-
-// Painel de login
+// Login panel
 .image-bg-login
     min-width: 100%
     min-height: 100%
@@ -151,12 +91,12 @@ label
         @include inputsValid
 
 span[data-valid="false"]
-    color: $cm-danger
+    color: $danger
     animation: showError .4s linear forwards
     z-index: 1
 
 span[data-valid="true"]
-    color: $cm-success
+    color: $success
     animation: showSuccess .4s linear forwards
     z-index: 1
 
@@ -186,6 +126,9 @@ div[data-message="false"]
 
 // Header
 .header
+    position: sticky
+    top: 0
+    z-index: 3
     min-height: 50px
 
     div
@@ -196,6 +139,8 @@ div[data-message="false"]
 
 // Sidebar
 .profile
+    position: sticky
+    top: 0
     min-height: 50px
 
     &-dropdawn
@@ -211,7 +156,7 @@ div[data-message="false"]
     img
         border-radius: 50%
 
-// Menu sandwiche
+// Sandwiche menu
 .menu
     &_label
         cursor: pointer
@@ -250,12 +195,16 @@ div[data-message="false"]
             width: 60%
             top: 11px
 
-// Menu sidebar
+// Sidebar menu
 .sidebar
     min-height: 100vh
 
+    nav
+        position: sticky
+        top: 61px
+
 .sidebar[data-expanded='desactive']
-    animation: toRecalldAside .4s .2s ease-in-out forwards
+    animation: toRecalldAside .4s ease-in-out forwards
 
 .sidebar[data-expanded='active']
     animation: expandedAside .4s ease-in-out forwards
@@ -272,9 +221,10 @@ div[data-message="false"]
 .item-nav-sidbar
     transition: all .4s
     cursor: pointer
+    border: 1px solid transparent
 
     &:hover
-        background: $color-main
+        border: 1px solid $color-main
 
         .submenu
             display: block
@@ -288,7 +238,7 @@ div[data-message="false"]
     transition: all .4s
 
     &:hover
-        background: $cm-danger
+        background: $danger
 
     div
         form
@@ -370,10 +320,11 @@ div[data-item-active='true']
     width: 80px
     height: 80px
 
-input[name="avatar"]
+[data-checked="add-style"]
     &:checked ~ label
-        border: 1px solid $color-main
-        box-shadow: 0px 0px 10px $color-main
+        border: 2px solid $color-main
+        box-shadow: 0px 0px 20px $color-main
+        transform: scale(1.05)
 
 input[type="checkbox"]
     cursor: pointer
@@ -392,59 +343,48 @@ input[type="checkbox"]
     &-image
         max-width: 100%
 
-// Formulário de pesquisa customizada dos relatórios
-.focus-shadown-none
-    &:focus
-        box-shadow: none
-
-[data-report="single"]
-    display: none !important
-
-[data-report="more"]
-    display: inline !important
-
 // Server error and not found pages custom
 .custom-401
     @include pagesCustom('/assets/images/not_found.svg')
 
     &-mirror
-        @include pageCustomMirror($cm-danger)
+        @include pageCustomMirror($danger)
 
 .custom-403
     @include pagesCustom('/assets/images/not_found.svg')
 
     &-mirror
-        @include pageCustomMirror($cm-danger)
+        @include pageCustomMirror($danger)
 
 .custom-404
     @include pagesCustom('/assets/images/not_found.svg')
 
     &-mirror
-        @include pageCustomMirror($cm-danger)
+        @include pageCustomMirror($danger)
 
 .custom-419
     @include pagesCustom('/assets/images/not_found.svg')
 
     &-mirror
-        @include pageCustomMirror($cm-danger)
+        @include pageCustomMirror($danger)
 
 .custom-429
     @include pagesCustom('/assets/images/not_found.svg')
 
     &-mirror
-        @include pageCustomMirror($cm-danger)
+        @include pageCustomMirror($danger)
 
 .custom-500
     @include pagesCustom('/assets/images/server_error.svg')
 
     &-mirror
-        @include pageCustomMirror($cm-warning)
+        @include pageCustomMirror($warning)
 
 .custom-503
     @include pagesCustom('/assets/images/not_found.svg')
 
     &-mirror
-        @include pageCustomMirror($cm-danger)
+        @include pageCustomMirror($danger)
 
 .custom-maintenance
     @include pagesCustom('/assets/images/maintenance.svg')
@@ -465,7 +405,7 @@ input[type="checkbox"]
     width: 220px
     overflow-x: scroll
 
-// Estilizações customizadas
+// Custom styles
 .input-custom
     border-radius: 3px
     cursor: pointer
@@ -473,19 +413,6 @@ input[type="checkbox"]
     &:focus
         outline: none
         box-shadow: none
-
-.results-found
-    span
-        cursor: pointer
-        transition: all .4s
-
-        &:hover
-            background: $cm-secondary
-            color: $cm-light !important
-
-.remove-campaign
-    font-size: .9rem
-    cursor: pointer
 
 // Definir scroll para a tabelas
 .cm-browser-height
@@ -505,83 +432,52 @@ input[type="checkbox"]
     td
         font-size: .85rem
 
-[data-url-status="inactive"]
-    display: none
-
-[data-url-status="active"]
-    display: block
-
-// Página de logs
-.link-log
-    transition: all .4s
-
-    &:hover
-        color: $color-main !important
-
-.block-log
-    max-width: 1300px
-    max-height: 700px
-    overflow: auto
-
 // Gallery
-.folder-folder
-    #options-folder
-        opacity: 0
-        display: none
-        transition: opacity .4s
+#modalGallery
+    z-index: 99999
 
-    &:hover #options-folder
-        opacity: 1
-        display: block
-
-.card-folder-image
-    width: 100px
-    height: 100px
+.gallery
+    width: 150px
+    height: 150px
 
     img
+        width: 150px
+        height: 150px
+        object-fit: contain
+
+.gallery-image-preview
+    max-width: 100%
+    max-height: 500px
+    object-fit: contain
+
+[data-upload]
+    width: 100%
+    max-width: 150px
+
+.section-preloader
+    z-index: 2
+
+    &-image
         width: 100px
-        height: 100px
-        object-fit: cover
-        object-position: center
 
-.folder-image
-    &-image-name
-        max-width: 100px
-        white-space: nowrap
-        overflow: hidden
-        text-overflow: ellipsis
-        margin-top: .8rem
+// Popup animation
+[data-modal]
+    background: #00000000
 
-.fs-icon-image
-    font-size: .7rem
+    [data-modal-body]
+        transform: scale(0)
 
-.gallery-view
-    background: #00000088
+[data-modal-content="true"]
+    animation: openPopupBackgroud .6s linear forwards
 
-    &-carousel
-        width: 100%
-        height: 100%
-        max-height: 600px
-        max-width: 1000px
+    [data-modal-body]
+        animation: openPopupScale .3s .6s ease-in-out forwards
 
-        &-body
-            &-video
-                max-width: 100%
-                max-height: 450px
-                object-fit: contain
+[data-modal-content="false"]
+    animation: openPopupBackgroud .6s .3s linear reverse
 
-            &-image
-                max-width: 100%
-                max-height: 450px
-                object-fit: contain
+    [data-modal-body]
+        animation: openPopupScale .3s ease-in-out reverse
 
-            &-btn
-                background: #00000086
-                opacity: 0
-                transition: all .4s
-
-                &:hover
-                    opacity: 1
-
-@import  ./_mediaQueries
-@import ./_keyFrames
+@import  ./_mediaqueries
+@import ./_keyframes

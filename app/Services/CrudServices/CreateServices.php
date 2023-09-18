@@ -4,10 +4,8 @@ namespace App\Services\CrudServices;
 
 use App\Events\CreateExtraPermissionForAdmin;
 use App\Events\CreatePermissionForAdmin;
-use App\Events\NotificationUser as EventsNotificationUser;
 use App\Models\Menu;
 use App\Models\Notification;
-use App\Models\NotificationUser;
 use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -108,8 +106,6 @@ class CreateServices extends BaseCrud
                     'password' => $request->password
                 ], $remember);
             endif;
-
-            EventsNotificationUser::dispatch($user->id);
         DB::commit();
 
         if($auth):
@@ -151,23 +147,5 @@ class CreateServices extends BaseCrud
             DB::commit();
 
         SessionMessage::create($request, 'Permissão adicionada com sucesso!', 'cm-success');
-    }
-
-    /**
-     * @param Request $request
-     * @return void
-     */
-    public function createNotifications(Request $request): void
-    {
-        DB::beginTransaction();
-            $users = User::all();
-            $notification = Notification::create($request->all());
-
-            foreach($users as $user):
-                $user->notifications()->attach($notification->id);
-                NotificationUser::where('notifications_id', $notification->id)->where('user_id', $user->id)->update(['notification_status' => 'on']);
-            endforeach;
-        DB::commit();
-        SessionMessage::create($request, 'Notificação adicionada com sucesso!', 'cm-success');
     }
 }
