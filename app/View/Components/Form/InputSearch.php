@@ -24,7 +24,19 @@ class InputSearch extends Component
      */
     public function __construct(?string $value = null)
     {
-        $this->value    = $value;
+        // $attr = null;
+
+        // if(isset($attributes)):
+        //     if(is_array($attributes)):
+        //         foreach($attributes as $indice => $attribute):
+        //             $attr .= "{$indice}={$attribute} ";
+        //         endforeach;
+        //     else:
+        //         $attr = $attributes;
+        //     endif;
+        // endif;
+
+        $this->value = $value;
     }
 
     /**

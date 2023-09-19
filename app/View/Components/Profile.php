@@ -3,7 +3,6 @@
 namespace App\View\Components;
 
 use App\Models\Notification;
-use App\Models\NotificationUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
@@ -15,11 +14,6 @@ class Profile extends Component
     public $auth;
 
     /**
-     * @var mixed $notifications
-     */
-    public $count_notifications;
-
-    /**
      * Create a new component instance.
      *
      * @return void
@@ -27,7 +21,6 @@ class Profile extends Component
     public function __construct()
     {
         $this->auth                = Auth::user();
-        $this->count_notifications = count($this->getNotifications());
     }
 
     /**
@@ -38,22 +31,5 @@ class Profile extends Component
     public function render()
     {
         return view('components.profile');
-    }
-
-    /**
-     * @return mixed
-     */
-    private function getNotifications(): mixed
-    {
-        $ids = [];
-        $notifications_user = NotificationUser::where('notification_status', 'on')->where('user_id', Auth::user()->id)->get('notifications_id');
-
-        foreach($notifications_user as $id):
-            array_push($ids, $id->notifications_id);
-        endforeach;
-
-        $notifications = Notification::whereIn('id', $ids)->get();
-
-        return $notifications;
     }
 }

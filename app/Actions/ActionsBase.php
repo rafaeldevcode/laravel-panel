@@ -146,19 +146,19 @@ class ActionsBase
 
         switch ($method):
             case 'edit':
-                $color = 'cm-primary';
+                $color = 'primary';
                 break;
 
             case 'read':
-                $color = 'cm-secondary';
+                $color = 'secondary';
                 break;
 
             case 'create':
-                $color = 'cm-success';
+                $color = 'success';
                 break;
 
             default:
-                $color = 'cm-secondary';
+                $color = 'secondary';
                 break;
         endswitch;
 

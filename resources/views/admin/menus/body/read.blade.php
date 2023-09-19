@@ -1,67 +1,102 @@
-<section class='p-3 bg-cm-grey m-3 rounded shadow'>
-    <section class='custom-table m-auto cm-browser-height'>
-        <table class='table table-hover mb-0'>
-            <thead>
-                <tr>
-                    <th class='col'>
-                        <input type='checkbox' data-button="select-several" />
-                    </th>
-                    <th class='col'>Ícone</th>
-                    <th class='col'>Nome</th>
-                    <th class='col'>Slug</th>
-                    <th class='col'>Posição</th>
-                    <th class='col'>Ações</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach ($menus as $menu)
+<section class="p-3 bg-light m-0 sm:m-3 rounded shadow-lg">
+    <section class="custom-table m-auto cm-browser-height">
+        <div class="relative overflow-x-auto rounded border">
+            <table class="w-full text-sm text-left text-gray-500">
+                <thead class="text-xs text-gray-700 uppercase bg-color-main">
                     <tr>
-                        <td class='col'>
-                            <input
-                                data-id='{{ $menu->id }}'
-                                data-message='Esta ação irá remover todos os items selecionados!'
-                                type='checkbox'
-                                data-button="delete-enable"
-                            />
-                        </td>
-                        <td><i class='{{ $menu->icon }}'></i></td>
-                        <td>{{ $menu->name }}</td>
-                        <td>{{ $menu->slug }}</td>
-                        <td>{{ $menu->position }}</td>
-                        <td>
-                            <a href='/admin/menus/edit/{{ $menu->id }}' title='Editar item {{ $menu->name }} do menu' class='btn btn-sm btn-cm-primary text-cm-light fw-bold m-1'>
-                                <i class='bi bi-pencil-square'></i>
-                            </a>
-
-                            <button
-                                data-button="delete"
-                                data-route='/admin/menus/delete/{{ $menu->id }}'
-                                data-message='Esta ação irá remover o item "{{ $menu->name }}" do menu!'
-                                type='button'
-                                title='Remover item {{ $menu->name }} do menu'
-                                class='btn btn-sm btn-cm-danger text-cm-light fw-bold m-1'
-                            >
-                                <i class='bi bi-trash-fill'></i>
-                            </button>
-                        </td>
+                        <th scope="col" class="p-4">
+                            <div class="flex items-center">
+                                <input
+                                    data-button="select-several"
+                                    id="checkbox-all-search"
+                                    type="checkbox"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                >
+                                <label for="checkbox-all-search" class="sr-only">checkbox</label>
+                            </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Ícone
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Nome
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Slug
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Posição
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-right">
+                            Ações
+                        </th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+                    @foreach ($menus as $menu)
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="w-4 p-4">
+                                <div class="flex items-center">
+                                    <input
+                                        value="{{ $menu->id }}"
+                                        data-message-delete="Esta ação irá remover todos os usuários selecionados!"
+                                        type="checkbox"
+                                        data-button="delete-enable"
+                                        id="checkbox-table-search-{{ $menu->id }}"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                    >
+                                    <label for="checkbox-table-search-{{ $menu->id }}" class="sr-only">checkbox</label>
+                                </div>
+                            </td>
+                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                <i class="{{ $menu->icon }}"></i>
+                            </td>
+                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                {{ $menu->name }}
+                            </td>
+                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                {{ $menu->slug }}
+                            </td>
+                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                {{ $menu->position }}
+                            </td>
+                            <td class="flex items-center justify-end px-6 py-4 space-x-2 right">
+                                <a href="/admin/users/edit/{{ $menu->id }}" title="Editar usuário {{ $menu->name }}" class="text-xs p-2 rounded btn-primary text-light fw-bold">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+
+                                <button
+                                    data-button="delete"
+                                    data-route="/admin/users/delete"
+                                    data-delete-id="{{ $menu->id }}"
+                                    data-message-delete="Esta ação irá remover o usuário '{{ $menu->name }}'!"
+                                    type="button"
+                                    title="Remover usuário {{ $menu->name }}"
+                                    class="p-2 text-xs rounded btn-danger text-light fw-bold"
+                                >
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
         @if(count($menus) == 0)
-            <div class="p-2 empty-collections d-flex justify-content-center align-items-center">
-                <img class="h-100" src="{{ asset('assets/images/empty.svg') }}" alt="Teste">
+            <div class="p-2 empty-collections flex justify-center items-center">
+                <img class="h-full" src="{{ asset('assets/images/empty.svg') }}" alt="Nenhum dado encontrado">
             </div>
         @endif
     </section>
 
     <x-pagination
-        :next='$menus->nextPageUrl()'
-        :previous='$menus->previousPageUrl()'
-        :current='$menus->currentPage()'
-        :totalpages='$menus->lastPage()'
+        :next="$menus->nextPageUrl()"
+        :previous="$menus->previousPageUrl()"
+        :current="$menus->currentPage()"
+        :totalpages="$menus->lastPage()"
     />
-    <x-modal-delete />
 </section>
+
+<x-modal-delete />

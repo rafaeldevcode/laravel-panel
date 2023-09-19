@@ -52,20 +52,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Permission::class);
     }
-
-    /**
-     * @return Notification
-     */
-    public function notifications()
-    {
-        return $this->belongsToMany(Notification::class);
-    }
-
-    /**
-     * @return Gallery
-     */
-    public function gallery()
-    {
-        return $this->hasMany(Gallery::class);
-    }
 }

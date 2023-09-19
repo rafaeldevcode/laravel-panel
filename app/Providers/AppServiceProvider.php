@@ -16,7 +16,7 @@ use App\View\Components\Form\InputNumber;
 use App\View\Components\Form\InputPass;
 use App\View\Components\Form\InputSearch;
 use App\View\Components\Form\InputSelect;
-use App\View\Components\Form\InputText;
+use App\View\Components\Form\InputDefault;
 use App\View\Components\Form\TextArea;
 use App\View\Components\Header;
 use App\View\Components\LoginSocial;
@@ -57,7 +57,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('input-button', InputButton::class);
         Blade::component('input-checkbox-switch', InputCheckboxSwitch::class);
         Blade::component('input-pass', InputPass::class);
-        Blade::component('input-text', InputText::class);
+        Blade::component('input-default', InputDefault::class);
         Blade::component('bg-login', BgLogin::class);
         Blade::component('input-email', InputEmail::class);
         Blade::component('login-social', LoginSocial::class);

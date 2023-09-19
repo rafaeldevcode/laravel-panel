@@ -1,59 +1,64 @@
 <section class='p-3'>
-    <div class='border-bottom d-flex justify-content-between flex-column flex-md-row align-items-start align-items-md-end'>
+    <div class='border-b flex justify-between flex-col md:flex-row items-start md:items-end'>
         <div>
             <div class="breadcrumps-overflow">
-                <ul class='p-0 d-flex flex-nowrap text-cm-secondary'>
-                    <li class='me-2'><span class='badge bg-{{ $color }} rounded-fill'>{{ $type }}</span></li>
+                <ul class='p-0 flex flex-nowrap text-secondary'>
+                    <li class='mr-2'><span class='bg-{{ $color }} rounded text-white font-bold text-xs py-1 px-2'>{{ $type }}</span></li>
+
                     @foreach ($breadcrumps as $breadcrump)
-                        <li>&gt;</li>
-                        <li class='mx-3'>
-                            <a class='text-cm-secondary text-decoration-none' href='/{{ $breadcrump['slug'] }}'>{{ $breadcrump['name'] }}</a>
+                        <li class='mx-2'>
+                            <a title="Breadcrumps item" class='text-secondary bg-gray-200 rounded-full text-xs py-1 px-3 block font-bold' href='/{{ $breadcrump['slug'] }}'>
+                                {{ $breadcrump['name'] }}
+                            </a>
                         </li>
                     @endforeach
 
                     @isset($ID)
-                        <li>&gt;</li>
-                        <li class='mx-3'>
-                            <a class='text-cm-secondary text-decoration-none' href='/{{ $breadcrumps[count($breadcrumps)-1]['slug'].'/'.$ID }}'>{{ $ID }}</a>
+                        <li class='mx-2'>
+                            <a title="Breadcrumps item" class='text-secondary bg-gray-200 rounded-full text-xs py-1 px-3 block font-bold' href='/{{ $breadcrumps[count($breadcrumps)-1]['slug'].'/'.$ID }}'>{{ $ID }}</a>
                         </li>
                     @endisset
                 </ul>
             </div>
 
-            <div class='d-flex frex-nowrap align-items-center mb-2'>
-                <span class='bg-color-main rounded d-block d-flex justify-content-center align-items-center px-2 me-1'>
-                    <i class='{{ $icon }} text-cm-light fs-2'></i>
+            <div class='flex frex-nowrap my-2 items-'>
+                <button type='button' id='back' title='Voltar a página anterior' class='rounded py-2 px-1 btn-color-main mr-1 text-light'>
+                    <i class="bi bi-arrow-bar-left text-2xl"></i>
+                </button>
+
+                <span class='bg-color-main rounded p-2 mr-1'>
+                    <i class='{{ $icon }} text-light text-2xl'></i>
                 </span>
-                <p class='fs-2 fw-bold text-cm-secondary m-0'>{{ $title }}</p>
+
+                <p class='text-3xl font-bold text-secondary m-0 block m-auto'>{{ $title }}</p>
             </div>
         </div>
 
-        <div class='d-flex flex-column flex-sm-row mb-3 mx-auto mx-md-0'>
-            <div class='d-flex justify-content-center'>
-                @isset($search)
-                    <x-input-search />
-                @endisset
+        <div class='flex flex-col sm:flex-row mb-2 mx-auto md:mx-0'>
+            <div class='flex justify-center'>
+                <div class="mx-1">
+                    @isset($search)
+                        <x-input-search />
+                    @endisset
+                </div>
 
                 @isset($delete)
-                    <button data-button="delete-several" id='deleteAll' type='button' title='Remover vários(a) {{ $title }}' class='btn btn-md btn-cm-danger ms-1 disabled text-cm-light' data-route='{{ $route_delete }}'>
+                    <button data-button="delete-several" id='deleteAll' type='button' title='Remover vários(a) {{ $title }}' class='btn text-xs font-bold btn-danger mx-1 text-light' data-route='{{ $route_delete }}' disabled>
                         Remover
                     </button>
                 @endisset
 
                 @isset($route_add)
-                    <a href='{{ $route_add }}' title='Adicionar {{ $title }}' class='btn btn-md btn-cm-primary mx-1 text-cm-light'>Adicionar</a>
+                    <a href='{{ $route_add }}' title='Adicionar {{ $title }}' class='text-xs btn btn-primary font-bold mx-1'>Adicionar</a>
                 @endisset
-
-                <button type='button' id='back' title='Voltar a página anterior' class='btn btn-md btn-cm-info text-cm-light'>
-                    Voltar
-                </button>
             </div>
         </div>
     </div>
 
     @isset($sub_options)
-        <div class="bg-cm-secondary p-3">
+        <div class="bg-secondary">
             @include($sub_options)
         </div>
-    @endisset
+        @endisset
 </section>
+

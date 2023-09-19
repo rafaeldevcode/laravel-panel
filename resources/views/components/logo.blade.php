@@ -1,6 +1,6 @@
-<div class='col-12 col-sm-6 mb-5'>
+<div class='w-full sm:w-6/12 mb-5'>
     <img
-        class='w-100'
+        class='w-full'
         src='{{ asset($image) }}'
         alt='{{ $description }}'
     />
