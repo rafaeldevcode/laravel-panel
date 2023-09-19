@@ -11,7 +11,6 @@
     <x-favicon />
 
     @yield('metasConfig')
-    @include('script')
 </head>
 <body>
 
@@ -28,6 +27,41 @@
             @yield('content')
         </section>
     </main>
+
+    <script type="text/javascript" src="{{ asset('libs/jquery/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/scripts/main.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('assets/scripts/class/Modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/scripts/class/Cookies.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/scripts/class/PageBack.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/scripts/class/Preloader.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/scripts/class/Menu.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/scripts/class/Message.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/scripts/class/Password.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/scripts/class/ValidateForm.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/scripts/class/Remove.js') }}"></script>
+    <script type="text/javascript">
+        Menu.checkIsOpen();
+        Menu.admin($('#checkbox-menu'));
+        Message.hide('[data-message]');
+        Password.show('[data-id-pass]');
+
+        // Validate the form
+        const validate = new ValidateForm();
+        validate.init();
+
+        // Delete item(s)
+        const remove = new Remove();
+        remove.init();
+
+        PageBack.init();
+
+        document.addEventListener("DOMContentLoaded", function() {
+            Preloader.hide();
+        });
+
+        Modal.init();
+    </script>
 
     @yield('scripts')
 </body>
