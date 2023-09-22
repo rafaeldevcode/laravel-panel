@@ -24,6 +24,9 @@ class Gallery{
         this.uploads();
         this.dbClickSelect();
         this.selectedFiles();
+
+        // Desabilit preloader
+        if(this.preloader) Preloader.hide('gallery');
     }
 
     /**
@@ -37,7 +40,7 @@ class Gallery{
 
         return new Promise((resolve, reject) => {
             element.change((event) => {
-                if(this.preloader) Preloader.show();
+                if(this.preloader) Preloader.show('gallery');
 
                 const file = event.target;
                 const countFile = file.files.length;
@@ -160,7 +163,7 @@ class Gallery{
      */
     async loadMore(){
         $('[data-next-page]').click(async (event) => {
-            if(this.preloader) Preloader.show();
+            if(this.preloader) Preloader.show('gallery');
 
             let page = parseInt($(event.target).attr('data-next-page'));
             const search = $(event.target).attr('data-search') && null ;
@@ -276,7 +279,7 @@ class Gallery{
         });
 
         // Desabilit preloader
-        if(this.preloader) Preloader.hide();
+        if(this.preloader) Preloader.hide('gallery');
 
         $('[data-gallery="empty"]').addClass('hidden');
     }

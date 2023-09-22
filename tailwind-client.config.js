@@ -1,15 +1,12 @@
-/** 
- * @type {import('tailwindcss').Config} 
- * 
+const colors = require('./tailwind-colors');
+
+/**
+ * @type {import('tailwindcss').Config}
+ *
  */
 module.exports = {
     content: [
         "./public/libs/tailwind/import.css",
-        "./resources/**/*.php",
-        "./admin/**/*.php",
-        "./policies/*.php",
-        "./login/*.php",
-        "./index.php",
     ],
     theme: {
         screens: {
@@ -34,15 +31,15 @@ module.exports = {
         },
         extend: {
             colors: {
-                "color-main": "#3695FF",
-                "primary": "#0062FF",
-                "secondary": "#6C757D",
-                "success": "#008000",
-                "info": '#0DCAF0',
-                "warning": "#FFFF00",
-                "danger": "#FF0000",
-                "light": '#FFFFFF',
-                "dark": '#000000',
+                "color-main": colors.color_main,
+                "primary": colors.primary,
+                "secondary": colors.secondary,
+                "success": colors.success,
+                "info": colors.info,
+                "warning": colors.warning,
+                "danger": colors.danger,
+                "light": colors.light,
+                "dark": colors.dark,
             },
             boxShadow: {
                 input: "0px 7px 20px rgba(0, 0, 0, 0.03)",
@@ -64,57 +61,57 @@ module.exports = {
                     display: 'block',
                 },
                 '.btn-danger': {
-                    backgroundColor: '#FF0000',
-                    border: '1px solid #FF0000',
+                    backgroundColor: colors.danger,
+                    border: `1px solid ${colors.danger}`,
                     color: '#fff',
                     transition: '.4s all',
                     '&:hover': {
                         backgroundColor: '#fff',
-                        color: '#FF0000',
+                        color: colors.danger,
                     },
                 },
                 '.btn-primary': {
-                    backgroundColor: '#0062FF',
-                    border: '1px solid #0062FF',
+                    backgroundColor: colors.primary,
+                    border: `1px solid ${colors.primary}`,
                     color: '#fff',
                     transition: '.4s all',
                     '&:hover': {
                         backgroundColor: '#fff',
-                        color: '#0062FF',
+                        color: colors.primary,
                     },
                 },
                 '.btn-color-main': {
-                    backgroundColor: '#3695FF',
-                    border: '1px solid #3695FF',
+                    backgroundColor: colors.color_main,
+                    border: `1px solid ${colors.color_main}`,
                     color: '#fff',
                     transition: '.4s all',
                     '&:hover': {
                         backgroundColor: '#fff',
-                        color: '#3695FF',
+                        color: colors.color_main,
                     },
                 },
                 '.btn-secondary': {
-                    backgroundColor: '#6C757D',
-                    border: '1px solid #6C757D',
+                    backgroundColor: colors.secondary,
+                    border: `1px solid ${colors.secondary}`,
                     color: '#fff',
                     transition: '.4s all',
                     '&:hover': {
                         backgroundColor: '#fff',
-                        color: '#6C757D',
+                        color: colors.secondary,
                     },
                 },
                 '.btn-info': {
-                    backgroundColor: '#0DCAF0',
-                    border: '1px solid #0DCAF0',
+                    backgroundColor: colors.info,
+                    border: `1px solid ${colors.info}`,
                     color: '#fff',
                     transition: '.4s all',
                     '&:hover': {
                         backgroundColor: '#fff',
-                        color: '#0DCAF0',
+                        color: colors.info,
                     },
                 },
             };
-      
+
             addUtilities(newUtilities, ['responsive', 'hover']);
         },
     ],

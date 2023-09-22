@@ -7,24 +7,27 @@ class Preloader{
     /**
      * @since 1.2.0
      *  
+     * @param {object} type 
+     * @returns {void}
      */
-    static hide(){
-        $('#preloader-section').removeClass('d-flex');
-        $('#preloader-section').hide();
+    static hide(type){
+        $(`[data-preloader="${type}"]`).removeClass('flex');
+        $(`[data-preloader="${type}"]`).hide();
     }
 
     /**
      * @since 1.2.0
      *  
+     * @param {object} type 
      * @returns {void}
      */
-    static show(){
-        $('#preloader-section').addClass('d-flex');
-        $('#preloader-section').show();
+    static show(type){
+        $(`[data-preloader="${type}"]`).addClass('flex');
+        $(`[data-preloader="${type}"]`).show();
     }
     
     /**
-     * @since 1.0.0
+     * @since 1.6.0
      * 
      * @param {object} event 
      */
