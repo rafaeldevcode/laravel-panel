@@ -2,27 +2,29 @@
 
 namespace App\View\Components;
 
+use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class Pagination extends Component
 {
     /**
-     * @var string|null $next
+     * @var string|null
      */
     public $next;
 
     /**
-     * @var string|null $previous
+     * @var string|null
      */
     public $previous;
 
     /**
-     * @var int|null $current
+     * @var int|null
      */
     public $current;
 
     /**
-     * @var int|null $totalpages
+     * @var int|null
      */
     public $totalpages;
 
@@ -37,18 +39,18 @@ class Pagination extends Component
      */
     public function __construct(string|null $next, string|null $previous, int|null $current, string|null $totalpages)
     {
-        $this->next       = $next;
-        $this->previous   = $previous;
-        $this->current    = $current;
+        $this->next = $next;
+        $this->previous = $previous;
+        $this->current = $current;
         $this->totalpages = $totalpages;
     }
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View|Closure|string
      */
-    public function render()
+    public function render(): View|Closure|string
     {
         return view('components.pagination');
     }

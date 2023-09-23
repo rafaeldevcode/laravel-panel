@@ -2,17 +2,19 @@
 
 namespace App\View\Components;
 
+use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class Tinymce extends Component
 {
     /**
-     * @var string $name
+     * @var string
      */
     public $name;
 
     /**
-     * @var ?string $value
+     * @var ?string
      */
     public $value;
 
@@ -25,16 +27,16 @@ class Tinymce extends Component
      */
     public function __construct(string $name, ?string $value = null)
     {
-        $this->name  = $name;
+        $this->name = $name;
         $this->value = $value;
     }
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View|Closure|string
      */
-    public function render()
+    public function render(): View|Closure|string
     {
         return view('components.tinymce');
     }

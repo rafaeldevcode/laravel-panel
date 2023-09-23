@@ -2,14 +2,15 @@
 
 namespace App\View\Components;
 
-use App\Models\Notification;
+use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class Profile extends Component
 {
     /**
-     * @var Auth $auth
+     * @var Auth
      */
     public $auth;
 
@@ -20,15 +21,15 @@ class Profile extends Component
      */
     public function __construct()
     {
-        $this->auth                = Auth::user();
+        $this->auth = Auth::user();
     }
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View|Closure|string
      */
-    public function render()
+    public function render(): View|Closure|string
     {
         return view('components.profile');
     }

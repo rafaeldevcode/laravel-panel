@@ -26,8 +26,6 @@ class FlashMessage extends Component
     /**
      * Create a new component instance.
      *
-     * @since 1.2.0
-     *
      * @return void
      */
     public function __construct()
@@ -40,8 +38,6 @@ class FlashMessage extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @since 1.2.0
-     *
      * @return string|View|Closure|string
      */
     public function render(): View|Closure|string
@@ -50,8 +46,6 @@ class FlashMessage extends Component
     }
 
     /**
-     * @since 1.2.0
-     *
      * @return string
      */
     private function getIcon(): string

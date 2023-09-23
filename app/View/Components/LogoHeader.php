@@ -2,18 +2,20 @@
 
 namespace App\View\Components;
 
+use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class LogoHeader extends Component
 {
     /**
-     * @var string $image
+     * @var string
      */
     public $image;
 
     /**
-     * @var string $description
+     * @var string
      */
     public $description;
 
@@ -26,16 +28,16 @@ class LogoHeader extends Component
     {
         $settings = DB::table('settings')->first();
 
-        $this->image        = $settings->site_logo_header == 'logo_header.png' ? "/assets/images/{$settings->site_logo_header}" : "/storage/{$settings->site_logo_header}";
-        $this->description  = $settings->site_description;
+        $this->image = $settings->site_logo_header == 'logo_header.png' ? "/assets/images/{$settings->site_logo_header}" : "/storage/{$settings->site_logo_header}";
+        $this->description = $settings->site_description;
     }
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View|Closure|string
      */
-    public function render()
+    public function render(): View|Closure|string
     {
         return view('components.logo-header');
     }

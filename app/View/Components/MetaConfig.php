@@ -2,18 +2,20 @@
 
 namespace App\View\Components;
 
+use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class MetaConfig extends Component
 {
     /**
-     * @var string $config
+     * @var string
      */
     public $description;
 
     /**
-     * @var string $title
+     * @var string
      */
     public $title;
 
@@ -28,15 +30,15 @@ class MetaConfig extends Component
         $settings = DB::table('settings')->first();
 
         $this->description = empty($description) ? $settings->site_description : $description;
-        $this->title       = empty($title) ? $settings->site_name : $title;
+        $this->title = empty($title) ? $settings->site_name : $title;
     }
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View|Closure|string
      */
-    public function render()
+    public function render(): View|Closure|string
     {
         return view('components.meta-config');
     }

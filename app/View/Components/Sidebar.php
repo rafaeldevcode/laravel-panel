@@ -2,19 +2,20 @@
 
 namespace App\View\Components;
 
-use Illuminate\Support\Facades\Auth;
+use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class Sidebar extends Component
 {
     /**
-     * @var mixed $menus
+     * @var mixed
      */
     public $menus;
 
     /**
-     * @var string $uri
+     * @var string
      */
     public $uri;
 
@@ -26,15 +27,15 @@ class Sidebar extends Component
     public function __construct()
     {
         $this->menus = DB::table('menus')->orderBy('position', 'ASC')->get();
-        $this->uri   = explode('/', request()->route()->uri)[1];
+        $this->uri = explode('/', request()->route()->uri)[1];
     }
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View|Closure|string
      */
-    public function render()
+    public function render(): View|Closure|string
     {
         return view('components.sidebar');
     }
