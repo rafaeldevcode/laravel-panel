@@ -23,7 +23,7 @@ class DeleteServices extends BaseCrud
             Menu::find($ID)->delete();
         DB::commit();
 
-        SessionMessage::create($request, 'Item removido com sucesso!', 'cm-success');
+        SessionMessage::create($request, 'Item removido com sucesso!', 'success');
     }
 
     /**
@@ -38,7 +38,7 @@ class DeleteServices extends BaseCrud
             endforeach;
         DB::commit();
 
-        SessionMessage::create($request, 'Todos os items foram removido com sucesso!', 'cm-success');
+        SessionMessage::create($request, 'Todos os items foram removido com sucesso!', 'success');
     }
 
     /**
@@ -50,7 +50,7 @@ class DeleteServices extends BaseCrud
     {
         // Imperdir que usuário admin seja excluido
         if($ID == 1):
-            SessionMessage::create($request, 'Este é um usuário do sistema, não pode ser excluido!', 'cm-danger');
+            SessionMessage::create($request, 'Este é um usuário do sistema, não pode ser excluido!', 'danger');
             return;
         endif;
 
@@ -60,7 +60,7 @@ class DeleteServices extends BaseCrud
             $user->delete();
         DB::commit();
 
-        SessionMessage::create($request, 'Usuário removido com sucesso!', 'cm-success');
+        SessionMessage::create($request, 'Usuário removido com sucesso!', 'success');
     }
 
     /**
@@ -72,7 +72,7 @@ class DeleteServices extends BaseCrud
     {
         // Imperdir que usuário admin seja excluido
         if(in_array(1, $request->ids)):
-            SessionMessage::create($request, 'Existe um usuário do sistema na lista para excluir, este não pode ser excluido!', 'cm-danger');
+            SessionMessage::create($request, 'Existe um usuário do sistema na lista para excluir, este não pode ser excluido!', 'danger');
             return;
         endif;
 
@@ -84,7 +84,7 @@ class DeleteServices extends BaseCrud
             endforeach;
         DB::commit();
 
-        SessionMessage::create($request, 'Todos os usuários foram removido com sucesso!', 'cm-success');
+        SessionMessage::create($request, 'Todos os usuários foram removido com sucesso!', 'success');
     }
 
     /**
@@ -96,7 +96,7 @@ class DeleteServices extends BaseCrud
     {
         // Imperdir que que a permição admin seja excluida
         if($ID == 1):
-            SessionMessage::create($request, 'Este é uma permissão do sistema, não pode ser excluida!', 'cm-danger');
+            SessionMessage::create($request, 'Este é uma permissão do sistema, não pode ser excluida!', 'danger');
             return;
         endif;
 
@@ -104,7 +104,7 @@ class DeleteServices extends BaseCrud
             Permission::find($ID)->delete();
         DB::commit();
 
-        SessionMessage::create($request, 'Permição removida com sucesso!', 'cm-success');
+        SessionMessage::create($request, 'Permição removida com sucesso!', 'success');
     }
 
     /**
@@ -116,7 +116,7 @@ class DeleteServices extends BaseCrud
     {
         // Imperdir que que a permição admin seja excluida
         if(in_array(1, $request->ids)):
-            SessionMessage::create($request, 'Existe uma permição do sistema na lista para excluir, esta não pode ser excluida!', 'cm-danger');
+            SessionMessage::create($request, 'Existe uma permição do sistema na lista para excluir, esta não pode ser excluida!', 'danger');
             return;
         endif;
 
@@ -126,6 +126,6 @@ class DeleteServices extends BaseCrud
             endforeach;
         DB::commit();
 
-        SessionMessage::create($request, 'Todas as permições foram removido com sucesso!', 'cm-success');
+        SessionMessage::create($request, 'Todas as permições foram removido com sucesso!', 'success');
     }
 }

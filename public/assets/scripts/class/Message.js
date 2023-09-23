@@ -6,19 +6,18 @@
 class Message{
     /**
      * Hidden message
-     * 
+     *
      * @since 1.0.0
-     * 
-     * @param {string} elementIndentfy 
+     *
      * @return {void}
      */
-    static hide(elementIndentfy){
+    static hide(){
         this.clickHide();
-        const message = $(elementIndentfy);
-    
+        const message = $('[data-message="true"]');
+
         setTimeout(()=>{
             message.attr('data-message', 'false');
-    
+
             setTimeout(() => {
                 $('[data-message="content"]').remove();
             }, 1000);
@@ -27,27 +26,27 @@ class Message{
 
     /**
      * @since 1.5.0
-     * 
+     *
      * @returns {void}
      */
     static clickHide(){
         $('[data-message="hide"]').on('click', (event) => {
             const message = $(event.target).parent();
             message.attr('data-message', 'false');
-    
+
             setTimeout(() => {
-                message.remove();
+                $('[data-message="content"]').remove();
             }, 1000);
         });
     }
-    
+
     /**
      * Create message
-     * 
+     *
      * @since 1.0.0
-     * 
-     * @param {string} textMessage 
-     * @param {string} typeMessage 
+     *
+     * @param {string} textMessage
+     * @param {string} typeMessage
      * @returns {void}
      */
     static create(textMessage, typeMessage){
@@ -103,7 +102,7 @@ class Message{
 
     /**
      * @since 1.5.0
-     * 
+     *
      * @returns {object}
      */
     static getContentMessage(){

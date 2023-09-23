@@ -14,8 +14,6 @@
 </head>
 <body>
 
-    <x-message />
-
     <main class='flex flex-nowrap justify-between w-full'>
         <x-sidebar />
 
@@ -27,6 +25,8 @@
             @yield('content')
         </section>
     </main>
+
+    <x-flash-message />
 
     <script type="text/javascript" src="{{ asset('libs/jquery/jquery.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/scripts/main.js') }}"></script>
@@ -43,7 +43,7 @@
     <script type="text/javascript">
         Menu.checkIsOpen();
         Menu.admin($('#checkbox-menu'));
-        Message.hide('[data-message]');
+        Message.hide();
         Password.show('[data-id-pass]');
 
         // Validate the form
@@ -62,7 +62,5 @@
 
         Modal.init();
     </script>
-
-    @yield('scripts')
 </body>
 </html>

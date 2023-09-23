@@ -45,7 +45,7 @@ class AuthController extends Controller
             return redirect('/admin/dashboard');
         endif;
 
-        SessionMessage::create($request, 'Senha ou usuário inválidos, porfavor tente novamente!', 'cm-danger');
+        SessionMessage::create($request, 'Senha ou usuário inválidos, porfavor tente novamente!', 'danger');
 
         return redirect()->back();
     }
@@ -79,7 +79,7 @@ class AuthController extends Controller
         if($request->password !== $request->confirm_password):
             $this->createMessageSession($request, [
                 'message' => 'Senhas não conferem, porfavor tente novamente!',
-                'status'  => 'cm-danger'
+                'status'  => 'danger'
             ]);
 
             return redirect()->back();

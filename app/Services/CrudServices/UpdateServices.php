@@ -39,7 +39,7 @@ class UpdateServices extends BaseCrud
             $settings->save();
         DB::commit();
 
-        SessionMessage::create($request, 'Configurações do site atualizadas com sucesso!', 'cm-success');
+        SessionMessage::create($request, 'Configurações do site atualizadas com sucesso!', 'success');
     }
 
     /**
@@ -51,11 +51,11 @@ class UpdateServices extends BaseCrud
         if(!is_null($request->current_password)):
             if(is_null($request->password) || is_null($request->repeat_password)):
 
-                SessionMessage::create($request, 'Por favor digite sua nova senha ou deixe o campo "senha atual" em branco, caso não queira altera-la!', 'cm-danger');
+                SessionMessage::create($request, 'Por favor digite sua nova senha ou deixe o campo "senha atual" em branco, caso não queira altera-la!', 'danger');
                 return;
             elseif($request->password !== $request->repeat_password):
 
-                SessionMessage::create($request, 'As senhas não conferem, porfavor tente novamente!', 'cm-danger');
+                SessionMessage::create($request, 'As senhas não conferem, porfavor tente novamente!', 'danger');
                 return;
             endif;
         endif;
@@ -75,7 +75,7 @@ class UpdateServices extends BaseCrud
             $profile->save();
         DB::commit();
 
-        SessionMessage::create($request, 'Perfil Atualizado com sucesso!', 'cm-success');
+        SessionMessage::create($request, 'Perfil Atualizado com sucesso!', 'success');
     }
 
     /**
@@ -90,7 +90,7 @@ class UpdateServices extends BaseCrud
             $profile->save();
         DB::commit();
 
-        SessionMessage::create($request, 'Avatar do perfil atualizado com sucesso!', 'cm-success');
+        SessionMessage::create($request, 'Avatar do perfil atualizado com sucesso!', 'success');
     }
 
     /**
@@ -114,7 +114,7 @@ class UpdateServices extends BaseCrud
             CreateExtraPermissionForAdmin::dispatch($permissions['extra_permissions']);
         DB::commit();
 
-        SessionMessage::create($request, 'Permissões atualizadas com sucesso!', 'cm-success');
+        SessionMessage::create($request, 'Permissões atualizadas com sucesso!', 'success');
     }
 
     /**
@@ -126,7 +126,7 @@ class UpdateServices extends BaseCrud
     {
         if(!is_null($request->password) && $request->password !== $request->repeat_password):
 
-            SessionMessage::create($request, 'As senhas não conferem, porfavor tente novamente!', 'cm-danger');
+            SessionMessage::create($request, 'As senhas não conferem, porfavor tente novamente!', 'danger');
             return;
         endif;
 
@@ -144,7 +144,7 @@ class UpdateServices extends BaseCrud
             $user->save();
         DB::commit();
 
-        SessionMessage::create($request, 'Usuário atualizado com sucesso!', 'cm-success');
+        SessionMessage::create($request, 'Usuário atualizado com sucesso!', 'success');
     }
 
     /**
@@ -165,7 +165,7 @@ class UpdateServices extends BaseCrud
                 ]);
         DB::commit();
 
-        SessionMessage::create($request, 'Item do menu atualizado com sucesso!', 'cm-success');
+        SessionMessage::create($request, 'Item do menu atualizado com sucesso!', 'success');
     }
 
     /**
@@ -183,6 +183,6 @@ class UpdateServices extends BaseCrud
             ]);
         DB::commit();
 
-        SessionMessage::create($request, 'Notificação atualizada com sucesso!', 'cm-success');
+        SessionMessage::create($request, 'Notificação atualizada com sucesso!', 'success');
     }
 }

@@ -11,13 +11,10 @@
     <x-favicon />
 
     @yield('metasConfig')
-    @include('script')
 </head>
 <body class="h-full w-full">
 
-    <x-message />
-
-    <main class="h-full w-full flex flex-nowrap">
+    <main class="h-full w-full flex flex-nowrap overflow-hidden">
         <x-bg-login />
 
         <div class='flex flex-col justify-center items-center w-full lg:w-5/12 p-2'>
@@ -25,9 +22,13 @@
 
             <form class='w-full sm:w-6/12 md:w-7/12' method="POST" action="/login">
                 @csrf
-                <x-input-default name='email' label='Usuário' icon='bi bi-person-fill' type="email" required />
+                <div class="pb-1">
+                    <x-input-default name='email' label='Usuário' icon='bi bi-person-fill' type="email" required />
+                </div>
 
-                <x-input-default name='password' label='Senha' icon="bi bi-envelope-fill" type="password" required />
+                <div class="pb-1">
+                    <x-input-default name='password' label='Senha' icon="bi bi-envelope-fill" type="password" required />
+                </div>
 
                 <div class='my-4'>
                     <x-input-checkbox-switch name='remember' label='Mantenha-me conectado' />
@@ -39,5 +40,21 @@
             </form>
         </div>
     </main>
+
+    <x-flash-message />
+
+    <script type="text/javascript" src="{{ asset('libs/jquery/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/scripts/class/Message.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/scripts/class/Password.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/scripts/class/ValidateForm.js') }}"></script>
+
+    <script type="text/javascript">
+        Message.hide();
+        Password.show('[data-id-pass]');
+
+        // Validate the form
+        const validate = new ValidateForm();
+        validate.init();
+    </script>
 </body>
 </html>

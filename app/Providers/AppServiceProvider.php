@@ -23,7 +23,7 @@ use App\View\Components\LoginSocial;
 use App\View\Components\Logo;
 use App\View\Components\LogoHeader;
 use App\View\Components\Menu;
-use App\View\Components\Message;
+use App\View\Components\FlashMessage;
 use App\View\Components\MetaConfig;
 use App\View\Components\ModalDelete;
 use App\View\Components\Notifications;
@@ -77,7 +77,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('input-select', InputSelect::class);
         Blade::component('text-area', TextArea::class);
         Blade::component('input-file-image', InputFileImage::class);
-        Blade::component('message', Message::class);
+        Blade::component('flash-message', FlashMessage::class);
         Blade::component('bg-profile', BgProfile::class);
         Blade::component('logo', Logo::class);
         Blade::component('logo-header', LogoHeader::class);

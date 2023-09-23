@@ -29,7 +29,7 @@ class CreateServices extends BaseCrud
 
             $menu->update(['submenus' => $submenus]);
 
-            return SessionMessage::create($request, 'Submenu adicionado com sucesso!', 'cm-success');
+            return SessionMessage::create($request, 'Submenu adicionado com sucesso!', 'success');
         }
 
         $slug = "/admin{$this->normalizeSlug($request->slug)}";
@@ -44,12 +44,12 @@ class CreateServices extends BaseCrud
             ->first();
 
             if($slugs):
-                SessionMessage::create($request, 'Esta slug já está sendo utilizada, porfavor tente outra!', 'cm-danger');
+                SessionMessage::create($request, 'Esta slug já está sendo utilizada, porfavor tente outra!', 'danger');
                 return;
             endif;
 
             if($prefixs):
-                SessionMessage::create($request, 'Esta slug já está sendo utilizada, porfavor tente outra!', 'cm-danger');
+                SessionMessage::create($request, 'Esta slug já está sendo utilizada, porfavor tente outra!', 'danger');
                 return;
             endif;
 
@@ -66,7 +66,7 @@ class CreateServices extends BaseCrud
             CreatePermissionForAdmin::dispatch($prefix);
         DB::commit();
 
-        SessionMessage::create($request, 'Item adicionado ao menu com sucesso!', 'cm-success');
+        SessionMessage::create($request, 'Item adicionado ao menu com sucesso!', 'success');
     }
 
     /**
@@ -82,7 +82,7 @@ class CreateServices extends BaseCrud
             ->get();
 
         if(isset($user[0])):
-            SessionMessage::create($request, 'Este email já está em uso, porfavor escolha outro email!', 'cm-danger');
+            SessionMessage::create($request, 'Este email já está em uso, porfavor escolha outro email!', 'danger');
             return;
         endif;
 
@@ -109,9 +109,9 @@ class CreateServices extends BaseCrud
         DB::commit();
 
         if($auth):
-            SessionMessage::create($request, "{$request->name}, seja bem vindo!", 'cm-success');
+            SessionMessage::create($request, "{$request->name}, seja bem vindo!", 'success');
         else:
-            SessionMessage::create($request, 'Usuário adicionado ao sistema com sucesso!', 'cm-success');
+            SessionMessage::create($request, 'Usuário adicionado ao sistema com sucesso!', 'success');
         endif;
     }
 
@@ -131,7 +131,7 @@ class CreateServices extends BaseCrud
             ->get();
 
             if(isset($permission[0])):
-                SessionMessage::create($request, 'O nome desta permissão já está em uso, porfavor escolha outro nome!', 'cm-danger');
+                SessionMessage::create($request, 'O nome desta permissão já está em uso, porfavor escolha outro nome!', 'danger');
                 return;
             endif;
 
@@ -146,6 +146,6 @@ class CreateServices extends BaseCrud
                 CreateExtraPermissionForAdmin::dispatch($permissions['extra_permissions']);
             DB::commit();
 
-        SessionMessage::create($request, 'Permissão adicionada com sucesso!', 'cm-success');
+        SessionMessage::create($request, 'Permissão adicionada com sucesso!', 'success');
     }
 }
