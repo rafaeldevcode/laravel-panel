@@ -2,19 +2,21 @@
 
 namespace App\View\Components\Form;
 
+use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class InputSearch extends Component
 {
     /**
-     * @var mixed $attributes
-     */
-    public $attributes;
-
-    /**
-     * @var ?string $value
+     * @var ?string
      */
     public $value;
+
+    /**
+     * @var mixed
+     */
+    public $attributes;
 
     /**
      * Create a new component instance.
@@ -24,27 +26,15 @@ class InputSearch extends Component
      */
     public function __construct(?string $value = null)
     {
-        // $attr = null;
-
-        // if(isset($attributes)):
-        //     if(is_array($attributes)):
-        //         foreach($attributes as $indice => $attribute):
-        //             $attr .= "{$indice}={$attribute} ";
-        //         endforeach;
-        //     else:
-        //         $attr = $attributes;
-        //     endif;
-        // endif;
-
         $this->value = $value;
     }
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View|Closure|string
      */
-    public function render()
+    public function render(): View|Closure|string
     {
         return view('components.form.input-search');
     }

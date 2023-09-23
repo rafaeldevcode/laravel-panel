@@ -2,32 +2,34 @@
 
 namespace App\View\Components\Form;
 
+use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class InputButton extends Component
 {
     /**
-     * @var string $style
+     * @var string
      */
     public $style;
 
     /**
-     * @var string $type
+     * @var string
      */
     public $type;
 
     /**
-     * @var string $title
+     * @var string
      */
     public $title;
 
     /**
-     * @var string $value
+     * @var string
      */
     public $value;
 
     /**
-     * @var mixed $attributes
+     * @var mixed
      */
     public $attributes;
 
@@ -42,18 +44,18 @@ class InputButton extends Component
      */
     public function __construct(string $style, string $type, string $title, string $value)
     {
-        $this->style    = $style;
-        $this->type     = $type;
-        $this->title    = $title;
-        $this->value    = $value;
+        $this->style = $style;
+        $this->type = $type;
+        $this->title = $title;
+        $this->value = $value;
     }
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View|Closure|string
      */
-    public function render()
+    public function render(): View|Closure|string
     {
         return view('components.form.input-button');
     }

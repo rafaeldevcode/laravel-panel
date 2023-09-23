@@ -2,52 +2,54 @@
 
 namespace App\View\Components\Form;
 
+use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class InputSelect extends Component
 {
     /**
-     * @var string $name
+     * @var string
      */
     public $name;
 
     /**
-     * @var string $icon
+     * @var string
      */
     public $icon;
 
     /**
-     * @var mixed $options
+     * @var mixed
      */
     public $options;
 
     /**
-     * @var string $optionid
+     * @var string
      */
     public $optionid;
 
     /**
-     * @var string $optionvalue
+     * @var string
      */
     public $optionvalue;
 
     /**
-     * @var ?string $label
+     * @var ?string
      */
     public $label;
 
     /**
-     * @var ?string $value
+     * @var ?string
      */
     public $value;
 
     /**
-     * @var ?string $is_required
+     * @var ?string
      */
     public $is_required;
 
     /**
-     * @var mixed $attributes
+     * @var mixed
      */
     public $attributes;
 
@@ -65,36 +67,27 @@ class InputSelect extends Component
      */
     public function __construct(string $name, string $icon, mixed $options, string $optionid, string $optionvalue, ?string $label = null, ?string $value = null)
     {
-        // $is_required = null;
-        // $attr = null;
-
-        // if(isset($attributes)):
-        //     if(is_array($attributes)):
-        //         foreach($attributes as $indice => $attribute):
-        //             $attr .= "{$indice}={$attribute} ";
-        //             $is_required = $indice == 'required' ? '*' : null;
-        //         endforeach;
-        //     else:
-        //         $attr = $attributes;
-        //         $is_required = $attributes == 'required' ? '*' : null;
-        //     endif;
-        // endif;
-
-        $this->name     = $name;
-        $this->icon     = $icon;
-        $this->options    = $options;
+        $this->name = $name;
+        $this->icon = $icon;
+        $this->options = $options;
         $this->optionid = $optionid;
         $this->optionvalue = $optionvalue;
-        $this->label    = $label;
-        $this->value    = $value;
+        $this->label = $label;
+        $this->value = $value;
+
+        if(isset($this->attributes)):
+            if($this->attributes['required'] && $this->attributes['required'] == true):
+                $this->is_required = '*';
+            endif;
+        endif;
     }
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View|Closure|string
      */
-    public function render()
+    public function render(): View|Closure|string
     {
         return view('components.form.input-select');
     }

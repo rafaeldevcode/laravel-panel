@@ -42,8 +42,6 @@ class ButtonUpload extends Component
     /**
      * Create a new component instance.
      *
-     * @since 1.9.0
-     *
      * @param string $name
      * @param string $label
      * @param string $type
@@ -70,8 +68,6 @@ class ButtonUpload extends Component
 
     /**
      * Get the view / contents that represent the component.
-     *
-     * @since 1.9.0
      *
      * @return View|Closure|string
      */

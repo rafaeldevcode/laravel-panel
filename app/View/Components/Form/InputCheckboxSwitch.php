@@ -2,37 +2,39 @@
 
 namespace App\View\Components\Form;
 
+use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class InputCheckboxSwitch extends Component
 {
     /**
-     * @var string $name
+     * @var string
      */
     public $name;
 
     /**
-     * @var string $label
+     * @var string
      */
     public $label;
 
     /**
-     * @var string $dchecked
+     * @var string
      */
     public $dchecked;
 
     /**
-     * @var ?string $value
+     * @var ?string
      */
     public $value;
 
     /**
-     * @var ?string $is_required
+     * @var ?string
      */
     public $is_required;
 
     /**
-     * @var mixed $attributes
+     * @var mixed
      */
     public $attributes;
 
@@ -47,39 +49,24 @@ class InputCheckboxSwitch extends Component
      */
     public function __construct(string $name, string $label, string|null $dchecked = null, ?string $value = null)
     {
-        // $is_required = null;
-        // $attr = null;
-
-        // if(isset($attributes)):
-        //     if(is_array($attributes)):
-        //         foreach($attributes as $indice => $attribute):
-        //             $attr .= "{$indice}={$attribute} ";
-        //             $is_required = $indice == 'required' ? '*' : null;
-        //         endforeach;
-        //     else:
-        //         $attr = $attributes;
-        //         $is_required = $attributes == 'required' ? '*' : null;
-        //     endif;
-        // endif;
-
-        // $checked = (!isset($value) || $value == 'off') ? '' : 'checked';
-
-        // if(isset($invert_value) && $invert_value):
-        //     $checked = $checked == 'checked' ? '' : 'checked';
-        // endif;
-
-        $this->name     = $name;
-        $this->value    = $value;
-        $this->label    = $label;
+        $this->name = $name;
+        $this->value = $value;
+        $this->label = $label;
         $this->dchecked = is_null($dchecked) ? 'off' : $dchecked;
+
+        if(isset($this->attributes)):
+            if($this->attributes['required'] && $this->attributes['required'] == true):
+                $this->is_required = '*';
+            endif;
+        endif;
     }
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View|Closure|string
      */
-    public function render()
+    public function render(): View|Closure|string
     {
         return view('components.form.input-checkbox-switch');
     }

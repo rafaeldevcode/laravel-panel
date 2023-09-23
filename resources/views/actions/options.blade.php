@@ -30,7 +30,7 @@
                     <i class='{{ $icon }} text-light text-2xl'></i>
                 </span>
 
-                <p class='text-3xl font-bold text-secondary m-0 block m-auto'>{{ $title }}</p>
+                <p class='text-3xl font-bold text-secondary block my-auto'>{{ $title }}</p>
             </div>
         </div>
 
