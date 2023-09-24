@@ -23,64 +23,61 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('/admin/dashboard');
+    return redirect()->route('dashboard');
 });
 
-Route::get('/login', [AuthController::class, 'index']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::get('/register', [AuthController::class, 'create'])->middleware('auth');
-Route::post('/register', [AuthController::class, 'store'])->middleware('auth');
-Route::get('/reset-password', [AuthController::class, 'resetPassword']);
-Route::get('/verify-email', [AuthController::class, 'verifyEmail']);
+Route::get('/login', [AuthController::class, 'index'])->name('login.index');
+Route::post('/login', [AuthController::class, 'login'])->name('login.create');
+// Route::get('/register', [AuthController::class, 'create'])->name('register.create')->middleware('auth');
+// Route::post('/register', [AuthController::class, 'store'])->name('register.store')->middleware('auth');
+Route::get('/reset-password', [AuthController::class, 'resetPassword'])->name('reset.pass');
+Route::get('/verify-email', [AuthController::class, 'verifyEmail'])->name('verify.email');
 
-// Grupos de rotas para administradores
+// Route groups for administrators
 Route::group(['prefix' => 'admin'], function(){
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/', function(){
         return redirect()->back();
     });
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Grupo de rotas para as permições
-    Route::get('/permissions', [PermissionsController::class, 'index']);
-    Route::post('/permissions/create', [PermissionsController::class, 'store']);
-    Route::get('/permissions/create', [PermissionsController::class, 'create']);
-    Route::post('/permissions/delete/{ID}', [PermissionsController::class, 'destroy']);
-    Route::post('/delete/several/permissions', [PermissionsController::class, 'destroySeveral']);
-    Route::get('/permissions/edit/{ID}', [PermissionsController::class, 'edit']);
-    Route::post('/permissions/edit/{ID}', [PermissionsController::class, 'update']);
+    // Route group for permissions
+    Route::get('/permissions', [PermissionsController::class, 'index'])->name('permissions.index');
+    Route::post('/permissions/create', [PermissionsController::class, 'store'])->name('permissions.store');
+    Route::get('/permissions/create', [PermissionsController::class, 'create'])->name('permissions.create');
+    Route::post('/permissions/delete', [PermissionsController::class, 'destroy'])->name('permissions.destroy');
+    Route::get('/permissions/edit/{ID}', [PermissionsController::class, 'edit'])->name('permissions.edit');
+    Route::post('/permissions/edit/{ID}', [PermissionsController::class, 'update'])->name('permissions.update');
 
-    // Grupo de rotas para os menus
-    Route::get('/menus', [MenusController::class, 'index']);
-    Route::post('/menus/create', [MenusController::class, 'store']);
-    Route::get('/menus/create', [MenusController::class, 'create']);
-    Route::post('/menus/delete/{ID}', [MenusController::class, 'destroy']);
-    Route::post('/delete/several/menus', [MenusController::class, 'destroySeveral']);
-    Route::get('/menus/edit/{ID}', [MenusController::class, 'edit']);
-    Route::post('/menus/edit/{ID}', [MenusController::class, 'update']);
+    // Route group for menus
+    Route::get('/menus', [MenusController::class, 'index'])->name('menus.index');
+    Route::post('/menus/create', [MenusController::class, 'store'])->name('menus.store');
+    Route::get('/menus/create', [MenusController::class, 'create'])->name('menus.create');
+    Route::post('/menus/delete', [MenusController::class, 'destroy'])->name('menus.destroy');
+    Route::get('/menus/edit/{ID}', [MenusController::class, 'edit'])->name('menus.edit');
+    Route::post('/menus/edit/{ID}', [MenusController::class, 'update'])->name('menus.update');
 
-    // Grupo de rotas para os usuários
-    Route::get('/users', [UsersController::class, 'index']);
-    Route::post('/users/create', [UsersController::class, 'store']);
-    Route::get('/users/create', [UsersController::class, 'create']);
-    Route::post('/users/delete/{ID}', [UsersController::class, 'destroy']);
-    Route::post('/delete/several/users', [UsersController::class, 'destroySeveral']);
-    Route::get('/users/edit/{ID}', [UsersController::class, 'edit']);
-    Route::post('/users/edit/{ID}', [UsersController::class, 'update']);
+    // Group of routes for users
+    Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+    Route::post('/users/create', [UsersController::class, 'store'])->name('users.store');
+    Route::get('/users/create', [UsersController::class, 'create'])->name('users.create');
+    Route::post('/users/delete', [UsersController::class, 'destroy'])->name('users.destroy');
+    Route::get('/users/edit/{ID}', [UsersController::class, 'edit'])->name('users.edit');
+    Route::post('/users/edit/{ID}', [UsersController::class, 'update'])->name('users.update');
 
-    // Grupo de rotas para as configurações da página
-    Route::get('/settings/edit', [SettingsController::class, 'edit']);
-    Route::post('/settings/edit', [SettingsController::class, 'update']);
+    // Route group for page settings
+    Route::get('/settings/edit', [SettingsController::class, 'edit'])->name('settings.edit');
+    Route::post('/settings/edit', [SettingsController::class, 'update'])->name('settings.update');
 
-    // Grupo de rotas para as configuração do perfil
-    Route::post('/profile', [ProfileController::class, 'update']);
-    Route::get('/profile', [ProfileController::class, 'edit']);
-    Route::post('/profile/image/edit', [ProfileController::class, 'updateAvatar']);
+    // Route group for profile configurations
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/image/edit', [ProfileController::class, 'updateAvatar'])->name('profile.update.avatar');
 });
 
-// Grupo de rotas para políticas e termos
+// Route group for policies and terms
 Route::group(['prefix' => 'policies'], function(){
-    Route::get('/privacy', [PoliciesCotroller::class, 'indexPrivacy']);
-    Route::get('/terms', [PoliciesCotroller::class, 'indexTerms']);
+    Route::get('/privacy', [PoliciesCotroller::class, 'privacy'])->name('privacy');
+    Route::get('/terms', [PoliciesCotroller::class, 'terms'])->name('terms');
 });

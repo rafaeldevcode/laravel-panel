@@ -16,7 +16,7 @@ class PoliciesCotroller extends Controller
      *
      * @return View
      */
-    public function indexPrivacy(): View
+    public function privacy(): View
     {
         return view('policies/privacy/index', [
             'method' => 'read',
@@ -30,7 +30,7 @@ class PoliciesCotroller extends Controller
      *
      * @return View
      */
-    public function indexTerms(): View
+    public function terms(): View
     {
         return view('policies/terms/index', [
             'method' => 'read',
