@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\PermissionsActions;
 use App\Models\Menu;
 use App\Models\Permission;
 use App\Services\CrudServices\CreateServices;
 use App\Services\CrudServices\DeleteServices;
 use App\Services\CrudServices\UpdateServices;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class PermissionsController extends Controller
 {
@@ -23,40 +25,36 @@ class PermissionsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $this->authorize('read', 'permissions');
 
-        $permissions = Permission::paginate(10);
-
-        $method = 'read';
-
-        return view('admin/permissions/index', compact(
-            'method',
-            'permissions'
-        ));
+        return view('admin/permissions/index', [
+            'body' => 'read',
+            'method' => 'read',
+            'action' => PermissionsActions::class,
+            'permissions' => Permission::paginate(10),
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         $this->authorize('create', 'permissions');
 
-        $permissions = Permission::all();
-        $menus = Menu::all();
-        $method = 'create';
-
-        return view('admin/permissions/index', compact(
-            'permissions',
-            'menus',
-            'method'
-        ));
+        return view('admin/permissions/index', [
+            'body' => 'form',
+            'method' => 'create',
+            'menus' => Menu::all(),
+            'action' => PermissionsActions::class,
+            'permissions' => Permission::all(),
+        ]);
     }
 
     /**
@@ -64,9 +62,9 @@ class PermissionsController extends Controller
      *
      * @param Request $request
      * @param CreateServices $create
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(Request $request, CreateServices $create)
+    public function store(Request $request, CreateServices $create): RedirectResponse
     {
         $this->authorize('create', 'permissions');
 
@@ -76,38 +74,26 @@ class PermissionsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @return Response
-     */
-    public function show()
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param int $ID
-     * @return Response
+     * @return View
      */
-    public function edit(int $ID)
+    public function edit(int $ID): View
     {
         $this->authorize('update', 'permissions');
 
         $permissions = Permission::find($ID);
-        $permissions_in_array = json_decode($permissions->permissions, true);
-        $permissions_edit = $this->getPermisionsEdit($permissions->extra_permissions);
-        $menus = Menu::all();
-        $method = 'edit';
 
-        return view('admin/permissions/index', compact(
-            'permissions',
-            'menus',
-            'permissions_in_array',
-            'method',
-            'permissions_edit'
-        ));
+        return view('admin/permissions/index', [
+            'body' => 'form',
+            'method' => 'edit',
+            'menus' => Menu::all(),
+            'permissions' => $permissions,
+            'action' => PermissionsActions::class,
+            'permissions_in_array' => json_decode($permissions->permissions, true),
+            'permissions_edit' => $this->getPermisionsEdit($permissions->extra_permissions)
+        ]);
     }
 
     /**
@@ -116,9 +102,9 @@ class PermissionsController extends Controller
      * @param Request $request
      * @param int $ID
      * @param UpdateServices $update
-     * @return Response
+     * @return RedirectResponse
      */
-    public function update(Request $request, int $ID, UpdateServices $update)
+    public function update(Request $request, int $ID, UpdateServices $update): RedirectResponse
     {
         $this->authorize('update', 'permissions');
 
@@ -133,29 +119,13 @@ class PermissionsController extends Controller
      * @param Request $request
      * @param int $ID
      * @param DeleteServices $delete
-     * @return Response
+     * @return RedirectResponse
      */
-    public function destroy(Request $request, int $ID, DeleteServices $delete)
+    public function destroy(Request $request, int $ID, DeleteServices $delete): RedirectResponse
     {
         $this->authorize('delete', 'permissions');
 
         $delete->deletePermission($request, $ID);
-
-        return redirect()->back();
-    }
-
-    /**
-     * Remove the several resource from storage.
-     *
-     * @param Request $request
-     * @param DeleteServices $delete
-     * @return mixed
-     */
-    public function destroySeveral(Request $request, DeleteServices $delete)
-    {
-        $this->authorize('delete', 'permissions');
-
-        $delete->deleteSeveralPermission($request);
 
         return redirect()->back();
     }

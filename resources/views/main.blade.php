@@ -20,11 +20,13 @@
         <section class='w-full'>
             <x-header />
 
-            {{ App\Actions\DashboardActions::handle() }}
+            {{ $action::handle($method) }}
 
             @yield('content')
         </section>
     </main>
+
+    <x-footer />
 
     <x-flash-message />
 

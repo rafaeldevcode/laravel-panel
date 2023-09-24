@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\MenuActions;
 use App\Models\Menu;
 use App\Services\CrudServices\CreateServices;
 use App\Services\CrudServices\DeleteServices;
 use App\Services\CrudServices\UpdateServices;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class MenusController extends Controller
 {
@@ -22,38 +24,35 @@ class MenusController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $this->authorize('read', 'menus');
 
-        $menus = Menu::paginate(10);
-
-        $method = 'read';
-
-        return view('admin/menus/index', compact(
-            'method',
-            'menus'
-        ));
+        return view('admin/menus/index', [
+            'body' => 'read',
+            'method' => 'read',
+            'menus' => Menu::paginate(10),
+            'action' => MenuActions::class,
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         $this->authorize('create', 'menus');
 
-        $menus = Menu::all();
-        $method = 'create';
-
-        return view('admin/menus/index', compact(
-            'menus',
-            'method'
-        ));
+        return view('admin/menus/index', [
+            'body' => 'form',
+            'method' => 'create',
+            'menus' => Menu::all(),
+            'action' => MenuActions::class,
+        ]);
     }
 
     /**
@@ -61,9 +60,9 @@ class MenusController extends Controller
      *
      * @param Request  $request
      * @param CreateServices $create
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(Request $request, CreateServices $create)
+    public function store(Request $request, CreateServices $create): RedirectResponse
     {
         $this->authorize('create', 'menus');
 
@@ -73,32 +72,21 @@ class MenusController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @return Response
-     */
-    public function show()
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
-     * @parm int $ID
-     * @return Response
+     * @param int $ID
+     * @return View
      */
-    public function edit(int $ID)
+    public function edit(int $ID): View
     {
         $this->authorize('update', 'menus');
 
-        $menu = Menu::find($ID);
-        $method = 'edit';
-
-        return view('admin/menus/index', compact(
-            'menu',
-            'method'
-        ));
+        return view('admin/menus/index', [
+            'body' => 'form',
+            'method' => 'edit',
+            'menu' => Menu::find($ID),
+            'action' => MenuActions::class,
+        ]);
     }
 
     /**
@@ -107,9 +95,9 @@ class MenusController extends Controller
      * @param $request
      * @param int $ID
      * @param UpdateServices $update
-     * @return Response
+     * @return RedirectResponse
      */
-    public function update(Request $request, int $ID, UpdateServices $update)
+    public function update(Request $request, int $ID, UpdateServices $update): RedirectResponse
     {
         $this->authorize('update', 'menus');
 
@@ -124,29 +112,13 @@ class MenusController extends Controller
      * @param Request $request
      * @param int $ID
      * @param DeleteServices $delete
-     * @return Response
+     * @return RedirectResponse
      */
-    public function destroy(Request $request, int $ID, DeleteServices $delete)
+    public function destroy(Request $request, int $ID, DeleteServices $delete): RedirectResponse
     {
         $this->authorize('delete', 'menus');
 
         $delete->deleteMenuItem($request, $ID);
-
-        return redirect()->back();
-    }
-
-    /**
-     * Remove the several resource from storage.
-     *
-     * @param Request $request
-     * @param DeleteServices $delete
-     * @return Response
-     */
-    public function destroySeveral(Request $request, DeleteServices $delete)
-    {
-        $this->authorize('delete', 'menus');
-
-        $delete->deleteSeveralMenuItem($request);
 
         return redirect()->back();
     }

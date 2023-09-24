@@ -37,12 +37,12 @@
         <div class='flex flex-col sm:flex-row mb-2 mx-auto md:mx-0'>
             <div class='flex justify-center'>
                 <div class="mx-1">
-                    @isset($search)
+                    @isset($route_search)
                         <x-input-search />
                     @endisset
                 </div>
 
-                @isset($delete)
+                @isset($route_delete)
                     <button data-button="delete-several" id='deleteAll' type='button' title='Remover vários(a) {{ $title }}' class='btn text-xs font-bold btn-danger mx-1 text-light' data-route='{{ $route_delete }}' disabled>
                         Remover
                     </button>

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Response;
+use App\Actions\DashboardActions;
+use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
@@ -17,12 +18,15 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $this->authorize('read', 'dashboard');
 
-        return view('admin/dashboard/index');
+        return view('admin/dashboard/index', [
+            'action' => DashboardActions::class,
+            'method' => 'read',
+        ]);
     }
 }

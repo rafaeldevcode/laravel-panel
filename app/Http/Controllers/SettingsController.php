@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\SettingsActions;
+use App\Models\Setting;
 use App\Services\CrudServices\UpdateServices;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class SettingsController extends Controller
 {
@@ -20,19 +22,20 @@ class SettingsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @return Response
+     * @return View
      */
-    public function edit()
+    public function edit(): View
     {
         $this->authorize('update', 'settings');
 
-        $settings = DB::table('settings')->first();
-        $images = $this->returnPathsImagesOfSettings($settings);
+        $settings = Setting::first();
 
-        return view('admin/settings/index', compact(
-            'settings',
-            'images'
-        ));
+        return view('admin/settings/index', [
+            'method' => 'edit',
+            'settings' => $settings,
+            'action' => SettingsActions::class,
+            'images' => $this->returnPathsImagesOfSettings($settings),
+        ]);
     }
 
     /**
@@ -40,9 +43,9 @@ class SettingsController extends Controller
      *
      * @param Request $request
      * @param UpdateServices $update
-     * @return Response
+     * @return RedirectResponse
      */
-    public function update(Request $request, UpdateServices $update)
+    public function update(Request $request, UpdateServices $update): RedirectResponse
     {
         $this->authorize('read', 'settings');
 

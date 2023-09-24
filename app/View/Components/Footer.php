@@ -2,9 +2,9 @@
 
 namespace App\View\Components;
 
+use App\Models\Setting;
 use Closure;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class Footer extends Component
@@ -21,8 +21,7 @@ class Footer extends Component
      */
     public function __construct()
     {
-        $this->site_name = DB::table('settings')
-            ->first()
+        $this->site_name = Setting::first()
             ->site_name;
     }
 

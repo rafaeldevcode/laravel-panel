@@ -5,5 +5,5 @@
 @endsection
 
 @section('content')
-    @include("admin/menus/body/{$method}")
+    @include("admin/menus/body/{$body}")
 @endsection

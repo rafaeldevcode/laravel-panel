@@ -23,9 +23,9 @@
         </div>
 
         <div class='absolute top-0 right-0 m-3'>
-            <span class='text-light bg-{{ $status[0] }} rounded px-2 py-1 font-bold'>
+            <span class='text-light bg-{{ StatusEnum::color($user->user_status) }} rounded px-2 py-1 font-bold'>
                 <i class='bi bi-circle-fill'></i>
-                {{ $status[1] }}
+                {{ StatusEnum::name($user->user_status) }}
             </span>
         </div>
     </div>

@@ -61,8 +61,8 @@
                                 {{ $user->email }}
                             </td>
                             <td class="px-6 py-4">
-                                <span class="rounded text-xs text-light px-2 py-1 bg-{{ App\Enums\UserStatus::getColor($user->user_status) }}">
-                                    {{ App\Enums\UserStatus::getMessage($user->user_status) }}
+                                <span class="rounded text-xs text-light px-2 py-1 bg-{{ StatusEnum::color($user->user_status) }}">
+                                    {{ StatusEnum::name($user->user_status) }}
                                 </span>
                             </td>
                             <td class="flex items-center justify-end px-6 py-4 space-x-2 right">

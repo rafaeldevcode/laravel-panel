@@ -12,15 +12,14 @@ class UsersActions extends ActionsBase
      */
     public static function handle(string|null $method = null): View
     {
-        self::$color        = self::getColor($method);
-        self::$icon         = 'bi bi-people-fill';
-        self::$title        = 'Usuários';
-        self::$type         = self::getType($method);
-        self::$search       = true;
-        self::$delete       = true;
-        self::$route_delete = '/admin/delete/several/users';
-        self::$route_add    = '/admin/users/add';
-        self::$sub_options  = null;
+        self::$color = self::getColor($method);
+        self::$icon = 'bi bi-people-fill';
+        self::$title = 'Usuários';
+        self::$type = self::getType($method);
+        self::$route_search = true;
+        self::$route_delete = self::getRoute('/admin/users', 'delete');
+        self::$route_add = self::getRoute('/admin/users', 'create');
+        self::$sub_options = null;
 
         return self::render();
     }

@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Facade;
-
 return [
 
     /*
@@ -208,8 +206,10 @@ return [
     |
     */
 
-    'aliases' => Facade::defaultAliases()->merge([
+    'aliases' => Illuminate\Support\Facades\Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'StatusEnum' => App\Enums\StatusEnum::class,
+        'Carbon' => Carbon\Carbon::class,
     ])->toArray(),
 
 ];

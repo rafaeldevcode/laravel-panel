@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\UserStatus;
+use App\Actions\ProfileActions;
 use App\Models\Permission;
 use App\Services\CrudServices\UpdateServices;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
@@ -22,20 +23,18 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-    * Request $request
-     * @return Response
+     * @return View
      */
-    public function edit(Request $request)
+    public function edit(): View
     {
         $user = Auth::user();
-        $user_permission = Permission::find($user->permission_id)->name;
-        $status = [UserStatus::getColor($user->user_status), UserStatus::getMessage($user->user_status)];
 
-        return view('admin/profile/index', compact(
-            'user',
-            'user_permission',
-            'status'
-        ));
+        return view('admin/profile/index', [
+            'user' => $user,
+            'method' => 'edit',
+            'action' => ProfileActions::class,
+            'user_permission' => Permission::find($user->permission_id)->name,
+        ]);
     }
 
     /**
@@ -43,9 +42,9 @@ class ProfileController extends Controller
      *
      * @param Request $request
      * @param UpdateServices $update
-     * @return Response
+     * @return RedirectResponse
      */
-    public function update(Request $request, UpdateServices $update)
+    public function update(Request $request, UpdateServices $update): RedirectResponse
     {
         $update->updateProfile($request);
 
@@ -57,9 +56,9 @@ class ProfileController extends Controller
      *
      * @param Request $request
      * @param UpdateServices $update
-     * @return Response
+     * @return RedirectResponse
      */
-    public function updateAvatar(Request $request, UpdateServices $update)
+    public function updateAvatar(Request $request, UpdateServices $update): RedirectResponse
     {
         $update->updateAvatarProfile($request);
 

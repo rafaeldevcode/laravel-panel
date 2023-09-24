@@ -32,7 +32,7 @@ class CreateServices extends BaseCrud
             return SessionMessage::create($request, 'Submenu adicionado com sucesso!', 'success');
         }
 
-        $slug = "/admin{$this->normalizeSlug($request->slug)}";
+        $slug = $this->normalizeSlug($request->slug);
         $prefix = $this->normalizeName(explode('/', $request->slug)[1]);
 
         $slugs = DB::table('menus')

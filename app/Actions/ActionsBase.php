@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use Illuminate\Support\Str;
 use Illuminate\Contracts\View\View;
 
 class ActionsBase
@@ -39,12 +40,7 @@ class ActionsBase
     /**
      * @var null|bool
      */
-    public static $search;
-
-    /**
-     * @var null|bool
-     */
-    public static $delete;
+    public static $route_search;
 
     /**
      * @var null|string
@@ -59,17 +55,16 @@ class ActionsBase
         $breadcrumps = self::normalizeBreadcrumps();
 
         return view('actions/options', [
-            'color'        => self::$color,
-            'icon'         => self::$icon,
-            'title'        => self::$title,
-            'type'         => self::$type,
+            'color' => self::$color,
+            'icon' => self::$icon,
+            'title' => self::$title,
+            'type' => self::$type,
             'route_delete' => self::$route_delete,
-            'route_add'    => self::$route_add,
-            'delete'       => self::$delete,
-            'search'       => self::$search,
-            'sub_options'  => self::$sub_options,
-            'breadcrumps'  => $breadcrumps[0],
-            'ID'           => $breadcrumps[1]
+            'route_add' => self::$route_add,
+            'route_search' => self::$route_search,
+            'sub_options' => self::$sub_options,
+            'breadcrumps' => $breadcrumps[0],
+            'ID' => $breadcrumps[1]
         ]);
     }
 
@@ -163,5 +158,29 @@ class ActionsBase
         endswitch;
 
         return $color;
+    }
+
+    /**
+     * @param string $path
+     * @param string $method
+     * @return ?string
+     */
+    protected static function getRoute(string $path, string $method)
+    {
+        $uri = request()->route()->uri;
+
+        if($method === 'delete'):
+            if(Str::contains($uri, 'create') || Str::contains($uri, 'edit')):
+                return null;
+            else:
+                return "{$path}/{$method}";
+            endif;
+        elseif($method === 'create'):
+            if(Str::contains($uri, 'create')):
+                return null;
+            else:
+                return "{$path}/{$method}";
+            endif;
+        endif;
     }
 }

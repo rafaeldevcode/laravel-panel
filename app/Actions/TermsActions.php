@@ -12,15 +12,14 @@ class TermsActions extends ActionsBase
      */
     public static function handle(string|null $method = null): View
     {
-        self::$color        = self::getColor($method);
-        self::$icon         = 'bi bi-file-earmark-text-fill';
-        self::$title        = 'Termos de Uso';
-        self::$type         = self::getType($method);
-        self::$search       = null;
-        self::$delete       = null;
+        self::$color = self::getColor($method);
+        self::$icon = 'bi bi-file-earmark-text-fill';
+        self::$title = 'Termos de Uso';
+        self::$type = self::getType($method);
+        self::$route_search = null;
         self::$route_delete = null;
-        self::$route_add    = null;
-        self::$sub_options  = null;
+        self::$route_add = null;
+        self::$sub_options = null;
 
         return self::render();
     }

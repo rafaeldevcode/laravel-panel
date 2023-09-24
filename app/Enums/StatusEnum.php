@@ -11,49 +11,32 @@ use BenSampo\Enum\Enum;
  */
 final class StatusEnum extends Enum
 {
-    public const DRAFT = 0;
-    public const PENDING = 1;
-    public const PUBLISHED = 2;
+    public const ON  = 'on';
+    public const OFF = 'off';
 
     /**
-     * @since 1.0.0
-     *
-     * @return string
+     * @param status $status
+     * @return string|null
      */
-    public static function name(int $value): string
+    public static function name(string|null $status): string
     {
-        return match($value){
-            self::DRAFT => 'Rascunho',
-            self::PENDING => 'Pendente',
-            self::PUBLISHED => 'Publicado',
+        return match($status){
+            self::ON  => 'Ativo',
+            self::OFF => 'Inativo',
+            default   => 'Inativo'
         };
     }
 
     /**
-     * @since 1.0.0
-     *
-     * @return string
+     * @param status $status
+     * @return string|null
      */
-    public static function color(int $value): string
+    public static function color(string|null $status): string
     {
-        return match($value){
-            self::DRAFT => 'secondary',
-            self::PENDING => 'primary',
-            self::PUBLISHED => 'success',
+        return match($status){
+            self::ON  => 'primary',
+            self::OFF => 'danger',
+            default   => 'danger'
         };
-    }
-
-    /**
-     * @since 1.0.0
-     *
-     * @return array
-     */
-    public static function asSelectArray(): array
-    {
-        return [
-            self::DRAFT => 'Rascunho',
-            self::PENDING => 'Pendente',
-            self::PUBLISHED => 'Publicado',
-        ];
     }
 }
