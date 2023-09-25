@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Actions\MenuActions;
 use App\Models\Menu;
-use App\Services\CrudServices\CreateServices;
-use App\Services\CrudServices\DeleteServices;
-use App\Services\CrudServices\UpdateServices;
+use App\Services\Crud\Create;
+use App\Services\Crud\Delete;
+use App\Services\Crud\Update;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -59,10 +59,10 @@ class MenusController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request  $request
-     * @param CreateServices $create
+     * @param Create $create
      * @return RedirectResponse
      */
-    public function store(Request $request, CreateServices $create): RedirectResponse
+    public function store(Request $request, Create $create): RedirectResponse
     {
         $this->authorize('create', 'menus');
 
@@ -94,10 +94,10 @@ class MenusController extends Controller
      *
      * @param $request
      * @param int $ID
-     * @param UpdateServices $update
+     * @param Update $update
      * @return RedirectResponse
      */
-    public function update(Request $request, int $ID, UpdateServices $update): RedirectResponse
+    public function update(Request $request, int $ID, Update $update): RedirectResponse
     {
         $this->authorize('update', 'menus');
 
@@ -110,10 +110,10 @@ class MenusController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Request $request
-     * @param DeleteServices $delete
+     * @param Delete $delete
      * @return RedirectResponse
      */
-    public function destroy(Request $request, DeleteServices $delete): RedirectResponse
+    public function destroy(Request $request, Delete $delete): RedirectResponse
     {
         $this->authorize('delete', 'menus');
 

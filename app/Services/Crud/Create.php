@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\CrudServices;
+namespace App\Services\Crud;
 
 use App\Events\CreateExtraPermissionForAdmin;
 use App\Events\CreatePermissionForAdmin;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Services\Session;
 use App\Services\Slug;
 
-class CreateServices extends BaseCrud
+class Create extends Crud
 {
     /**
      * @param Request $request

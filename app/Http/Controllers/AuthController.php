@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\CrudServices\CreateServices;
+use App\Services\Crud\Create;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\Session;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class AuthController extends Controller
@@ -15,26 +14,25 @@ class AuthController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
-     * @return Response
+     * @return View
      */
-    public function index(Request $request)
+    public function index(): View
     {
         if(Auth::check()):
 
-            return redirect('/admin/dashboard');
+            return redirect()->route('dashboard');
         endif;
 
-        return view('auth/login');
+        return view('auth.login');
     }
 
     /**
      * Perform user login
      *
      * @param Request $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function login(Request $request)
+    public function login(Request $request): RedirectResponse
     {
         $remember = isset($request->remember) ? true : false;
 
@@ -44,7 +42,7 @@ class AuthController extends Controller
         ], $remember)):
             $request->session()->regenerate();
 
-            return redirect('/admin/dashboard');
+            return redirect()->route('dashboard');
         endif;
 
         Session::create($request, 'Senha ou usuário inválidos, porfavor tente novamente!', 'danger');
@@ -56,23 +54,23 @@ class AuthController extends Controller
      * Show the form for creating a new resource.
      *
      * @param Request $request
-     * @return Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         $this->authorize('create', 'users');
 
-        return view('auth/create');
+        return view('auth.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @param CreateServices $create
+     * @param Create $create
      * @return RedirectResponse
      */
-    public function store(Request $request, CreateServices $create): RedirectResponse
+    public function store(Request $request, Create $create): RedirectResponse
     {
         $this->authorize('create', 'users');
 

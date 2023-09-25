@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Services\CrudServices;
+namespace App\Services\Crud;
 
 use App\Events\CreateExtraPermissionForAdmin;
 use App\Models\Menu;
-use App\Models\Notification;
 use App\Models\Permission;
 use App\Models\Setting;
 use App\Models\User;
@@ -14,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Services\Session;
 
-class UpdateServices extends BaseCrud
+class Update extends Crud
 {
     /**
      * @param Request $request

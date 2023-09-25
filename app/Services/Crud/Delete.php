@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Services\CrudServices;
+namespace App\Services\Crud;
 
 use App\Models\Menu;
-use App\Models\Notification;
 use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Services\Session;
 use Illuminate\Http\Request;
 
-class DeleteServices extends BaseCrud
+class Delete extends Crud
 {
     /**
      * @param Request $request

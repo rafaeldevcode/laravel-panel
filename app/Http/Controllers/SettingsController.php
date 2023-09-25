@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\SettingsActions;
 use App\Models\Setting;
-use App\Services\CrudServices\UpdateServices;
+use App\Services\Crud\Update;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -42,10 +42,10 @@ class SettingsController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param UpdateServices $update
+     * @param Update $update
      * @return RedirectResponse
      */
-    public function update(Request $request, UpdateServices $update): RedirectResponse
+    public function update(Request $request, Update $update): RedirectResponse
     {
         $this->authorize('read', 'settings');
 

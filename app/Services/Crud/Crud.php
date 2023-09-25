@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\CrudServices;
+namespace App\Services\Crud;
 
 use App\Models\Permission;
 
-class BaseCrud
+class Crud
 {
     /**
      * @param string $name
