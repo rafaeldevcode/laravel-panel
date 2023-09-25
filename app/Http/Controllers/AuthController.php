@@ -14,9 +14,9 @@ class AuthController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return View
+     * @return View|RedirectResponse
      */
-    public function index(): View
+    public function index(): View|RedirectResponse
     {
         if(Auth::check()):
 

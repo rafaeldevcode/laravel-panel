@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
                 'name'             => config('seeders.user.name'),
                 'email'            => config('seeders.user.email'),
                 'password'         => Hash::make(config('seeders.user.password')),
-                'user_status'      => config('seeders.user.user_status'),
+                'status'      => config('seeders.user.user_status'),
                 'permission_id'    => $permissionsID[0]
             ]);
 
