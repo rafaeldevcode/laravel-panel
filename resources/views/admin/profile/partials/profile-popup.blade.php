@@ -1,6 +1,6 @@
 <div data-modal="avatar" class="z-[99999] fixed top-0 left-0 w-full h-full items-center justify-center hidden z-50">
     <div class='bg-white max-w-[800px] border border-color-main rounded' data-modal-body="popup">
-        <form action="/admin/profile/image/edit" method="POST">
+        <form action="{{ route('profile.update.avatar') }}" method="POST">
             @csrf
 
             <div class='bg-color-main relative'>

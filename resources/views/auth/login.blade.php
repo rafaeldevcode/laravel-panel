@@ -20,7 +20,7 @@
         <div class='flex flex-col justify-center items-center w-full lg:w-5/12 p-2'>
             <x-logo />
 
-            <form class='w-full sm:w-6/12 md:w-7/12' method="POST" action="/login">
+            <form class='w-full sm:w-6/12 md:w-7/12' method="POST" action="{{ route('login.store') }}">
                 @csrf
                 <div class="pb-1">
                     <x-input-default name='email' label='Usuário' icon='bi bi-person-fill' type="email" required />

@@ -44,13 +44,13 @@
                                 {{ $permission->name }}
                             </td>
                             <td class="flex items-center justify-end px-6 py-4 space-x-2 right">
-                                <a href="/admin/permissions/edit/{{ $permission->id }}" title="Editar permisão {{ $permission->name }}" class="text-xs p-2 rounded btn-primary text-light fw-bold">
+                                <a href="{{ route('permissions.edit', ['ID' => $permission->id]) }}" title="Editar permisão {{ $permission->name }}" class="text-xs p-2 rounded btn-primary text-light fw-bold">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
 
                                 <button
                                     data-button="delete"
-                                    data-route="/admin/permissions/delete"
+                                    data-route="{{ route('permissions.destroy') }}"
                                     data-delete-id="{{ $permission->id }}"
                                     data-message-delete="Esta ação irá remover o permisão '{{ $permission->name }}'!"
                                     type="button"

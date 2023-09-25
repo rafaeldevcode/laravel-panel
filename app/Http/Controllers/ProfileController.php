@@ -29,7 +29,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        return view('admin/profile/index', [
+        return view('admin.profile.index', [
             'user' => $user,
             'method' => 'edit',
             'action' => ProfileActions::class,
@@ -46,9 +46,9 @@ class ProfileController extends Controller
      */
     public function update(Request $request, UpdateServices $update): RedirectResponse
     {
-        $update->updateProfile($request);
+        $response = $update->profile($request);
 
-        return redirect('/admin/profile/edit');
+        return redirect()->route($response);
     }
 
     /**
@@ -60,7 +60,7 @@ class ProfileController extends Controller
      */
     public function updateAvatar(Request $request, UpdateServices $update): RedirectResponse
     {
-        $update->updateAvatarProfile($request);
+        $update->avatar($request);
 
         return redirect()->back();
     }

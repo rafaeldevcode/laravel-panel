@@ -3,8 +3,8 @@
 return [
     'user' => [
         'name'        => 'Admin',
-        'email'       => 'admin@admin.com',
-        'password'    => '!R443303e',
+        'email'       => 'admin@example.com',
+        'password'    => '@Admin4431!',
         'user_status' => 'on'
     ],
     'menus' => [
@@ -59,9 +59,9 @@ return [
     'settings' => [
         'site_name'        => 'Rafael Dev Code',
         'site_description' => 'Faça seu login!',
-        'site_logo'        => 'logo.png',
-        'site_logo_header' => 'logo_header.png',
-        'site_favicon'     => 'favicon.png',
-        'site_bg_login'    => 'login_bg.png'
+        'site_logo'        => 'logo_main.svg',
+        'site_logo_header' => 'logo_secondary.png',
+        'site_favicon'     => 'favicon.svg',
+        'site_bg_login'    => 'bg_login.jpg'
     ]
 ];

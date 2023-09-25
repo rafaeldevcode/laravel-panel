@@ -24,7 +24,7 @@ class DashboardController extends Controller
     {
         $this->authorize('read', 'dashboard');
 
-        return view('admin/dashboard/index', [
+        return view('admin.dashboard.index', [
             'action' => DashboardActions::class,
             'method' => 'read',
         ]);

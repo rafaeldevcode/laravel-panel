@@ -9,6 +9,7 @@
         </div>
 
         <form data-submit="delete" class="mt-8 p-4">
+            @csrf
             <div class="flex justify-end space-x-2">
                 <button data-modal-close="popup" type="button" title="Fechar" class="btn btn-secondary font-bold">
                     Não

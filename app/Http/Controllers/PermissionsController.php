@@ -31,7 +31,7 @@ class PermissionsController extends Controller
     {
         $this->authorize('read', 'permissions');
 
-        return view('admin/permissions/index', [
+        return view('admin.permissions.index', [
             'body' => 'read',
             'method' => 'read',
             'action' => PermissionsActions::class,
@@ -48,7 +48,7 @@ class PermissionsController extends Controller
     {
         $this->authorize('create', 'permissions');
 
-        return view('admin/permissions/index', [
+        return view('admin.permissions.index', [
             'body' => 'form',
             'method' => 'create',
             'menus' => Menu::all(),
@@ -68,7 +68,7 @@ class PermissionsController extends Controller
     {
         $this->authorize('create', 'permissions');
 
-        $create->createPermissions($request);
+        $create->permissions($request);
 
         return redirect('/admin/permissions');
     }
@@ -83,16 +83,16 @@ class PermissionsController extends Controller
     {
         $this->authorize('update', 'permissions');
 
-        $permissions = Permission::find($ID);
+        $permission = Permission::find($ID);
 
-        return view('admin/permissions/index', [
+        return view('admin.permissions.index', [
             'body' => 'form',
             'method' => 'edit',
             'menus' => Menu::all(),
-            'permissions' => $permissions,
+            'permission' => $permission,
             'action' => PermissionsActions::class,
-            'permissions_in_array' => json_decode($permissions->permissions, true),
-            'permissions_edit' => $this->getPermisionsEdit($permissions->extra_permissions)
+            'permissions_in_array' => json_decode($permission->permissions, true),
+            'permissions_edit' => $this->getPermisionsEdit($permission->extra_permissions)
         ]);
     }
 
@@ -108,7 +108,7 @@ class PermissionsController extends Controller
     {
         $this->authorize('update', 'permissions');
 
-        $update->updatePermissions($request, $ID);
+        $update->permissions($request, $ID);
 
         return redirect('/admin/permissions');
     }
@@ -117,15 +117,14 @@ class PermissionsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Request $request
-     * @param int $ID
      * @param DeleteServices $delete
      * @return RedirectResponse
      */
-    public function destroy(Request $request, int $ID, DeleteServices $delete): RedirectResponse
+    public function destroy(Request $request, DeleteServices $delete): RedirectResponse
     {
         $this->authorize('delete', 'permissions');
 
-        $delete->deletePermission($request, $ID);
+        $delete->permission($request);
 
         return redirect()->back();
     }

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Services\CrudServices\CreateServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Services\SessionMessage\SessionMessage;
+use App\Services\Session;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class AuthController extends Controller
 {
@@ -45,7 +47,7 @@ class AuthController extends Controller
             return redirect('/admin/dashboard');
         endif;
 
-        SessionMessage::create($request, 'Senha ou usuário inválidos, porfavor tente novamente!', 'danger');
+        Session::create($request, 'Senha ou usuário inválidos, porfavor tente novamente!', 'danger');
 
         return redirect()->back();
     }
@@ -68,9 +70,9 @@ class AuthController extends Controller
      *
      * @param Request $request
      * @param CreateServices $create
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(Request $request, CreateServices $create)
+    public function store(Request $request, CreateServices $create): RedirectResponse
     {
         $this->authorize('create', 'users');
 
@@ -84,9 +86,9 @@ class AuthController extends Controller
 
             return redirect()->back();
         else:
-            $create->createUser($request, true, $remember);
+            $create->user($request, $remember);
 
-            return redirect('/admin/dashboard');
+            return redirect()->route('dashboard');
         endif;
     }
 
@@ -94,39 +96,37 @@ class AuthController extends Controller
      * Update user password
      *
      * @param Request $request
-     * @return Response
+     * @return View
      */
-    public function resetPassword(Request $request)
+    public function resetPassword(Request $request): View
     {
-        $insert = $request->query()['insert'];
-
-        return view('auth/reset-password', compact('insert'));
+        return view('auth.reset-password', [
+            'insert' => $request->insert,
+        ]);
     }
 
     /**
      * Check user email
      *
-     * @return Response
+     * @return View
      */
-    public function verifyEmail()
+    public function verifyEmail(): View
     {
-
-        return view('auth/verify-email');
-
+        return view('auth.verify-email');
     }
 
     /**
      * Log out user
      *
      * @param Request $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function logout(Request $request)
+    public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect()->route('login.index');
     }
 }

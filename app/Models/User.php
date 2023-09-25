@@ -22,8 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'permission_id',
-        'user_status',
-        'folders'
+        'status',
     ];
 
     /**

@@ -30,7 +30,7 @@ class SettingsController extends Controller
 
         $settings = Setting::first();
 
-        return view('admin/settings/index', [
+        return view('admin.settings.index', [
             'method' => 'edit',
             'settings' => $settings,
             'action' => SettingsActions::class,
@@ -49,7 +49,7 @@ class SettingsController extends Controller
     {
         $this->authorize('read', 'settings');
 
-        $update->updateSettings($request);
+        $update->settings($request);
 
         return redirect()->back();
     }

@@ -18,7 +18,7 @@ class PoliciesCotroller extends Controller
      */
     public function privacy(): View
     {
-        return view('policies/privacy/index', [
+        return view('policies.privacy.index', [
             'method' => 'read',
             'settings' => Setting::first(),
             'action' => PrivacyActions::class,
@@ -32,7 +32,7 @@ class PoliciesCotroller extends Controller
      */
     public function terms(): View
     {
-        return view('policies/terms/index', [
+        return view('policies.terms.index', [
             'method' => 'read',
             'settings' => Setting::first(),
             'action' => TermsActions::class,

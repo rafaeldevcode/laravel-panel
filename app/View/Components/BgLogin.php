@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Setting;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
@@ -31,9 +32,9 @@ class BgLogin extends Component
      */
     public function __construct()
     {
-        $settings = DB::table('settings')->first();
+        $settings = Setting::first();
 
-        $this->image = $settings->site_bg_login == 'login_bg.png' ? "/assets/images/{$settings->site_bg_login}" : "/storage/{$settings->site_bg_login}";
+        $this->image = $settings->site_bg_login;
         $this->description = $settings->site_description;
         $this->name = $settings->site_name;
     }

@@ -5,147 +5,136 @@ namespace App\Services\CrudServices;
 use App\Events\CreateExtraPermissionForAdmin;
 use App\Events\CreatePermissionForAdmin;
 use App\Models\Menu;
-use App\Models\Notification;
 use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Services\SessionMessage\SessionMessage;
+use App\Services\Session;
+use App\Services\Slug;
 
 class CreateServices extends BaseCrud
 {
     /**
      * @param Request $request
-     * @return mixed
+     * @return string
      */
-    public function createItemMneu(Request $request)
+    public function menu(Request $request): string
     {
-        if(isset($request->is_submenu) && $request->is_submenu == 'on'){
-            $slug = "/admin{$this->normalizeSlug($request->slug)}";
+        if(isset($request->is_submenu) && $request->is_submenu == 'on'):
             $menu = Menu::find($request->submenu);
+            $slug = Slug::normalize($request->slug);
             $submenus = $this->getSubmenus($menu->submenus, [$slug => $request->name]);
 
             $menu->update(['submenus' => $submenus]);
 
-            return SessionMessage::create($request, 'Submenu adicionado com sucesso!', 'success');
-        }
+            Session::create($request, 'Submenu adicionado com sucesso!', 'success');
 
-        $slug = $this->normalizeSlug($request->slug);
+            return 'menus.index';
+        endif;
+
+        $slug = Slug::normalize($request->slug);
         $prefix = $this->normalizeName(explode('/', $request->slug)[1]);
 
-        $slugs = DB::table('menus')
-            ->where('slug', $slug)
-            ->first();
+        $slug_count = Menu::where('slug', $slug)->count();
+        $prefix_count =Menu::where('prefix', $prefix)->count();
 
-        $prefixs = DB::table('menus')
-            ->where('prefix', $prefix)
-            ->first();
+        if($slug_count > 0):
+            Session::create($request, 'Esta slug já está sendo utilizada, porfavor tente outra!', 'danger');
+            return 'menus.create';
+        endif;
 
-            if($slugs):
-                SessionMessage::create($request, 'Esta slug já está sendo utilizada, porfavor tente outra!', 'danger');
-                return;
-            endif;
+        if($prefix_count > 0):
+            Session::create($request, 'Esta slug já está sendo utilizada, porfavor tente outra!', 'danger');
+            return 'menus.create';
+        endif;
 
-            if($prefixs):
-                SessionMessage::create($request, 'Esta slug já está sendo utilizada, porfavor tente outra!', 'danger');
-                return;
-            endif;
+        $request->merge(['slug' => $slug, 'prefix' => $prefix]);
 
         DB::beginTransaction();
-            Menu::create([
-                'name'           => $request->name,
-                'icon'           => $request->icon,
-                'slug'           => $slug,
-                'position'       => $request->position,
-                'prefix'         => $prefix
-            ]);
+            Menu::create($request->all());
 
-            // Adicionar permições para admin
+            // Add permissions for admin
             CreatePermissionForAdmin::dispatch($prefix);
         DB::commit();
 
-        SessionMessage::create($request, 'Item adicionado ao menu com sucesso!', 'success');
+        Session::create($request, 'Item adicionado ao menu com sucesso!', 'success');
+        return 'menus.index';
     }
 
     /**
      * @param Request $request
-     * @param bool $auth
      * @param bool $remember
-     * @return mixed
+     * @return string
      */
-    public function createUser(Request $request, bool $auth, bool $remember)
+    public function user(Request $request, bool $remember): string
     {
-        $user = DB::table('users')
-            ->where('email', $request->email)
-            ->get();
+        $count_user = User::where('email', $request->email)->count();
 
-        if(isset($user[0])):
-            SessionMessage::create($request, 'Este email já está em uso, porfavor escolha outro email!', 'danger');
-            return;
+        if($count_user > 0):
+            Session::create($request, 'Este email já está em uso, porfavor escolha outro email!', 'danger');
+            return 'users.create';
         endif;
 
-        $phone      = isset($request->phone) && $request->phone;
-        $birth_date = isset($request->birth_date) && $request->birth_date;
+        if($request->password !== $request->repeat_password):
+            Session::create($request, 'As senhas digitadas não conferem!', 'danger');
+            return 'users.create';
+        endif;
+
+        $request->merge([
+            'password' => Hash::make($request->password),
+            'permission_id' => $request->permission
+        ]);
 
         DB::beginTransaction();
-            $user = User::create([
-                'name'               => $request->name,
-                'email'              => $request->email,
-                'password'           => Hash::make($request->password),
-                'permission_id'      => $request->permission,
-                'phone'              => $phone,
-                'birth_date'         => $birth_date,
-                'user_status'        => $request->user_status
-            ]);
-
-            if($auth):
-                Auth::attempt([
-                    'email'    => $request->email,
-                    'password' => $request->password
-                ], $remember);
-            endif;
+            User::create($request->all());
         DB::commit();
 
-        if($auth):
-            SessionMessage::create($request, "{$request->name}, seja bem vindo!", 'success');
+        if(!auth()):
+            Auth::attempt([
+                'email'    => $request->email,
+                'password' => $request->password
+            ], $remember);
+
+            Session::create($request, "{$request->name}, seja bem vindo!", 'success');
         else:
-            SessionMessage::create($request, 'Usuário adicionado ao sistema com sucesso!', 'success');
+            Session::create($request, 'Usuário adicionado ao sistema com sucesso!', 'success');
         endif;
+
+        return 'users.index';
     }
 
     /**
      * @param Request $request
-     * @return mixed
+     * @return string
      */
-    public function createPermissions(Request $request)
+    public function permissions(Request $request): string
     {
         $permissions = $request->except(['_token', 'name', 'extra_permissions']);
         $permissions = $this->getPermissionsInJson($permissions, $request->extra_permissions);
 
         $eng_name =  $this->normalizeName($request->name);
+        $permission_count = Permission::where('eng_name', $eng_name)->count();
 
-        $permission = DB::table('permissions')
-            ->where('eng_name', $eng_name)
-            ->get();
+        if($permission_count > 0):
+            Session::create($request, 'O nome desta permissão já está em uso, porfavor escolha outro nome!', 'danger');
+            return 'permissions.create';
+        endif;
 
-            if(isset($permission[0])):
-                SessionMessage::create($request, 'O nome desta permissão já está em uso, porfavor escolha outro nome!', 'danger');
-                return;
-            endif;
+        $request->merge([
+            'eng_name' => $eng_name,
+            'permissions' => $permissions['permissions'],
+            'extra_permissions' => $permissions['extra_permissions'],
+        ]);
 
-            DB::beginTransaction();
-                Permission::create([
-                    'name'              => $request->name,
-                    'permissions'       => $permissions['permissions'],
-                    'extra_permissions' => $permissions['extra_permissions'],
-                    'eng_name'          => $eng_name
-                ]);
+        DB::beginTransaction();
+            Permission::create($request->all());
 
-                CreateExtraPermissionForAdmin::dispatch($permissions['extra_permissions']);
-            DB::commit();
+            CreateExtraPermissionForAdmin::dispatch($permissions['extra_permissions']);
+        DB::commit();
 
-        SessionMessage::create($request, 'Permissão adicionada com sucesso!', 'success');
+        Session::create($request, 'Permissão adicionada com sucesso!', 'success');
+        return 'permissions.index';
     }
 }

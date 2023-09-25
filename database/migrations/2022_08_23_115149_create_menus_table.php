@@ -14,15 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('menus', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('name');
-            $table->string('icon');
-            $table->string('slug')->unique();
+            $table->increments('id');
+            $table->string('name', 100);
+            $table->string('icon', 50);
+            $table->string('slug', 100)->unique();
             $table->string('position');
-            $table->integer('belongs_to')->nullable();
-            $table->longText('submenus')->nullable();
-            $table->string('prefix');
+            $table->json('submenus')->nullable();
+            $table->string('prefix', 100);
+
+            $table->timestamps();
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Setting;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +28,7 @@ class MetaConfig extends Component
      */
     public function __construct(string $description, string $title)
     {
-        $settings = DB::table('settings')->first();
+        $settings = Setting::first();
 
         $this->description = empty($description) ? $settings->site_description : $description;
         $this->title = empty($title) ? $settings->site_name : $title;

@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Setting;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
@@ -21,8 +22,8 @@ class Favicon extends Component
      */
     public function __construct()
     {
-        $settings = DB::table('settings')->first();
-        $this->favicon = $settings->site_favicon == 'favicon.png' ? "/assets/images/{$settings->site_favicon}" : "/storage/{$settings->site_favicon}";
+        $settings = Setting::first();
+        $this->favicon = $settings->site_favicon;
     }
 
     /**

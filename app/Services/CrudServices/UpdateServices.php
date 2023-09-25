@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Services\SessionMessage\SessionMessage;
+use App\Services\Session;
 
 class UpdateServices extends BaseCrud
 {
@@ -20,7 +20,7 @@ class UpdateServices extends BaseCrud
      * @param Request $request
      * @return void
      */
-    public function updateSettings(Request $request): void
+    public function settings(Request $request): void
     {
         $settings = Setting::find(1);
 
@@ -39,150 +39,116 @@ class UpdateServices extends BaseCrud
             $settings->save();
         DB::commit();
 
-        SessionMessage::create($request, 'Configurações do site atualizadas com sucesso!', 'success');
+        Session::create($request, 'Configurações do site atualizadas com sucesso!', 'success');
     }
 
     /**
      * @param Request $request
-     * @return mixed
+     * @return string
      */
-    public function updateProfile(Request $request)
+    public function profile(Request $request): string
     {
         if(!is_null($request->current_password)):
             if(is_null($request->password) || is_null($request->repeat_password)):
 
-                SessionMessage::create($request, 'Por favor digite sua nova senha ou deixe o campo "senha atual" em branco, caso não queira altera-la!', 'danger');
-                return;
+                Session::create($request, 'Por favor digite sua nova senha ou deixe o campo "senha atual" em branco, caso não queira altera-la!', 'danger');
+                return 'profile.edit';
             elseif($request->password !== $request->repeat_password):
 
-                SessionMessage::create($request, 'As senhas não conferem, porfavor tente novamente!', 'danger');
-                return;
+                Session::create($request, 'As senhas não conferem, porfavor tente novamente!', 'danger');
+                return 'profile.edit';
             endif;
         endif;
 
-        $updatePass = !empty($request->password) && !empty($request->current_password) && !empty($request->repeat_password) ? true : false;
+        if(!empty($request->password) && !empty($request->current_password) && !empty($request->repeat_password)):
+            $request->merge(['password' => Hash::make($request->password)]);
+        endif;
 
         DB::beginTransaction();
-            $profile = User::find(Auth::user()->id);
-            !is_null($request->name)              && $profile->name = $request->name;
-            !is_null($request->phone)             && $profile->phone = $request->phone;
-            !is_null($request->birth_date)        && $profile->birth_date = $request->birth_date;
-            !is_null($request->permission)        && $profile->permission = $request->permission;
-            !is_null($request->user_type)         && $profile->user_type = $request->user_type;
-
-            $updatePass == true && $profile->password = Hash::make($request->password);
-
-            $profile->save();
+            User::find(Auth::user()->id)->update($request->all());
         DB::commit();
 
-        SessionMessage::create($request, 'Perfil Atualizado com sucesso!', 'success');
+        Session::create($request, 'Perfil Atualizado com sucesso!', 'success');
+        return 'profile.edit';
     }
 
     /**
      * @param Request $request
-     * @return mixed
+     * @return void
      */
-    public function updateAvatarProfile(Request $request)
+    public function avatar(Request $request): void
     {
         DB::beginTransaction();
-            $profile = User::find(Auth::user()->id);
-            $profile->avatar = $request->avatar;
-            $profile->save();
+            User::find(Auth::user()->id)->update(['avatar' => $request->avatar]);
         DB::commit();
 
-        SessionMessage::create($request, 'Avatar do perfil atualizado com sucesso!', 'success');
+        Session::create($request, 'Avatar do perfil atualizado com sucesso!', 'success');
     }
 
     /**
      * @param Request $request
      * @param int $ID
-     * @return mixed
+     * @return void
      */
-    public function updatePermissions(Request $request, int $ID)
+    public function permissions(Request $request, int $ID): void
     {
         $permissions = $request->except(['_token', 'name', 'extra_permissions']);
         $permissions = $this->getPermissionsInJson($permissions, $request->extra_permissions, $ID);
 
-        DB::beginTransaction();
-            $permission = Permission::find($ID);
+        $request->merge(['permissions' => $permissions['permissions']]);
 
-            $permission->name        = $request->name;
-            $permission->permissions = $permissions['permissions'];
-            !is_null($permissions['extra_permissions']) && $permission->extra_permissions = $permissions['extra_permissions'];
-            $permission->save();
+        if(!is_null($permissions['extra_permissions'])):
+            $request->merge(['extra_permissions' => $permissions['extra_permissions']]);
+        endif;
+
+        DB::beginTransaction();
+            Permission::find($ID)->update($request->all());
 
             CreateExtraPermissionForAdmin::dispatch($permissions['extra_permissions']);
         DB::commit();
 
-        SessionMessage::create($request, 'Permissões atualizadas com sucesso!', 'success');
+        Session::create($request, 'Permissões atualizadas com sucesso!', 'success');
     }
 
     /**
      * @param Request $request
      * @param int $ID
-     * @return mixed
+     * @return string
      */
-    public function updateUser(Request $request, int $ID)
+    public function user(Request $request, int $ID): string
     {
         if(!is_null($request->password) && $request->password !== $request->repeat_password):
 
-            SessionMessage::create($request, 'As senhas não conferem, porfavor tente novamente!', 'danger');
-            return;
+            Session::create($request, 'As senhas não conferem, porfavor tente novamente!', 'danger');
+            return "/admin/users/edit/{$ID}";
+        endif;
+
+        if(!is_null($request->password)):
+            $request->merge([
+                'password' => Hash::make($request->password),
+                'permission_id' => $request->permission,
+            ]);
         endif;
 
         DB::beginTransaction();
-            $user = User::find($ID);
-
-            $user->name               = $request->name;
-            $user->phone              = $request->phone;
-            $user->birth_date         = $request->birth_date;
-            $user->permission_id      = $request->permission;
-            $user->user_status        = $request->user_status;
-
-            !is_null($request->password) && $user->password = Hash::make($request->password);
-
-            $user->save();
+            User::find($ID)->update($request->all());
         DB::commit();
 
-        SessionMessage::create($request, 'Usuário atualizado com sucesso!', 'success');
+        Session::create($request, 'Usuário atualizado com sucesso!', 'success');
+        return '/admin/users';
     }
 
     /**
      * @param Request $request
      * @param int $ID
-     * @return mixed
+     * @return void
      */
-    public function updateMenus(Request $request, int $ID)
+    public function menu(Request $request, int $ID): void
     {
         DB::beginTransaction();
-            Menu::find($ID)
-                ->update([
-                    'name'           => $request->name,
-                    'slug'           => $request->slug,
-                    'icon'           => $request->icon,
-                    'position'       => $request->position,
-                    'submenus'       => $request->submenus
-                ]);
+            Menu::find($ID)->update($request->all());
         DB::commit();
 
-        SessionMessage::create($request, 'Item do menu atualizado com sucesso!', 'success');
-    }
-
-    /**
-     * @param Request $request
-     * @param int $ID
-     * @return mixed
-     */
-    public function updateNotification(Request $request, int $ID)
-    {
-        DB::beginTransaction();
-            Notification::find($ID)->update([
-                'name'                => $request->name,
-                'notification'        => $request->notification,
-                'notification_status' => $request->notification_status
-            ]);
-        DB::commit();
-
-        SessionMessage::create($request, 'Notificação atualizada com sucesso!', 'success');
+        Session::create($request, 'Menu atualizado com sucesso!', 'success');
     }
 }

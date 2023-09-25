@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <form method="POST" action="/admin/profile/edit">
+    <form method="POST" action="{{ route('profile.update') }}">
         @csrf
 
         <div class="flex justify-between flex-wrap">
@@ -43,15 +43,7 @@
             </div>
 
             <div class="w-full md:w-6/12 px-4">
-                <x-input-default name="phone" label="Telefone" icon="bi bi-phone-fill" :value="$user->phone" type="text" />
-            </div>
-
-            <div class="w-full md:w-6/12 px-4">
                 <x-input-default name="permissions" label="Permissão" icon="bi bi-file-earmark-lock-fill" :value="$user_permission" type="text" disabled />
-            </div>
-
-            <div class="w-full md:w-6/12 px-4">
-                <x-input-default name="birth_date" label="Data de nascimento" icon="bi bi-calendar-fill" :value="$user->birth_date" type="date" />
             </div>
 
             <div class="w-full md:w-6/12 px-4">

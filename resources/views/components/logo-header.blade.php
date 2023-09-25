@@ -1,5 +1,5 @@
-<a href='/admin/dashboard' title='Voltar a página inicial'>
+<a href='{{ route('dashboard') }}' title='Voltar a página inicial'>
     <img class='h-full'
-    src="{{ asset($image) }}"
+    src="{{ asset("assets/images/{$image}") }}"
     alt="{{ $description }}" />
 </a>

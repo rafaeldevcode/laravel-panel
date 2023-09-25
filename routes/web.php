@@ -27,7 +27,7 @@ Route::get('/', function () {
 });
 
 Route::get('/login', [AuthController::class, 'index'])->name('login.index');
-Route::post('/login', [AuthController::class, 'login'])->name('login.create');
+Route::post('/login', [AuthController::class, 'login'])->name('login.store');
 // Route::get('/register', [AuthController::class, 'create'])->name('register.create')->middleware('auth');
 // Route::post('/register', [AuthController::class, 'store'])->name('register.store')->middleware('auth');
 Route::get('/reset-password', [AuthController::class, 'resetPassword'])->name('reset.pass');

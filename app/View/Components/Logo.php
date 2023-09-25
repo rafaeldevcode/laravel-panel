@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Setting;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
@@ -26,9 +27,9 @@ class Logo extends Component
      */
     public function __construct()
     {
-        $settings = DB::table('settings')->first();
+        $settings = Setting::first();
 
-        $this->image = $settings->site_logo == 'logo.png' ? "/assets/images/{$settings->site_logo}" : "/storage/{$settings->site_logo}";
+        $this->image = $settings->site_logo;
         $this->description = $settings->site_description;
     }
 

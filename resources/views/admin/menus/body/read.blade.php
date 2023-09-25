@@ -62,13 +62,13 @@
                                 {{ $menu->position }}
                             </td>
                             <td class="flex items-center justify-end px-6 py-4 space-x-2 right">
-                                <a href="/admin/users/edit/{{ $menu->id }}" title="Editar usuário {{ $menu->name }}" class="text-xs p-2 rounded btn-primary text-light fw-bold">
+                                <a href="{{ route('menus.edit', ['ID' => $menu->id]) }}" title="Editar usuário {{ $menu->name }}" class="text-xs p-2 rounded btn-primary text-light fw-bold">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
 
                                 <button
                                     data-button="delete"
-                                    data-route="/admin/users/delete"
+                                    data-route="{{ route('menus.destroy') }}"
                                     data-delete-id="{{ $menu->id }}"
                                     data-message-delete="Esta ação irá remover o usuário '{{ $menu->name }}'!"
                                     type="button"

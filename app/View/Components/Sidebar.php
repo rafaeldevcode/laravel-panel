@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Menu;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +27,7 @@ class Sidebar extends Component
      */
     public function __construct()
     {
-        $this->menus = DB::table('menus')->orderBy('position', 'ASC')->get();
+        $this->menus = Menu::orderBy('position', 'ASC')->get();
         $this->uri = explode('/', request()->route()->uri)[1];
     }
 

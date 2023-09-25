@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Setting;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
@@ -26,9 +27,9 @@ class LogoHeader extends Component
      */
     public function __construct()
     {
-        $settings = DB::table('settings')->first();
+        $settings = Setting::first();
 
-        $this->image = $settings->site_logo_header == 'logo_header.png' ? "/assets/images/{$settings->site_logo_header}" : "/storage/{$settings->site_logo_header}";
+        $this->image = $settings->site_logo_header;
         $this->description = $settings->site_description;
     }
 

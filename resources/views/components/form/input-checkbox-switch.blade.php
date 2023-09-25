@@ -4,7 +4,7 @@
         class="sr-only peer"
         id='{{ $name }}'
         name='{{ $name }}'
-        {{ $dchecked == 'on' ? 'checked' : '' }}
+        {{ $value }}
         {{ $attributes }}
     >
 

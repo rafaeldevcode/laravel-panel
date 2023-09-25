@@ -30,7 +30,7 @@ class MenusController extends Controller
     {
         $this->authorize('read', 'menus');
 
-        return view('admin/menus/index', [
+        return view('admin.menus.index', [
             'body' => 'read',
             'method' => 'read',
             'menus' => Menu::paginate(10),
@@ -47,7 +47,7 @@ class MenusController extends Controller
     {
         $this->authorize('create', 'menus');
 
-        return view('admin/menus/index', [
+        return view('admin.menus.index', [
             'body' => 'form',
             'method' => 'create',
             'menus' => Menu::all(),
@@ -66,9 +66,9 @@ class MenusController extends Controller
     {
         $this->authorize('create', 'menus');
 
-        $create->createItemMneu($request);
+        $response = $create->menu($request);
 
-        return redirect('/admin/menus');
+        return redirect()->route($response);
     }
 
     /**
@@ -81,7 +81,7 @@ class MenusController extends Controller
     {
         $this->authorize('update', 'menus');
 
-        return view('admin/menus/index', [
+        return view('admin.menus.index', [
             'body' => 'form',
             'method' => 'edit',
             'menu' => Menu::find($ID),
@@ -101,24 +101,23 @@ class MenusController extends Controller
     {
         $this->authorize('update', 'menus');
 
-        $update->updateMenus($request, $ID);
+        $update->menu($request, $ID);
 
-        return redirect('/admin/menus');
+        return redirect()->route('menu.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param Request $request
-     * @param int $ID
      * @param DeleteServices $delete
      * @return RedirectResponse
      */
-    public function destroy(Request $request, int $ID, DeleteServices $delete): RedirectResponse
+    public function destroy(Request $request, DeleteServices $delete): RedirectResponse
     {
         $this->authorize('delete', 'menus');
 
-        $delete->deleteMenuItem($request, $ID);
+        $delete->menu($request);
 
         return redirect()->back();
     }

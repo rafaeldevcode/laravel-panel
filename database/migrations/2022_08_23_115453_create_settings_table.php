@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->string('site_name', 100);
+            $table->string('site_description', 100);
+            $table->string('site_logo', 100);
+            $table->string('site_logo_header', 100);
+            $table->string('site_favicon', 100);
+            $table->string('site_bg_login', 100);
+
             $table->timestamps();
-            $table->string('site_name');
-            $table->string('site_description');
-            $table->string('site_logo');
-            $table->string('site_logo_header');
-            $table->string('site_favicon');
-            $table->string('site_bg_login');
         });
     }
 

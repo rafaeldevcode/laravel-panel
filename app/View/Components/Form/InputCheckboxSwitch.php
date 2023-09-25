@@ -19,11 +19,6 @@ class InputCheckboxSwitch extends Component
     public $label;
 
     /**
-     * @var string
-     */
-    public $dchecked;
-
-    /**
      * @var ?string
      */
     public $value;
@@ -43,16 +38,14 @@ class InputCheckboxSwitch extends Component
      *
      * @param string $name
      * @param string $label
-     * @param string $dchecked
      * @param ?string $value
      * @return void
      */
-    public function __construct(string $name, string $label, string|null $dchecked = null, ?string $value = null)
+    public function __construct(string $name, string $label, ?string $value = null)
     {
         $this->name = $name;
-        $this->value = $value;
+        $this->value = $value === 'on' ? 'checked' : '';
         $this->label = $label;
-        $this->dchecked = is_null($dchecked) ? 'off' : $dchecked;
 
         if(isset($this->attributes)):
             if($this->attributes['required'] && $this->attributes['required'] == true):

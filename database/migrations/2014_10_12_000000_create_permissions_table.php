@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->longText('permissions');
-            $table->text('extra_permissions')->nullable();
-            $table->string('eng_name')->unique();
+            $table->string('name', 100);
+            $table->string('eng_name', 100)->unique();
+            $table->json('permissions');
+            $table->json('extra_permissions')->nullable();
+
             $table->timestamps();
         });
     }

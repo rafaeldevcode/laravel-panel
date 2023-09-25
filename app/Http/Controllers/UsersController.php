@@ -31,7 +31,7 @@ class UsersController extends Controller
     {
         $this->authorize('read', 'users');
 
-        return view('admin/users/index', [
+        return view('admin.users.index', [
             'body' => 'read',
             'method' => 'read',
             'users' => User::paginate(10),
@@ -48,7 +48,7 @@ class UsersController extends Controller
     {
         $this->authorize('create', 'users');
 
-        return view('admin/users/index', [
+        return view('admin.users.index', [
             'body' => 'form',
             'method' => 'create',
             'users' => User::all(),
@@ -68,9 +68,9 @@ class UsersController extends Controller
     {
         $this->authorize('create', 'users');
 
-        $create->createUser($request, false, false);
+        $response = $create->user($request, false);
 
-        return redirect('/admin/users');
+        return redirect()->route($response);
     }
 
     /**
@@ -83,7 +83,7 @@ class UsersController extends Controller
     {
         $this->authorize('update', 'users');
 
-        return view('admin/users/index', [
+        return view('admin.users.index', [
             'body' => 'form',
             'method' => 'edit',
             'user' => User::find($ID),
@@ -104,24 +104,23 @@ class UsersController extends Controller
     {
         $this->authorize('update', 'users');
 
-        $update->updateUser($request, $ID);
+        $response = $update->user($request, $ID);
 
-        return redirect('/admin/users');
+        return redirect($response);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param Request $request
-     * @param int $ID
      * @param DeleteServices $delete
      * @return RedirectResponse
      */
-    public function destroy(Request $request, int $ID, DeleteServices $delete): RedirectResponse
+    public function destroy(Request $request, DeleteServices $delete): RedirectResponse
     {
         $this->authorize('delete', 'users');
 
-        $delete->deleteUser($request, $ID);
+        $delete->user($request);
 
         return redirect()->back();
     }

@@ -1,1 +1,1 @@
-<link rel="icon" type="image/png" href="{{ asset($favicon) }}">
+<link rel="icon" type="image/png" href="{{ asset("assets/images/{$favicon}") }}">

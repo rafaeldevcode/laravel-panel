@@ -5,13 +5,13 @@
         <nav>
             <ul class='flex sm:flex-row flex-col m-0 p-0 items-center'>
                 <li>
-                    <a href='/policies/privacy' class='font-bold text-color-main'>
+                    <a href='{{ route('privacy') }}' class='font-bold text-color-main'>
                         Politícas de Privacidade
                     </a>
                 </li>
                 <li class='mx-2 d-sm-block d-none'>|</li>
                 <li>
-                    <a href='/policies/terms' class='font-bold text-color-main'>
+                    <a href='{{ route('terms') }}' class='font-bold text-color-main'>
                         Temos de Uso
                     </a>
                 </li>

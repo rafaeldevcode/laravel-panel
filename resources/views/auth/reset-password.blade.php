@@ -11,7 +11,7 @@
             @switch($insert)
                 @case('email')
 
-                    <form action="/reset-password?insert=token">
+                    <form action="{{ route('reset.pass', ['insert', 'token']) }}">
                         <h1 class='text-center fs-3'>Por favor informe seu email</h1>
 
                         <x-input-email name='email' label='Email' icon='bi bi-envelope-fill' required />
@@ -23,7 +23,7 @@
                     @break
                 @case('token')
 
-                    <form action="/reset-password?insert=pass">
+                    <form action="{{ route('reset.pass', ['insert', 'pass']) }}">
                         <h1 class='text-center fs-3'>Enviamos um token de verificação para seu email.</h1>
 
                         <x-input-number name='token' label='Token de verificação' icon='bi bi-123' required />
