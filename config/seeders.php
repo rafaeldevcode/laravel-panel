@@ -16,11 +16,11 @@ return [
             'prefix'         => 'dashboard'
         ],
         2 => [
-            'name'           => 'Menus',
-            'icon'           => 'bi bi-menu-button-wide-fill',
-            'slug'           => '/admin/menus',
-            'position'       => 4,
-            'prefix'         => 'menus'
+            'name'           => 'Usuários',
+            'icon'           => 'bi bi-people-fill',
+            'slug'           => '/admin/users',
+            'position'       => 2,
+            'prefix'         => 'users'
         ],
         3 => [
             'name'           => 'Permissões',
@@ -30,17 +30,24 @@ return [
             'prefix'         => 'permissions'
         ],
         4 => [
-            'name'           => 'Usuários',
-            'icon'           => 'bi bi-people-fill',
-            'slug'           => '/admin/users',
-            'position'       => 2,
-            'prefix'         => 'users'
+            'name'           => 'Menus',
+            'icon'           => 'bi bi-menu-button-wide-fill',
+            'slug'           => '/admin/menus',
+            'position'       => 4,
+            'prefix'         => 'menus'
         ],
         5 => [
+            'name'           => 'Galeria',
+            'icon'           => 'bi bi-images',
+            'slug'           => '/admin/gallery',
+            'position'       => 5,
+            'prefix'         => 'gallery'
+        ],
+        6 => [
             'name'           => 'Configurações',
             'icon'           => 'bi bi-gear-fill',
             'slug'           => '/admin/settings/edit',
-            'position'       => 7,
+            'position'       => 6,
             'prefix'         => 'settings'
         ],
     ],

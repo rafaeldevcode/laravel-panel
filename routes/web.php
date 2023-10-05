@@ -4,6 +4,7 @@ use App\Http\Controllers\{
     UsersController,
     DashboardController,
     AuthController,
+    GalleryController,
     MenusController,
     PermissionsController,
     PoliciesCotroller,
@@ -74,6 +75,12 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/image/edit', [ProfileController::class, 'updateAvatar'])->name('profile.update.avatar');
+
+    // Route group for gallery
+    Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
+    Route::get('/gallery/get', [GalleryController::class, 'get'])->name('gallery.get');
+    Route::post('/gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
+    Route::post('/gallery/delete', [GalleryController::class, 'destroy'])->name('gallery.destroy');
 });
 
 // Route group for policies and terms
