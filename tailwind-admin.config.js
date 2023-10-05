@@ -61,6 +61,16 @@ module.exports = {
                     borderRadius: '0.25rem',
                     display: 'block',
                 },
+                '.btn-success': {
+                    backgroundColor: colors.success,
+                    border: `1px solid ${colors.success}`,
+                    color: '#fff',
+                    transition: '.4s all',
+                    '&:hover': {
+                        backgroundColor: '#fff',
+                        color: colors.success,
+                    },
+                },
                 '.btn-danger': {
                     backgroundColor: colors.danger,
                     border: `1px solid ${colors.danger}`,

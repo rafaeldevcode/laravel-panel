@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Gallery;
 use App\Models\Setting;
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -29,8 +30,8 @@ class Logo extends Component
     {
         $settings = Setting::first();
 
-        $this->image = $settings->site_logo;
-        $this->description = $settings->site_description;
+        $this->image = $this->getPathImage($settings?->site_logo_main, 'logo_main.svg');
+        $this->description = $settings?->site_description;
     }
 
     /**
@@ -41,5 +42,16 @@ class Logo extends Component
     public function render(): View|Closure|string
     {
         return view('components.logo');
+    }
+
+    private function getPathImage(?int $image, string $default): string
+    {
+        if($image):
+            $gallery = Gallery::find($image);
+
+            return "storage/{$gallery->file}";
+        else:
+            return "assets/images/{$default}";
+        endif;
     }
 }

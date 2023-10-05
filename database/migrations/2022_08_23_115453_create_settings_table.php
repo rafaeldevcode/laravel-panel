@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('site_name', 100);
             $table->string('site_description', 100);
-            $table->string('site_logo', 100);
-            $table->string('site_logo_header', 100);
-            $table->string('site_favicon', 100);
-            $table->string('site_bg_login', 100);
+            $table->integer('site_logo_main')->nullable();
+            $table->integer('site_logo_secondary')->nullable();
+            $table->integer('site_favicon')->nullable();
+            $table->integer('site_bg_login')->nullable();
 
             $table->timestamps();
         });

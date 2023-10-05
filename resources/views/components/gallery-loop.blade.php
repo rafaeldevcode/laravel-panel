@@ -20,7 +20,7 @@
             </div>
         @endforeach
 
-        <div class="p-4 rounded w-full border-grey-700 text-center border {{ count($images) == 0 ? '' : 'hidden' }}" data-gallery="empty">
+        <div class="p-4 mt-4 mx-4 rounded w-full border-grey-700 text-center border {{ count($images) == 0 ? '' : 'hidden' }}" data-gallery="empty">
             <h2>{{ __('Nenhuma imagem encontrada!') }}</h2>
         </div>
     </div>

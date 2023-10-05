@@ -21,21 +21,14 @@ class Update extends Crud
      */
     public function settings(Request $request): void
     {
-        $settings = Setting::find(1);
+        $setting = Setting::first();
 
         DB::beginTransaction();
-            $site_logo        = isset($request->site_logo) ? $request->file('site_logo')->store('settings', 'public') : '';
-            $site_logo_header = isset($request->site_logo_header) ? $request->file('site_logo_header')->store('settings', 'public') : '';
-            $site_favicon     = isset($request->site_favicon) ? $request->file('site_favicon')->store('settings', 'public') : '';
-            $site_bg_login    = isset($request->site_bg_login) ? $request->file('site_bg_login')->store('settings', 'public') : '';
-
-            $settings->site_name = $request->site_name;
-            $settings->site_description = $request->site_description;
-            !empty($site_logo)        && $settings->site_logo = $site_logo;
-            !empty($site_logo_header) && $settings->site_logo_header = $site_logo_header;
-            !empty($site_favicon)     && $settings->site_favicon = $site_favicon;
-            !empty($site_bg_login)    && $settings->site_bg_login = $site_bg_login;
-            $settings->save();
+            if($setting):
+                Setting::find($setting->id)->update($request->all());
+            else:
+                Setting::create($request->all());
+            endif;
         DB::commit();
 
         Session::create($request, 'Configurações do site atualizadas com sucesso!', 'success');

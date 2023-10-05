@@ -22,7 +22,7 @@ class Footer extends Component
     public function __construct()
     {
         $this->site_name = Setting::first()
-            ->site_name;
+            ?->site_name;
     }
 
     /**

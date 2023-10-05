@@ -2,10 +2,10 @@
     <div class="bg-white rounded p-8 relative w-full h-full overflow-auto max-w-[1000px]" data-modal-body="popup">
         <div class='relative modal-content border border-primary rounded'>
             <div class='bg-primary p-4 rounded-t'>
-                <h5 class='text-gray-900' id='modalGalleryLabel'>Galeria de imagens</h5>
+                <h5 class='text-white font-semibold' id='modalGalleryLabel'>Galeria de imagens</h5>
 
-                <button data-modal-close="popup" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 w-[20px] opacity-50">
-                    <img src="{{ asset("assets/images/icons/close.svg") }}" alt="Close">
+                <button data-modal-close="popup" class="absolute top-2 right-2 text-white hover:text-gray-800 w-[20px] opacity-50">
+                    <i class="bi bi-x text-2xl"></i>
                 </button>
             </div>
 

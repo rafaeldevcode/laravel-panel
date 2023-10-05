@@ -66,9 +66,5 @@ return [
     'settings' => [
         'site_name'        => 'Rafael Dev Code',
         'site_description' => 'Faça seu login!',
-        'site_logo'        => 'logo_main.svg',
-        'site_logo_header' => 'logo_secondary.png',
-        'site_favicon'     => 'favicon.svg',
-        'site_bg_login'    => 'bg_login.jpg'
     ]
 ];
