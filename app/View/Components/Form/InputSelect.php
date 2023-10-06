@@ -65,7 +65,7 @@ class InputSelect extends Component
      * @param ?string $value
      * @return void
      */
-    public function __construct(string $name, string $icon, mixed $options, string $optionid, string $optionvalue, ?string $label = null, ?string $value = null)
+    public function __construct(string $name, string $icon, mixed $options = [], string $optionid = '', string $optionvalue = '', ?string $label = null, ?string $value = null)
     {
         $this->name = $name;
         $this->icon = $icon;
