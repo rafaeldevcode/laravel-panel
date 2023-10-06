@@ -44,23 +44,25 @@ class Gallery{
 
                 const file = event.target;
                 const countFile = file.files.length;
+                const token = $('input[name="_token"]').val();
 
                 if(file && countFile > 0){
                     if(countFile <= 20){
                         const formData = new FormData();
+
+                        formData.append('_token', token);
 
                         for (let i = 0; i < file.files.length; i++) {
                             formData.append('images[]', file.files[i]);
                         }
 
                         $.ajax({
-                            url: route('/api/gallery/create'),
+                            url: '/admin/gallery/create',
                             type: 'POST',
                             data: formData,
                             processData: false,
                             contentType: false,
                             success: function(response) {
-                                console.log(response)
                                 resolve(response);
                             },
                             error: function(xhr, status, error) {
@@ -88,7 +90,7 @@ class Gallery{
             const searchParam = search ? `&search=${search}` : '';
 
             $.ajax({
-                url: route(`/api/gallery?page=${page}&count=${count}${searchParam}`),
+                url: `/admin/gallery/get?page=${page}&count=${count}${searchParam}`,
                 type: 'GET',
                 processData: false,
                 contentType: false,

@@ -30,8 +30,8 @@ class MetaConfig extends Component
     {
         $settings = Setting::first();
 
-        $this->description = empty($description) ? $settings->site_description : $description;
-        $this->title = empty($title) ? $settings->site_name : $title;
+        $this->description = empty($description) ? $settings?->site_description : $description;
+        $this->title = empty($title) ? $settings?->site_name : "{$settings?->site_name} | {$title}";
     }
 
     /**

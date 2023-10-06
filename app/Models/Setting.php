@@ -11,10 +11,10 @@ class Setting extends Model
 
     protected $fillable = [
         'site_name',
-        'site_description',
-        'site_logo',
-        'site_logo_header',
         'site_favicon',
-        'site_bg_login'
+        'site_bg_login',
+        'site_logo_main',
+        'site_description',
+        'site_logo_secondary',
     ];
 }

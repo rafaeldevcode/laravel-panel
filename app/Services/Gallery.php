@@ -39,7 +39,7 @@ class Gallery
             'status' => true,
             'file_path' => URL::to("storage/{$gallery->file}"),
             'id' => $gallery->id,
-            'name' => $gallery->name
+            'name' => $gallery->name,
         ];
     }
 

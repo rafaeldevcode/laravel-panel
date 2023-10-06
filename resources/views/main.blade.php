@@ -64,5 +64,7 @@
 
         Modal.init();
     </script>
+
+    @yield('scripts')
 </body>
 </html>

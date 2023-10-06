@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Form;
 
 use App\Models\Gallery;
 use Closure;
@@ -73,6 +73,6 @@ class ButtonUpload extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.button-upload');
+        return view('components.form.button-upload');
     }
 }

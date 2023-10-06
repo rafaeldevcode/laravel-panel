@@ -11,9 +11,3 @@
         </form>
     @endauth
 </div>
-
-<script>
-    $('#checkbox-menu').click((event) =>{
-        oppenClosedMenu(event);
-    });
-</script>

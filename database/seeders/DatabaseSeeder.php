@@ -58,10 +58,6 @@ class DatabaseSeeder extends Seeder
             Setting::create([
                 'site_name'        => config('seeders.settings.site_name'),
                 'site_description' => config('seeders.settings.site_description'),
-                'site_logo'        => config('seeders.settings.site_logo'),
-                'site_logo_header' => config('seeders.settings.site_logo_header'),
-                'site_favicon'     => config('seeders.settings.site_favicon'),
-                'site_bg_login'    => config('seeders.settings.site_bg_login')
             ]);
         DB::commit();
     }

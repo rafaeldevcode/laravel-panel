@@ -13,6 +13,11 @@ use App\Services\Session;
 
 class GalleryController extends Controller
 {
+    public function __construct()
+    {
+        return $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
