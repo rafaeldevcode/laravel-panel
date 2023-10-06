@@ -46,6 +46,8 @@ class GalleryController extends Controller
      */
     public function create(Request $request)
     {
+        $this->authorize('create', 'gallery');
+
         $data = [];
 
         foreach($request->file('images') as $file):
@@ -67,6 +69,8 @@ class GalleryController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        $this->authorize('delete', 'gallery');
+
         foreach($request->ids as $ID):
             ServicesGallery::removeImage($ID);
         endforeach;
@@ -86,6 +90,8 @@ class GalleryController extends Controller
      */
     public function get(Request $request)
     {
+        $this->authorize('read', 'gallery');
+
         $data = [[], []];
         $next = null;
         $gallery = isset($request->search)
