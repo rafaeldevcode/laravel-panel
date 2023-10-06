@@ -54,10 +54,14 @@ class Update extends Crud
 
         if(!empty($request->password) && !empty($request->current_password) && !empty($request->repeat_password)):
             $request->merge(['password' => Hash::make($request->password)]);
+
+            $data = $request->all();
+        else:
+            $data = $request->except(['password', 'current_password', 'repeat_password']);
         endif;
 
         DB::beginTransaction();
-            User::find(Auth::user()->id)->update($request->all());
+            User::find(Auth::user()->id)->update($data);
         DB::commit();
 
         Session::create($request, 'Perfil Atualizado com sucesso!', 'success');
@@ -115,15 +119,18 @@ class Update extends Crud
             return "/admin/users/edit/{$ID}";
         endif;
 
+        $request->merge(['permission_id' => $request->permission]);
+
         if(!is_null($request->password)):
-            $request->merge([
-                'password' => Hash::make($request->password),
-                'permission_id' => $request->permission,
-            ]);
+            $request->merge(['password' => Hash::make($request->password)]);
+
+            $data = $request->all();
+        else:
+            $data = $request->except(['password', 'repeat_password', '_token', 'id']);
         endif;
 
         DB::beginTransaction();
-            User::find($ID)->update($request->all());
+            User::find($ID)->update($data);
         DB::commit();
 
         Session::create($request, 'Usuário atualizado com sucesso!', 'success');

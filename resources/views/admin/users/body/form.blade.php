@@ -1,5 +1,5 @@
 <section class='p-3 bg-light m-0 sm:m-3 rounded shadow-lg'>
-    <form method="POST" action="{{ isset($user) ? route('users.update', ['ID', $user->id]) : route('users.store') }}">
+    <form method="POST" action="{{ isset($user) ? route('users.update', ['ID' => $user->id]) : route('users.store') }}">
         @csrf
         @isset($user)
             <input type="hidden" name="id" value="{{ $user->id }}">

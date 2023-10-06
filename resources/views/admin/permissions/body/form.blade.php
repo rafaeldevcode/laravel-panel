@@ -1,9 +1,6 @@
 <section class='p-3 bg-light m-0 sm:m-3 rounded shadow-lg'>
-    <form method="POST" action="{{ isset($permission) ? route('permissions.update', ['ID', $permission->id]) : route('permissions.store') }}">
+    <form method="POST" action="{{ isset($permission) ? route('permissions.update', ['ID' => $permission->id]) : route('permissions.store') }}">
         @csrf
-        @isset($permission)
-            <input type="hidden" name="id" value="{{ $permission->id }}">
-        @endisset
 
         <div class='flex justify-between mb-4 px-4'>
             <div class='w-full md:w-6/12'>

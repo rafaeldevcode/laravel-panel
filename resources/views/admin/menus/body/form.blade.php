@@ -1,9 +1,6 @@
 <section class='p-3 bg-cm-grey m-3 rounded shadow'>
-    <form method="POST" action="{{ isset($menu) ? route('menus.update', ['ID', $menu->id]) : route('menus.store') }}">
+    <form method="POST" action="{{ isset($menu) ? route('menus.update', ['ID' => $menu->id]) : route('menus.store') }}">
         @csrf
-        @isset($menu)
-            <input type="hidden" name="id" value="{{ $menu->id }}">
-        @endisset
 
         <div class='flex justify-between flex-wrap'>
             <div class='w-full md:w-6/12 px-4'>

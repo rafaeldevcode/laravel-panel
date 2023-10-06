@@ -103,7 +103,7 @@ class MenusController extends Controller
 
         $update->menu($request, $ID);
 
-        return redirect()->route('menu.index');
+        return redirect()->route('menus.index');
     }
 
     /**
