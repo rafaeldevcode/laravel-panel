@@ -10,7 +10,7 @@
     <meta name='author' content='Rafael Vieira | github.com/rafaeldevcode' />
     <x-favicon />
 
-    @yield('metasConfig')
+    <x-meta-config title='Login' />
 </head>
 <body class="h-full w-full">
 

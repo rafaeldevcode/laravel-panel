@@ -28,7 +28,7 @@
         </div>
 
         <div class='w-full md:w-6/12 px-4'>
-            <x-input-checkbox-switch name="user_status" label='Status do usuário (Ativo | Inativo)' :value="isset($user) ? $user->status : null" />
+            <x-input-checkbox-switch name="user_status" label='Status do usuário (Inativo | Ativo)' :value="isset($user) ? $user->status : null" />
         </div>
 
         <div class='flex justify-end px-4'>

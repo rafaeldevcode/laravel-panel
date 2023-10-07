@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('metasConfig')
-    <x-meta-config title='Dashboard' description='' />
+    <x-meta-config title="{{ $action::handle($method)->type }} dashboard" />
 @endsection
 
 @section('content')

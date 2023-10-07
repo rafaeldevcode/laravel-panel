@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('metasConfig')
-    <x-meta-config title='Listar menus' description='' />
+    <x-meta-config title="{{ $action::handle($method)->type }} galeria" />
 @endsection
 
 @section('content')

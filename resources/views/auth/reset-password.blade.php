@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('metasConfig')
-    <x-meta-config title='Resetar minha senha' description='' />
+    <x-meta-config title='Resetar minha senha' />
 @endsection
 
 @section('content')

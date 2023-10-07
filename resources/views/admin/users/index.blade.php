@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('metasConfig')
-    <x-meta-config title='Listar usuários' description='' />
+    <x-meta-config title="{{ $action::handle($method)->type }} usuários" />
 @endsection
 
 @section('content')

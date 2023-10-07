@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('metasConfig')
-    <x-meta-config title='Editar perfil' description='' />
+    <x-meta-config title="{{ $action::handle($method)->type }} perfil" />
 @endsection
 
 @section('content')

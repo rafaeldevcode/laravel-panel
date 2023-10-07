@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('metasConfig')
-    <x-meta-config title='Configurações' description='' />
+    <x-meta-config title="{{ $action::handle($method)->type }} configurações" />
 @endsection
 
 @section('content')

@@ -13,12 +13,12 @@ class MetaConfig extends Component
     /**
      * @var string
      */
-    public $description;
+    public $title;
 
     /**
      * @var string
      */
-    public $title;
+    public $description;
 
     /**
      * Create a new component instance.
@@ -26,12 +26,12 @@ class MetaConfig extends Component
      * @param array $config
      * @return void
      */
-    public function __construct(string $description, string $title)
+    public function __construct(string $title, string $description = '')
     {
         $settings = Setting::first();
 
-        $this->description = empty($description) ? $settings?->site_description : $description;
         $this->title = empty($title) ? $settings?->site_name : "{$settings?->site_name} | {$title}";
+        $this->description = empty($description) ? $settings?->site_description : $description;
     }
 
     /**

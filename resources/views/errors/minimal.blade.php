@@ -8,7 +8,7 @@
         <meta name='author' content='Rafael Vieira | github.com/rafaeldevcode' />
         <x-favicon />
 
-        <title>@yield('title')</title>
+        <x-meta-config :title="@yield('title')" />
     </head>
 
     <body class="antialiased">

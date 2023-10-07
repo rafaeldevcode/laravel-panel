@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('metasConfig')
-    <x-meta-config title='Termos de Uso' description='' />
+    <x-meta-config title='Termos de Uso' />
 @endsection
 
 @section('content')

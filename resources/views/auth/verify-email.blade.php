@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('metasConfig')
-    <x-meta-config title='Verificar email' description='' />
+    <x-meta-config title='Verificar email' />
 @endsection
 
 @section('content')

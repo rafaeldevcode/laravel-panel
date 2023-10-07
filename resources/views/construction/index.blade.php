@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('metasConfig')
-    <x-meta-config title='Site em construção' description='' />
+    <x-meta-config title='Site em construção' />
 @endsection
 
 @section('content')

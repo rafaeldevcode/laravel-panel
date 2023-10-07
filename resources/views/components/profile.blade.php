@@ -5,7 +5,7 @@
         </a>
     </div>
 
-    <div class='hiddeItem dNone profile-dropdawn'  data-item-active='false'>
+    <div class='hiddeItem dNone profile-dropdawn ml-2'  data-item-active='false'>
         <a href="{{ route('profile.edit') }}" title='Ver e editar perfil' class='profile-dropdawn-btn w-full text-light font-bold' aria-expanded='false'>
             {{ explode(' ', $auth->name)[0] }}
         </a>
