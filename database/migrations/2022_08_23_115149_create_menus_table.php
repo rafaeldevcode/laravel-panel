@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\StatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,6 +20,7 @@ return new class extends Migration
             $table->string('icon', 50);
             $table->string('slug', 100)->unique();
             $table->string('position');
+            $table->char('show', 3)->default(StatusEnum::ON);
             $table->json('submenus')->nullable();
             $table->string('prefix', 100);
 

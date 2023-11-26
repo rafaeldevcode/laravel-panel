@@ -27,6 +27,9 @@
                         <th scope="col" class="px-6 py-3">
                             Posição
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Exibir
+                        </th>
                         <th scope="col" class="px-6 py-3 text-right">
                             Ações
                         </th>
@@ -60,6 +63,11 @@
                             </td>
                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                 {{ $menu->position }}
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="rounded text-xs text-light px-2 py-1 bg-{{ StatusEnum::color($menu->show) }}">
+                                    {{ StatusEnum::nameBoolean($menu->show) }}
+                                </span>
                             </td>
                             <td class="flex items-center justify-end px-6 py-4 space-x-2 right">
                                 <a href="{{ route('menus.edit', ['ID' => $menu->id]) }}" title="Editar usuário {{ $menu->name }}" class="text-xs p-2 rounded btn-primary text-light fw-bold">

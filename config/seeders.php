@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\StatusEnum;
+
 return [
     'user' => [
         'name'        => 'Admin',
@@ -13,42 +15,48 @@ return [
             'icon'           => 'bi bi-speedometer',
             'slug'           => '/admin/dashboard',
             'position'       => 1,
-            'prefix'         => 'dashboard'
+            'prefix'         => 'dashboard',
+            'show'           => StatusEnum::ON,
         ],
         2 => [
             'name'           => 'Usuários',
             'icon'           => 'bi bi-people-fill',
             'slug'           => '/admin/users',
             'position'       => 2,
-            'prefix'         => 'users'
+            'prefix'         => 'users',
+            'show'           => StatusEnum::ON,
         ],
         3 => [
             'name'           => 'Permissões',
             'icon'           => 'bi bi-file-earmark-lock-fill',
             'slug'           => '/admin/permissions',
             'position'       => 3,
-            'prefix'         => 'permissions'
+            'prefix'         => 'permissions',
+            'show'           => StatusEnum::ON,
         ],
         4 => [
             'name'           => 'Menus',
             'icon'           => 'bi bi-menu-button-wide-fill',
             'slug'           => '/admin/menus',
             'position'       => 4,
-            'prefix'         => 'menus'
+            'prefix'         => 'menus',
+            'show'           => StatusEnum::ON,
         ],
         5 => [
             'name'           => 'Galeria',
             'icon'           => 'bi bi-images',
             'slug'           => '/admin/gallery',
             'position'       => 5,
-            'prefix'         => 'gallery'
+            'prefix'         => 'gallery',
+            'show'           => StatusEnum::ON,
         ],
         6 => [
             'name'           => 'Configurações',
             'icon'           => 'bi bi-gear-fill',
             'slug'           => '/admin/settings/edit',
             'position'       => 6,
-            'prefix'         => 'settings'
+            'prefix'         => 'settings',
+            'show'           => StatusEnum::ON,
         ],
     ],
     'permissions' => [

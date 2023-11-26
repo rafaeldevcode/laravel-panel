@@ -31,6 +31,19 @@ final class StatusEnum extends Enum
      * @param status $status
      * @return string|null
      */
+    public static function nameBoolean(string|null $status): string
+    {
+        return match($status){
+            self::ON  => 'Sim',
+            self::OFF => 'Não',
+            default   => 'Não'
+        };
+    }
+
+    /**
+     * @param status $status
+     * @return string|null
+     */
     public static function color(string|null $status): string
     {
         return match($status){

@@ -119,6 +119,9 @@ class Update extends Crud
             return "/admin/users/edit/{$ID}";
         endif;
 
+        $status = isset($request->status) ? $request->status : 'off';
+        $request->merge(['status' => $status]);
+
         $request->merge(['permission_id' => $request->permission]);
 
         if(!is_null($request->password)):
@@ -144,6 +147,9 @@ class Update extends Crud
      */
     public function menu(Request $request, int $ID): void
     {
+        $show = isset($request->show) ? $request->show : 'off';
+        $request->merge(['show' => $show]);
+
         DB::beginTransaction();
             Menu::find($ID)->update($request->all());
         DB::commit();
