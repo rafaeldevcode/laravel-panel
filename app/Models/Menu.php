@@ -15,6 +15,7 @@ class Menu extends Model
         'slug',
         'position',
         'prefix',
-        'submenus'
+        'submenus',
+        'show',
     ];
 }

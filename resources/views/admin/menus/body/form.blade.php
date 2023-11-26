@@ -24,8 +24,12 @@
             </div>
         </div>
 
+        <div class='w-full md:w-6/12 px-4' data-submenu="false">
+            <x-input-checkbox-switch name="show" label='Exibir no menu lateral (Sim | Não)' :value="isset($menu) ? $menu->show : null" />
+        </div>
+
         @if(!isset($menu))
-            <div class='col-12 px-4'>
+            <div class='w-full md:w-6/12 px-4'>
                 <x-input-checkbox-switch name="is_submenu" label='Esté um submneu?' />
             </div>
         @else

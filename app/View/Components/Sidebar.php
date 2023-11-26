@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Enums\StatusEnum;
 use App\Models\Menu;
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -27,7 +28,7 @@ class Sidebar extends Component
      */
     public function __construct()
     {
-        $this->menus = Menu::orderBy('position', 'ASC')->get();
+        $this->menus = Menu::where('show', StatusEnum::ON)->orderBy('position', 'ASC')->get();
         $this->uri = explode('/', request()->route()->uri)[1];
     }
 
