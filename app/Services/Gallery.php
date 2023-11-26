@@ -12,12 +12,6 @@ use Illuminate\Support\Facades\URL;
 
 class Gallery
 {
-    /**
-     * @since 1.9.0
-     *
-     * @param mixed $file
-     * @return array
-     */
     public static function saveImage(mixed $file): array
     {
         $size = $file->getSize();
@@ -43,12 +37,6 @@ class Gallery
         ];
     }
 
-    /**
-     * @since 1.9.0
-     *
-     * @param int $gallery_id
-     * @return void
-     */
     public static function removeImage(int $gallery_id): void
     {
         $gallery = ModelsGallery::find($gallery_id);

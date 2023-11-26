@@ -16,9 +16,6 @@ class Permission extends Model
         'extra_permissions'
     ];
 
-    /**
-     * @return User
-     */
     public function users()
     {
         return $this->hasMany(User::class);

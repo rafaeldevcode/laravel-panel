@@ -18,13 +18,6 @@ class GalleryController extends Controller
         return $this->middleware('auth');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @since 1.9.0
-     *
-     * @return View
-     */
     public function index(): View
     {
         $this->authorize('read', 'gallery');
@@ -36,14 +29,6 @@ class GalleryController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @since 1.9.0
-     *
-     * @param Request $request
-     * @return Response
-     */
     public function create(Request $request)
     {
         $this->authorize('create', 'gallery');
@@ -59,14 +44,6 @@ class GalleryController extends Controller
         return response()->json($data, 201);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @since 1.9.0
-     *
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function destroy(Request $request): RedirectResponse
     {
         $this->authorize('delete', 'gallery');
@@ -80,14 +57,6 @@ class GalleryController extends Controller
         return redirect()->route('gallery.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @since 1.9.0
-     *
-     * @param Request $request
-     * @return Response
-     */
     public function get(Request $request)
     {
         $this->authorize('read', 'gallery');

@@ -8,51 +8,20 @@ use Illuminate\View\Component;
 
 class InputDefault extends Component
 {
-    /**
-     * @var string
-     */
     public $name;
 
-    /**
-     * @var string
-     */
     public $icon;
 
-    /**
-     * @var string
-     */
     public $label;
 
-    /**
-     * @var string
-     */
     public $type;
 
-    /**
-     * @var ?string
-     */
     public $value;
 
-    /**
-     * @var ?string
-     */
     public $is_required;
 
-    /**
-     * @var mixed
-     */
     public $attributes;
 
-    /**
-     * Create a new component instance.
-     *
-     * @param string $name
-     * @param string $icon
-     * @param string $label
-     * @param string $type
-     * @param ?string $value
-     * @return void
-     */
     public function __construct(string $name, string $icon, string $label, string $type, ?string $value = null)
     {
         $this->name = $name;
@@ -68,11 +37,6 @@ class InputDefault extends Component
         endif;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return View|Closure|string
-     */
     public function render(): View|Closure|string
     {
         return view('components.form.input-default');

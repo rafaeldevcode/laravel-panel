@@ -7,49 +7,22 @@ use Illuminate\Contracts\View\View;
 
 class ActionsBase
 {
-    /**
-     * @var string
-     */
     public static $color;
 
-    /**
-     * @var string
-     */
     public static $icon;
 
-    /**
-     * @var string
-     */
     public static $title;
 
-    /**
-     * @var string
-     */
     public static $type;
 
-    /**
-     * @var null|string
-     */
     public static $route_delete;
 
-    /**
-     * @var null|string
-     */
     public static $route_add;
 
-    /**
-     * @var null|bool
-     */
     public static $route_search;
 
-    /**
-     * @var null|string
-     */
     public static $sub_options;
 
-    /**
-     * @return View
-     */
     public static function render(): View
     {
         $breadcrumps = self::normalizeBreadcrumps();
@@ -68,9 +41,6 @@ class ActionsBase
         ]);
     }
 
-    /**
-     * @return array
-     */
     protected static function normalizeBreadcrumps(): array
     {
         $breadcrumps_normalize = [];
@@ -102,10 +72,6 @@ class ActionsBase
         return [$breadcrumps_normalize, $ID];
     }
 
-    /**
-     * @param string|null $method
-     * @return string
-     */
     protected static function getType(string|null $method): string
     {
         $type = '';
@@ -131,10 +97,6 @@ class ActionsBase
         return $type;
     }
 
-    /**
-     * @param string|null $method
-     * @return string
-     */
     protected static function getColor(string|null $method): string
     {
         $color = '';
@@ -160,11 +122,6 @@ class ActionsBase
         return $color;
     }
 
-    /**
-     * @param string $path
-     * @param string $method
-     * @return ?string
-     */
     protected static function getRoute(string $path, string $method)
     {
         $uri = request()->route()->uri;

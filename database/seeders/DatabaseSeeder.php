@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
 use App\Models\Menu;
 use App\Models\Permission;
 use App\Models\Setting;
@@ -14,11 +12,6 @@ use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
     public function run()
     {
         DB::beginTransaction();
@@ -62,11 +55,6 @@ class DatabaseSeeder extends Seeder
         DB::commit();
     }
 
-    /**
-     * @param array $menus
-     * @param string $value
-     * @return string
-     */
     private function generatePermissions(array $menus, string $value): string
     {
         $keys = [];

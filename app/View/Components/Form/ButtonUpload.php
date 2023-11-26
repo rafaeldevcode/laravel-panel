@@ -9,45 +9,18 @@ use Illuminate\View\Component;
 
 class ButtonUpload extends Component
 {
-    /**
-     * @var string
-     */
     public $name;
 
-    /**
-     * @var string
-     */
     public $label;
 
-    /**
-     * @var string
-     */
     public $type;
 
-    /**
-     * @var ?string
-     */
     public $value;
 
-    /**
-     * @var ?string
-     */
     public $is_required = null;
 
-    /**
-     * @var ?Gallery
-     */
     public $images = null;
 
-    /**
-     * Create a new component instance.
-     *
-     * @param string $name
-     * @param string $label
-     * @param string $type
-     * @param string $value
-     * @return void
-     */
     public function __construct(string $name, string $label, ?string $type = 'radio', ?string $value = null)
     {
         $this->name = $name;
@@ -66,11 +39,6 @@ class ButtonUpload extends Component
         endif;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return View|Closure|string
-     */
     public function render(): View|Closure|string
     {
         return view('components.form.button-upload');

@@ -4,20 +4,12 @@ namespace App\Enums;
 
 use BenSampo\Enum\Enum;
 
-/**
- * @method static static OptionOne()
- * @method static static OptionTwo()
- * @method static static OptionThree()
- */
 final class StatusEnum extends Enum
 {
     public const ON  = 'on';
+
     public const OFF = 'off';
 
-    /**
-     * @param status $status
-     * @return string|null
-     */
     public static function name(string|null $status): string
     {
         return match($status){
@@ -27,10 +19,6 @@ final class StatusEnum extends Enum
         };
     }
 
-    /**
-     * @param status $status
-     * @return string|null
-     */
     public static function nameBoolean(string|null $status): string
     {
         return match($status){
@@ -40,10 +28,6 @@ final class StatusEnum extends Enum
         };
     }
 
-    /**
-     * @param status $status
-     * @return string|null
-     */
     public static function color(string|null $status): string
     {
         return match($status){

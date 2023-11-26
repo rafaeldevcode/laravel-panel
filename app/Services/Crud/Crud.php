@@ -6,10 +6,6 @@ use App\Models\Permission;
 
 class Crud
 {
-    /**
-     * @param string $name
-     * @return string
-     */
     public function normalizeName(string $name): string
     {
         $name = strtolower($name);
@@ -20,12 +16,6 @@ class Crud
         return $name;
     }
 
-    /**
-     * @param array permissions
-     * @param ?string $extra_permissions
-     * @param int|null $ID
-     * @return array
-     */
     protected function getPermissionsInJson(array $permissions, ?string $extra_permissions, int|null $ID = null): array
     {
         $extra_permissions_array = [];
@@ -56,11 +46,6 @@ class Crud
         ];
     }
 
-    /**
-     * @param null|string $submenus
-     * @param array $new_submenu
-     * @return string
-     */
     protected function getSubmenus(null|string $submenus, array $new_submenu): string
     {
         if(is_null($submenus)):

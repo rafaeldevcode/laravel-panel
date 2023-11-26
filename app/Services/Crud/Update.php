@@ -15,10 +15,6 @@ use App\Services\Session;
 
 class Update extends Crud
 {
-    /**
-     * @param Request $request
-     * @return void
-     */
     public function settings(Request $request): void
     {
         $setting = Setting::first();
@@ -34,10 +30,6 @@ class Update extends Crud
         Session::create($request, 'Configurações do site atualizadas com sucesso!', 'success');
     }
 
-    /**
-     * @param Request $request
-     * @return string
-     */
     public function profile(Request $request): string
     {
         if(!is_null($request->current_password)):
@@ -68,10 +60,6 @@ class Update extends Crud
         return 'profile.edit';
     }
 
-    /**
-     * @param Request $request
-     * @return void
-     */
     public function avatar(Request $request): void
     {
         DB::beginTransaction();
@@ -81,11 +69,6 @@ class Update extends Crud
         Session::create($request, 'Avatar do perfil atualizado com sucesso!', 'success');
     }
 
-    /**
-     * @param Request $request
-     * @param int $ID
-     * @return void
-     */
     public function permissions(Request $request, int $ID): void
     {
         $permissions = $request->except(['_token', 'name', 'extra_permissions']);
@@ -106,11 +89,6 @@ class Update extends Crud
         Session::create($request, 'Permissões atualizadas com sucesso!', 'success');
     }
 
-    /**
-     * @param Request $request
-     * @param int $ID
-     * @return string
-     */
     public function user(Request $request, int $ID): string
     {
         if(!is_null($request->password) && $request->password !== $request->repeat_password):
@@ -140,11 +118,6 @@ class Update extends Crud
         return '/admin/users';
     }
 
-    /**
-     * @param Request $request
-     * @param int $ID
-     * @return void
-     */
     public function menu(Request $request, int $ID): void
     {
         $show = isset($request->show) ? $request->show : 'off';

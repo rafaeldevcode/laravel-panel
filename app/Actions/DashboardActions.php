@@ -6,10 +6,6 @@ use Illuminate\Contracts\View\View;
 
 class DashboardActions extends ActionsBase
 {
-    /**
-     * @param string|null $method
-     * @return View
-     */
     public static function handle(string|null $method = null): View
     {
         self::$color  = self::getColor($method);

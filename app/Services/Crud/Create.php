@@ -16,10 +16,6 @@ use App\Services\Slug;
 
 class Create extends Crud
 {
-    /**
-     * @param Request $request
-     * @return string
-     */
     public function menu(Request $request): string
     {
         if(isset($request->is_submenu) && $request->is_submenu == 'on'):
@@ -63,11 +59,6 @@ class Create extends Crud
         return 'menus.index';
     }
 
-    /**
-     * @param Request $request
-     * @param bool $remember
-     * @return string
-     */
     public function user(Request $request, bool $remember): string
     {
         $count_user = User::where('email', $request->email)->count();
@@ -105,10 +96,6 @@ class Create extends Crud
         return 'users.index';
     }
 
-    /**
-     * @param Request $request
-     * @return string
-     */
     public function permissions(Request $request): string
     {
         $permissions = $request->except(['_token', 'name', 'extra_permissions']);

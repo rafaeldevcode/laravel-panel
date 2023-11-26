@@ -7,5 +7,6 @@ use BenSampo\Enum\Enum;
 final class BooleanEnum extends Enum
 {
     public const TRUE  = true;
+
     public const FALSE = false;
 }

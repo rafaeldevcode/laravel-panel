@@ -8,46 +8,18 @@ use Illuminate\View\Component;
 
 class TextArea extends Component
 {
-    /**
-     * @var string
-     */
     public $name;
 
-    /**
-     * @var string
-     */
     public $icon;
 
-    /**
-     * @var string
-     */
     public $label;
 
-    /**
-     * @var ?string
-     */
     public $value;
 
-    /**
-     * @var string
-     */
     public $is_required;
 
-
-    /**
-     * @var mixed
-     */
     public $attributes;
 
-    /**
-     * Create a new component instance.
-     *
-     * @param string $name
-     * @param string $icon
-     * @param string $label
-     * @param ?string $value
-     * @return void
-     */
     public function __construct(string $name, string $icon, string $label, ?string $value = null)
     {
         $this->name = $name;
@@ -62,11 +34,6 @@ class TextArea extends Component
         endif;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return View|Closure|string
-     */
     public function render(): View|Closure|string
     {
         return view('components.form.text-area');

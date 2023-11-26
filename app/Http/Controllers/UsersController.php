@@ -14,19 +14,11 @@ use Illuminate\View\View;
 
 class UsersController extends Controller
 {
-    /**
-     * @return mixed
-     */
     public function __construct()
     {
         return $this->middleware('auth');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return View
-     */
     public function index(): View
     {
         $this->authorize('read', 'users');
@@ -39,11 +31,6 @@ class UsersController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return View
-     */
     public function create(): View
     {
         $this->authorize('create', 'users');
@@ -57,13 +44,6 @@ class UsersController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @param Create $create
-     * @return RedirectResponse
-     */
     public function store(Request $request, Create $create): RedirectResponse
     {
         $this->authorize('create', 'users');
@@ -73,12 +53,6 @@ class UsersController extends Controller
         return redirect()->route($response);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $ID
-     * @return View
-     */
     public function edit(int $ID): View
     {
         $this->authorize('update', 'users');
@@ -92,14 +66,6 @@ class UsersController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param int $ID
-     * @param Update $update
-     * @return RedirectResponse
-     */
     public function update(Request $request, int $ID, Update $update): RedirectResponse
     {
         $this->authorize('update', 'users');
@@ -109,13 +75,6 @@ class UsersController extends Controller
         return redirect($response);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Request $request
-     * @param Delete $delete
-     * @return RedirectResponse
-     */
     public function destroy(Request $request, Delete $delete): RedirectResponse
     {
         $this->authorize('delete', 'users');

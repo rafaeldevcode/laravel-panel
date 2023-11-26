@@ -11,10 +11,6 @@ use Illuminate\Http\Request;
 
 class Delete extends Crud
 {
-    /**
-     * @param Request $request
-     * @return void
-     */
     public function menu(Request $request): void
     {
         foreach($request->ids as $ID):
@@ -26,10 +22,6 @@ class Delete extends Crud
         Session::create($request, 'Menu(s) removido(s) com sucesso!', 'success');
     }
 
-    /**
-     * @param Request $request
-     * @return void
-     */
     public function user(Request $request): void
     {
         // Prevent admin user from being deleted
@@ -50,10 +42,6 @@ class Delete extends Crud
         Session::create($request, $message, $type);
     }
 
-    /**
-     * @param Request $request
-     * @return void
-     */
     public function permission(Request $request): void
     {
         foreach($request->ids as $ID):

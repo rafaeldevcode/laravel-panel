@@ -4,28 +4,10 @@ namespace App\Listeners;
 
 use App\Events\CreatePermissionForAdmin;
 use App\Models\Permission;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\DB;
 
 class CreatePermission
 {
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * Handle the event.
-     *
-     * @param  \App\Events\CreatePermissionForAdmin  $event
-     * @return void
-     */
     public function handle(CreatePermissionForAdmin $event)
     {
         $permission_admin = Permission::where('eng_name', 'admin')->first();

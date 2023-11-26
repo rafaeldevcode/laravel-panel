@@ -11,11 +11,6 @@ use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return View|RedirectResponse
-     */
     public function index(): View|RedirectResponse
     {
         if(Auth::check()):
@@ -26,12 +21,6 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    /**
-     * Perform user login
-     *
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function login(Request $request): RedirectResponse
     {
         $remember = isset($request->remember) ? true : false;
@@ -50,12 +39,6 @@ class AuthController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @param Request $request
-     * @return View
-     */
     public function create(): View
     {
         $this->authorize('create', 'users');
@@ -63,13 +46,6 @@ class AuthController extends Controller
         return view('auth.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @param Create $create
-     * @return RedirectResponse
-     */
     public function store(Request $request, Create $create): RedirectResponse
     {
         $this->authorize('create', 'users');
@@ -90,12 +66,6 @@ class AuthController extends Controller
         endif;
     }
 
-    /**
-     * Update user password
-     *
-     * @param Request $request
-     * @return View
-     */
     public function resetPassword(Request $request): View
     {
         return view('auth.reset-password', [
@@ -103,22 +73,11 @@ class AuthController extends Controller
         ]);
     }
 
-    /**
-     * Check user email
-     *
-     * @return View
-     */
     public function verifyEmail(): View
     {
         return view('auth.verify-email');
     }
 
-    /**
-     * Log out user
-     *
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
