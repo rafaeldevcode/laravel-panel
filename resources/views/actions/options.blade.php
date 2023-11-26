@@ -35,8 +35,8 @@
         </div>
 
         <div class='flex flex-col sm:flex-row mb-2 mx-auto md:mx-0'>
-            <div class='flex justify-center'>
-                <div class="mx-1">
+            <div class='flex justify-center items-center flex-wrap'>
+                <div class="m-1">
                     @isset($route_search)
                         <x-input-search />
                     @endisset
