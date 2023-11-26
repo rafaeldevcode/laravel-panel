@@ -1,4 +1,6 @@
-<div class="my-4">
+<div class="my-3">
+    <label for="{{ $name }}">{{ $label }}</label>
+
     <label class="relative block">
         <span class="sr-only">
             {{ $label.$is_required }}
@@ -11,7 +13,7 @@
         </span>
 
         <input
-            class="placeholder:italic placeholder:text-secondary block bg-white w-full border border-secondary rounded py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-color-main focus:ring-color-main focus:ring-1 sm:text-sm"
+            class="placeholder:italic placeholder:text-secondary block bg-white w-full border border-secondary rounded py-3 pl-9 pr-3 shadow-sm focus:outline-none focus:border-color-main focus:ring-color-main focus:ring-1 sm:text-sm"
             placeholder="{{ $label.$is_required }}"
             type="{{ $type }}"
             name="{{ $name }}"

@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
+! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -691,6 +691,11 @@ video {
   margin-bottom: 0.5rem;
 }
 
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -817,20 +822,20 @@ video {
   height: 100%;
 }
 
-.h-full {
-  height: 100%;
-}
-
-.h-screen {
-  height: 100vh;
-}
-
 .h-\[45px\] {
   height: 45px;
 }
 
 .h-\[61px\] {
   height: 61px;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.h-screen {
+  height: 100vh;
 }
 
 .w-11 {
@@ -1039,11 +1044,6 @@ video {
 .border-secondary {
   --tw-border-opacity: 1;
   border-color: rgb(108 117 125 / var(--tw-border-opacity));
-}
-
-.border-white {
-  --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
 .bg-color-main {
@@ -1380,14 +1380,22 @@ video {
   transition-timing-function: linear;
 }
 
-.ease-in {
-  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-}
-
 .btn {
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   display: block;
+}
+
+.btn-success {
+  background-color: #008000;
+  border: 1px solid #008000;
+  color: #fff;
+  transition: .4s all;
+}
+
+.btn-success:hover {
+  background-color: #fff;
+  color: #008000;
 }
 
 .btn-danger {
