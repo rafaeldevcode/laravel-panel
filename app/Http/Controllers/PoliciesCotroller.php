@@ -11,11 +11,6 @@ use Illuminate\View\View;
 
 class PoliciesCotroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return View
-     */
     public function privacy(): View
     {
         return view('policies.privacy.index', [
@@ -25,11 +20,6 @@ class PoliciesCotroller extends Controller
         ]);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return View
-     */
     public function terms(): View
     {
         return view('policies.terms.index', [

@@ -4,28 +4,10 @@ namespace App\Listeners;
 
 use App\Events\CreateExtraPermissionForAdmin;
 use App\Models\Permission;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\DB;
 
 class CreateExtraPermission
 {
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * Handle the event.
-     *
-     * @param  \App\Events\CreateExtraPermissionForAdmin  $event
-     * @return void
-     */
     public function handle(CreateExtraPermissionForAdmin $event)
     {
         if($event->extra_permissions):

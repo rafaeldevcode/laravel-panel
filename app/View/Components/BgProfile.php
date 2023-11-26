@@ -11,16 +11,8 @@ use Illuminate\View\Component;
 
 class BgProfile extends Component
 {
-    /**
-     * @var string
-     */
     public $image;
 
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $settings = Setting::first();
@@ -28,11 +20,6 @@ class BgProfile extends Component
         $this->image = $this->getPathImage($settings?->site_bg_login, 'bg_login.jpg');
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return View|Closure|string
-     */
     public function render(): View|Closure|string
     {
         return view('components.bg-profile');

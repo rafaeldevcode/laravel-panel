@@ -4,12 +4,6 @@ namespace App\Services;
 
 class Slug
 {
-    /**
-     * @since 1.0.0
-     *
-     * @param string $
-     * @return string $slug
-     */
     public static function normalize(string $slug): string
     {
         // Replaces accented characters with their unaccented versions.

@@ -12,19 +12,11 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * @return mixed
-     */
     public function __construct()
     {
         return $this->middleware('auth');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @return View
-     */
     public function edit(): View
     {
         $user = Auth::user();
@@ -37,13 +29,6 @@ class ProfileController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param Update $update
-     * @return RedirectResponse
-     */
     public function update(Request $request, Update $update): RedirectResponse
     {
         $response = $update->profile($request);
@@ -51,13 +36,6 @@ class ProfileController extends Controller
         return redirect()->route($response);
     }
 
-    /**
-     *  Update avatar of the specified user in storage.
-     *
-     * @param Request $request
-     * @param Update $update
-     * @return RedirectResponse
-     */
     public function updateAvatar(Request $request, Update $update): RedirectResponse
     {
         $update->avatar($request);

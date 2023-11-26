@@ -14,19 +14,11 @@ use Illuminate\View\View;
 
 class PermissionsController extends Controller
 {
-    /**
-     * @return mixed
-     */
     public function __construct()
     {
         return $this->middleware('auth');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return View
-     */
     public function index(): View
     {
         $this->authorize('read', 'permissions');
@@ -39,11 +31,6 @@ class PermissionsController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return View
-     */
     public function create(): View
     {
         $this->authorize('create', 'permissions');
@@ -57,13 +44,6 @@ class PermissionsController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @param Create $create
-     * @return RedirectResponse
-     */
     public function store(Request $request, Create $create): RedirectResponse
     {
         $this->authorize('create', 'permissions');
@@ -73,12 +53,6 @@ class PermissionsController extends Controller
         return redirect('/admin/permissions');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $ID
-     * @return View
-     */
     public function edit(int $ID): View
     {
         $this->authorize('update', 'permissions');
@@ -96,14 +70,6 @@ class PermissionsController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param int $ID
-     * @param Update $update
-     * @return RedirectResponse
-     */
     public function update(Request $request, int $ID, Update $update): RedirectResponse
     {
         $this->authorize('update', 'permissions');
@@ -113,13 +79,6 @@ class PermissionsController extends Controller
         return redirect('/admin/permissions');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Request $request
-     * @param Delete $delete
-     * @return RedirectResponse
-     */
     public function destroy(Request $request, Delete $delete): RedirectResponse
     {
         $this->authorize('delete', 'permissions');
@@ -129,10 +88,6 @@ class PermissionsController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * @param string $extra_permissions
-     * @return string|null
-     */
     private function getPermisionsEdit(string|null $extra_permissions): string
     {
         if($extra_permissions):
